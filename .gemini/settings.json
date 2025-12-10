@@ -1,0 +1,59 @@
+{
+	"$schema": "https://raw.githubusercontent.com/google-gemini/gemini-cli/main/schemas/settings.schema.json",
+	"mcpServers": {
+		"svelte": {
+			"command": "npx",
+			"args": ["-y", "@sveltejs/mcp"]
+		},
+		"filesystem": {
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/entussuenos/projects/websites/fullscopemedia.com"]
+		},
+		"git": {
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-git", "/Users/entussuenos/projects/websites/fullscopemedia.com"]
+		},
+		"fetch": {
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-fetch"]
+		},
+		"sqlite": {
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-sqlite"]
+		},
+		"postgres": {
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-postgres"],
+			"env": {
+				"POSTGRES_CONNECTION_STRING": "postgresql://user:password@localhost:5432/database"
+			}
+		},
+		"github": {
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-github"],
+			"env": {
+				"GITHUB_PERSONAL_ACCESS_TOKEN": "your-github-token-here"
+			}
+		},
+		"memory": {
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-memory"]
+		},
+		"time": {
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-time"]
+		},
+		"calculator": {
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-calculator"]
+		},
+		"docker": {
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-docker"]
+		},
+		"npm-search": {
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-npm-search"]
+		}
+	}
+}

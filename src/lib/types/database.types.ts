@@ -1,0 +1,366 @@
+export interface Database {
+	public: {
+		Tables: {
+			bookings: {
+				Row: {
+					id: string;
+					created_at: string;
+					updated_at: string;
+					client_name: string;
+					client_email: string;
+					client_phone: string;
+					client_company?: string;
+					service_type: string;
+					appointment_date: string;
+					appointment_time: string;
+					duration_minutes: number;
+					status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
+					property_address?: string;
+					property_type?: string;
+					special_requirements?: string;
+					budget_range?: string;
+					how_heard_about_us?: string;
+					notes?: string;
+					ical_uid?: string;
+					confirmation_sent: boolean;
+					reminder_sent: boolean;
+				};
+				Insert: {
+					id?: string;
+					created_at?: string;
+					updated_at?: string;
+					client_name: string;
+					client_email: string;
+					client_phone: string;
+					client_company?: string;
+					service_type: string;
+					appointment_date: string;
+					appointment_time: string;
+					duration_minutes: number;
+					status?: 'pending' | 'confirmed' | 'completed' | 'cancelled';
+					property_address?: string;
+					property_type?: string;
+					special_requirements?: string;
+					budget_range?: string;
+					how_heard_about_us?: string;
+					notes?: string;
+					ical_uid?: string;
+					confirmation_sent?: boolean;
+					reminder_sent?: boolean;
+				};
+				Update: {
+					id?: string;
+					created_at?: string;
+					updated_at?: string;
+					client_name?: string;
+					client_email?: string;
+					client_phone?: string;
+					client_company?: string;
+					service_type?: string;
+					appointment_date?: string;
+					appointment_time?: string;
+					duration_minutes?: number;
+					status?: 'pending' | 'confirmed' | 'completed' | 'cancelled';
+					property_address?: string;
+					property_type?: string;
+					special_requirements?: string;
+					budget_range?: string;
+					how_heard_about_us?: string;
+					notes?: string;
+					ical_uid?: string;
+					confirmation_sent?: boolean;
+					reminder_sent?: boolean;
+				};
+			};
+			services: {
+				Row: {
+					id: string;
+					name: string;
+					description: string;
+					duration_minutes: number;
+					base_price?: number;
+					category: string;
+					active: boolean;
+					created_at: string;
+				};
+				Insert: {
+					id?: string;
+					name: string;
+					description: string;
+					duration_minutes: number;
+					base_price?: number;
+					category: string;
+					active?: boolean;
+					created_at?: string;
+				};
+				Update: {
+					id?: string;
+					name?: string;
+					description?: string;
+					duration_minutes?: number;
+					base_price?: number;
+					category?: string;
+					active?: boolean;
+					created_at?: string;
+				};
+			};
+			contact_submissions: {
+				Row: {
+					id: string;
+					created_at: string;
+					name: string;
+					email: string;
+					company?: string;
+					service: string;
+					budget?: string;
+					message: string;
+					timeline?: string;
+					status: 'new' | 'contacted' | 'converted' | 'closed';
+					notes?: string;
+				};
+				Insert: {
+					id?: string;
+					created_at?: string;
+					name: string;
+					email: string;
+					company?: string;
+					service: string;
+					budget?: string;
+					message: string;
+					timeline?: string;
+					status?: 'new' | 'contacted' | 'converted' | 'closed';
+					notes?: string;
+				};
+				Update: {
+					id?: string;
+					created_at?: string;
+					name?: string;
+					email?: string;
+					company?: string;
+					service?: string;
+					budget?: string;
+					message?: string;
+					timeline?: string;
+					status?: 'new' | 'contacted' | 'converted' | 'closed';
+					notes?: string;
+				};
+			};
+			studio_availability: {
+				Row: {
+					id: string;
+					date: string;
+					start_time: string;
+					end_time: string;
+					is_available: boolean;
+					hourly_rate: number;
+					daily_rate: number;
+					notes?: string;
+					created_at: string;
+					updated_at: string;
+				};
+				Insert: {
+					id?: string;
+					date: string;
+					start_time: string;
+					end_time: string;
+					is_available?: boolean;
+					hourly_rate?: number;
+					daily_rate?: number;
+					notes?: string;
+					created_at?: string;
+					updated_at?: string;
+				};
+				Update: {
+					id?: string;
+					date?: string;
+					start_time?: string;
+					end_time?: string;
+					is_available?: boolean;
+					hourly_rate?: number;
+					daily_rate?: number;
+					notes?: string;
+					created_at?: string;
+					updated_at?: string;
+				};
+			};
+			studio_rentals: {
+				Row: {
+					id: string;
+					created_at: string;
+					updated_at: string;
+					client_name: string;
+					client_email: string;
+					client_phone: string;
+					client_company?: string;
+					rental_date: string;
+					start_time: string;
+					end_time: string;
+					duration_minutes: number;
+					total_blocks: number;
+					rental_type: 'studio_rental' | 'party_rental' | 'photographer_rental' | 'event_rental';
+					total_amount: number;
+					rate_per_block: number;
+					status: 'pending' | 'confirmed' | 'paid' | 'completed' | 'cancelled';
+					purpose?: string;
+					event_type?: string;
+					equipment_needed?: string;
+					guest_count: number;
+					special_requirements?: string;
+					setup_time_needed: boolean;
+					cleanup_time_needed: boolean;
+					payment_status: 'pending' | 'paid' | 'refunded' | 'failed';
+					payment_method?: string;
+					payment_reference?: string;
+					deposit_amount?: number;
+					deposit_required: boolean;
+					ical_uid?: string;
+					confirmation_sent: boolean;
+					reminder_sent: boolean;
+					booking_source: 'website' | 'phone' | 'email' | 'referral';
+				};
+				Insert: {
+					id?: string;
+					created_at?: string;
+					updated_at?: string;
+					client_name: string;
+					client_email: string;
+					client_phone: string;
+					client_company?: string;
+					rental_date: string;
+					start_time: string;
+					end_time: string;
+					duration_hours: number;
+					rental_type?: 'hourly' | 'daily' | 'half-day';
+					total_amount: number;
+					status?: 'pending' | 'confirmed' | 'paid' | 'completed' | 'cancelled';
+					purpose?: string;
+					equipment_needed?: string;
+					guest_count?: number;
+					special_requirements?: string;
+					payment_status?: 'pending' | 'paid' | 'refunded' | 'failed';
+					payment_method?: string;
+					payment_reference?: string;
+					deposit_amount?: number;
+					ical_uid?: string;
+					confirmation_sent?: boolean;
+					reminder_sent?: boolean;
+				};
+				Update: {
+					id?: string;
+					created_at?: string;
+					updated_at?: string;
+					client_name?: string;
+					client_email?: string;
+					client_phone?: string;
+					client_company?: string;
+					rental_date?: string;
+					start_time?: string;
+					end_time?: string;
+					duration_hours?: number;
+					rental_type?: 'hourly' | 'daily' | 'half-day';
+					total_amount?: number;
+					status?: 'pending' | 'confirmed' | 'paid' | 'completed' | 'cancelled';
+					purpose?: string;
+					equipment_needed?: string;
+					guest_count?: number;
+					special_requirements?: string;
+					payment_status?: 'pending' | 'paid' | 'refunded' | 'failed';
+					payment_method?: string;
+					payment_reference?: string;
+					deposit_amount?: number;
+					ical_uid?: string;
+					confirmation_sent?: boolean;
+					reminder_sent?: boolean;
+				};
+			};
+			studio_pricing: {
+				Row: {
+					id: string;
+					name: string;
+					description?: string;
+					hourly_rate?: number;
+					half_day_rate?: number;
+					full_day_rate?: number;
+					weekend_multiplier: number;
+					holiday_multiplier: number;
+					minimum_hours: number;
+					maximum_hours: number;
+					active: boolean;
+					created_at: string;
+				};
+				Insert: {
+					id?: string;
+					name: string;
+					description?: string;
+					hourly_rate?: number;
+					half_day_rate?: number;
+					full_day_rate?: number;
+					weekend_multiplier?: number;
+					holiday_multiplier?: number;
+					minimum_hours?: number;
+					maximum_hours?: number;
+					active?: boolean;
+					created_at?: string;
+				};
+				Update: {
+					id?: string;
+					name?: string;
+					description?: string;
+					hourly_rate?: number;
+					half_day_rate?: number;
+					full_day_rate?: number;
+					weekend_multiplier?: number;
+					holiday_multiplier?: number;
+					minimum_hours?: number;
+					maximum_hours?: number;
+					active?: boolean;
+					created_at?: string;
+				};
+			};
+			booking_conflicts: {
+				Row: {
+					id: string;
+					booking_date: string;
+					start_time: string;
+					end_time: string;
+					booking_type: 'studio_rental' | 'photography_service';
+					booking_id: string;
+					client_name: string;
+					service_description: string;
+					created_at: string;
+				};
+				Insert: {
+					id?: string;
+					booking_date: string;
+					start_time: string;
+					end_time: string;
+					booking_type: 'studio_rental' | 'photography_service';
+					booking_id: string;
+					client_name: string;
+					service_description: string;
+					created_at?: string;
+				};
+				Update: {
+					id?: string;
+					booking_date?: string;
+					start_time?: string;
+					end_time?: string;
+					booking_type?: 'studio_rental' | 'photography_service';
+					booking_id?: string;
+					client_name?: string;
+					service_description?: string;
+					created_at?: string;
+				};
+			};
+		};
+		Views: {
+			[_ in never]: never;
+		};
+		Functions: {
+			[_ in never]: never;
+		};
+		Enums: {
+			[_ in never]: never;
+		};
+	};
+}
