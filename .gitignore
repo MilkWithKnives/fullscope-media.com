@@ -22,3 +22,23 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Python (for uvx/mcp-server-git etc)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Lock files (optional - uncomment if you don't want to track)
+# pnpm-lock.yaml
