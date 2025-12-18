@@ -3,11 +3,62 @@
 	import Container from '$lib/components/ui/Container.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
-	import { Calendar, Mail, Phone, MapPin, Clock, User } from 'lucide-svelte';
+	import Calendar from 'lucide-svelte/icons/calendar';
+	import Mail from 'lucide-svelte/icons/mail';
+	import Phone from 'lucide-svelte/icons/phone';
+	import MapPin from 'lucide-svelte/icons/map-pin';
+	import Clock from 'lucide-svelte/icons/clock';
+	import User from 'lucide-svelte/icons/user';
 
-	let bookings = $state([]);
-	let contacts = $state([]);
-	let studioRentals = $state([]);
+	interface Contact {
+		id: string;
+		name: string;
+		email: string;
+		phone?: string;
+		company?: string;
+		service?: string;
+		budget?: string;
+		message: string;
+		status: string;
+		created_at: string;
+	}
+
+	interface Booking {
+		id: string;
+		client_name: string;
+		client_email: string;
+		client_phone?: string;
+		service: string;
+		service_type: string;
+		date: string;
+		time: string;
+		appointment_date: string;
+		appointment_time: string;
+		property_address?: string;
+		status: string;
+		created_at: string;
+	}
+
+	interface StudioRental {
+		id: string;
+		client_name: string;
+		client_email: string;
+		client_phone?: string;
+		date: string;
+		rental_date: string;
+		start_time: string;
+		end_time: string;
+		rental_type: string;
+		purpose: string;
+		guest_count: number;
+		status: string;
+		total_amount: number;
+		created_at: string;
+	}
+
+	let bookings = $state<Booking[]>([]);
+	let contacts = $state<Contact[]>([]);
+	let studioRentals = $state<StudioRental[]>([]);
 	let loading = $state(true);
 
 	onMount(async () => {

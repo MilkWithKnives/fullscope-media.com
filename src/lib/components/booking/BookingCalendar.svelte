@@ -1,14 +1,13 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { createCalendar } from '@schedule-x/calendar';
-	import { createViewWeek, createViewMonthGrid } from '@schedule-x/calendar';
+	import { createCalendar, createViewWeek, createViewMonthGrid } from '@schedule-x/calendar';
 	import '@schedule-x/theme-default/dist/index.css';
-	import { Calendar, Clock, User, MapPin, Phone } from 'lucide-svelte';
+	import CalendarIcon from 'lucide-svelte/icons/calendar';
+	import Clock from 'lucide-svelte/icons/clock';
 	import Button from '../ui/Button.svelte';
 	import Card from '../ui/Card.svelte';
-	import { cn } from '$lib/utils';
 
-	interface BookingSlot {
+	type BookingSlot = {
 		id: string;
 		title: string;
 		start: string;
@@ -17,324 +16,135 @@
 		service: string;
 		duration: number;
 		price?: string;
-	}
+	};
 
-	interface ServiceType {
-		id: string;
-		name: string;
-		duration: number;
-		price: string;
-		description: string;
-		color: string;
-	}
-
-	let {
-		selectedDate = new Date().toISOString().split('T')[0],
-		selectedService = '',
-		onBookingSelect,
-		availableSlots = []
-	}: {
-		selectedDate?: string;
-		selectedService?: string;
-		onBookingSelect?: (slot: BookingSlot) => void;
-		availableSlots?: BookingSlot[];
-	} = $props();
+	let { onBookingSelect }: { onBookingSelect?: (slot: BookingSlot) => void } = $props();
 
 	let calendarElement: HTMLElement;
-	let calendar: any;
+	let calendar: ReturnType<typeof createCalendar> | null = null;
 	let selectedSlot = $state<BookingSlot | null>(null);
+	let slots = $state<BookingSlot[]>([]);
 
-	const serviceTypes: ServiceType[] = [
-		{
-			id: 'consultation',
-			name: 'Free Consultation',
-			duration: 30,
-			price: 'Free',
-			description: 'Discuss your project needs and get expert advice',
-			color: '#3b82f6'
-		},
-		{
-			id: 'strategy',
-			name: 'Strategy Session',
-			duration: 60,
-			price: '$150',
-			description: 'Deep dive into your marketing strategy and goals',
-			color: '#8b5cf6'
-		},
-		{
-			id: 'production',
-			name: 'Production Planning',
-			duration: 90,
-			price: '$200',
-			description: 'Plan your video or photo production in detail',
-			color: '#10b981'
-		},
-		{
-			id: 'review',
-			name: 'Project Review',
-			duration: 45,
-			price: '$100',
-			description: 'Review and provide feedback on ongoing projects',
-			color: '#f59e0b'
-		}
-	];
+	const today = new Date();
+	const pad = (n: number) => n.toString().padStart(2, '0');
+	const toDateString = (date: Date) => `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
 
-	// Sample available slots - in real app, this would come from your backend
-	const sampleSlots: BookingSlot[] = [
-		{
-			id: '1',
-			title: 'Available - Free Consultation',
-			start: '2024-12-11 09:00',
-			end: '2024-12-11 09:30',
-			available: true,
-			service: 'consultation',
-			duration: 30
-		},
-		{
-			id: '2',
-			title: 'Available - Strategy Session',
-			start: '2024-12-11 10:00',
-			end: '2024-12-11 11:00',
-			available: true,
-			service: 'strategy',
-			duration: 60,
-			price: '$150'
-		},
-		{
-			id: '3',
-			title: 'Available - Production Planning',
-			start: '2024-12-11 14:00',
-			end: '2024-12-11 15:30',
-			available: true,
-			service: 'production',
-			duration: 90,
-			price: '$200'
-		},
-		{
-			id: '4',
-			title: 'Booked - Client Meeting',
-			start: '2024-12-11 11:00',
-			end: '2024-12-11 12:00',
-			available: false,
-			service: 'consultation',
-			duration: 60
-		}
-	];
+	function addDays(base: Date, days: number) {
+		const d = new Date(base);
+		d.setDate(d.getDate() + days);
+		return d;
+	}
+
+	function buildSlots() {
+		const day0 = toDateString(today);
+		const day1 = toDateString(addDays(today, 1));
+		const day2 = toDateString(addDays(today, 2));
+
+		slots = [
+			{ id: 'slot-1', title: 'Consultation', start: `${day0} 10:00`, end: `${day0} 10:30`, available: true, service: 'consultation', duration: 30, price: 'Free' },
+			{ id: 'slot-2', title: 'Strategy Session', start: `${day0} 14:00`, end: `${day0} 15:00`, available: true, service: 'strategy', duration: 60, price: '$150' },
+			{ id: 'slot-3', title: 'Production Planning', start: `${day1} 11:00`, end: `${day1} 12:30`, available: true, service: 'production', duration: 90, price: '$200' },
+			{ id: 'slot-4', title: 'Booked - Client Meeting', start: `${day1} 16:00`, end: `${day1} 17:00`, available: false, service: 'consultation', duration: 60 },
+			{ id: 'slot-5', title: 'Project Review', start: `${day2} 09:30`, end: `${day2} 10:15`, available: true, service: 'review', duration: 45, price: '$100' }
+		];
+	}
+
+	function toEvents() {
+		return slots.map((slot) => ({
+			id: slot.id,
+			title: slot.title,
+			start: slot.start,
+			end: slot.end,
+			calendarId: slot.available ? 'available' : 'booked'
+		}));
+	}
 
 	onMount(() => {
-		if (calendarElement) {
-			calendar = createCalendar({
-				selectedDate: selectedDate,
-				views: [createViewWeek(), createViewMonthGrid()],
-				defaultView: 'week',
-				events: sampleSlots.map(slot => ({
-					id: slot.id,
-					title: slot.title,
-					start: slot.start,
-					end: slot.end,
-					backgroundColor: slot.available 
-						? serviceTypes.find(s => s.id === slot.service)?.color || '#3b82f6'
-						: '#6b7280',
-					borderColor: slot.available 
-						? serviceTypes.find(s => s.id === slot.service)?.color || '#3b82f6'
-						: '#6b7280',
-					textColor: '#ffffff'
-				})),
-				callbacks: {
-					onEventClick: (calendarEvent) => {
-						const slot = sampleSlots.find(s => s.id === calendarEvent.id);
-						if (slot && slot.available) {
-							selectedSlot = slot;
-							onBookingSelect?.(slot);
-						}
+		buildSlots();
+		const initialDate = toDateString(today);
+
+		calendar = createCalendar({
+			selectedDate: initialDate,
+			views: [createViewWeek(), createViewMonthGrid()],
+			defaultView: 'week',
+			events: toEvents(),
+			calendars: {
+				available: {
+					colorName: 'available',
+					lightColors: { main: '#22c55e', container: '#dcfce7', onContainer: '#166534' }
+				},
+				booked: {
+					colorName: 'booked',
+					lightColors: { main: '#9ca3af', container: '#f3f4f6', onContainer: '#374151' }
+				}
+			},
+			callbacks: {
+				onEventClick: (calendarEvent) => {
+					const slot = slots.find((s) => s.id === calendarEvent.id);
+					if (slot && slot.available) {
+						selectedSlot = slot;
+						onBookingSelect?.(slot);
 					}
 				}
-			});
+			}
+		});
 
+		if (calendarElement) {
 			calendar.render(calendarElement);
 		}
 
 		return () => {
-			if (calendar) {
-				calendar.destroy();
-			}
+			calendar?.destroy();
 		};
 	});
-
-	function selectService(serviceId: string) {
-		selectedService = serviceId;
-		// Filter calendar events based on selected service
-		if (calendar) {
-			const filteredSlots = selectedService 
-				? sampleSlots.filter(slot => slot.service === selectedService)
-				: sampleSlots;
-			
-			calendar.events.set(filteredSlots.map(slot => ({
-				id: slot.id,
-				title: slot.title,
-				start: slot.start,
-				end: slot.end,
-				backgroundColor: slot.available 
-					? serviceTypes.find(s => s.id === slot.service)?.color || '#3b82f6'
-					: '#6b7280',
-				borderColor: slot.available 
-					? serviceTypes.find(s => s.id === slot.service)?.color || '#3b82f6'
-					: '#6b7280',
-				textColor: '#ffffff'
-			})));
-		}
-	}
-
-	function bookSlot(slot: BookingSlot) {
-		// Handle booking logic here
-		console.log('Booking slot:', slot);
-		// In real app, this would make an API call to book the slot
-	}
 </script>
 
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-	<!-- Service Selection -->
-	<div class="lg:col-span-1 space-y-6">
-		<Card>
-			<h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center space-x-2">
-				<Calendar size={20} class="text-blue-600" />
-				<span>Select Service</span>
-			</h3>
-
-			<div class="space-y-3">
-				<button
-					onclick={() => selectService('')}
-					class={cn(
-						'w-full text-left p-3 rounded-lg border transition-all duration-200',
-						selectedService === ''
-							? 'border-blue-500 bg-blue-50 text-blue-700'
-							: 'border-gray-200 hover:border-gray-300'
-					)}
-				>
-					<div class="font-medium">All Services</div>
-					<div class="text-sm text-gray-500">View all available slots</div>
-				</button>
-
-				{#each serviceTypes as service}
-					<button
-						onclick={() => selectService(service.id)}
-						class={cn(
-							'w-full text-left p-3 rounded-lg border transition-all duration-200',
-							selectedService === service.id
-								? 'border-blue-500 bg-blue-50 text-blue-700'
-								: 'border-gray-200 hover:border-gray-300'
-						)}
-					>
-						<div class="flex items-center justify-between mb-1">
-							<div class="font-medium">{service.name}</div>
-							<div class="text-sm font-semibold text-green-600">{service.price}</div>
-						</div>
-						<div class="flex items-center space-x-4 text-sm text-gray-500">
-							<span class="flex items-center space-x-1">
-								<Clock size={14} />
-								<span>{service.duration} min</span>
-							</span>
-						</div>
-						<div class="text-sm text-gray-600 mt-1">{service.description}</div>
-					</button>
-				{/each}
+<div class="grid gap-6 lg:grid-cols-[2fr,1fr] items-start">
+	<Card class="h-full">
+		<div class="mb-4 flex items-center gap-3">
+			<CalendarIcon class="text-blue-600" size={22} />
+			<div>
+				<h3 class="text-lg font-semibold text-gray-900">Pick a time</h3>
+				<p class="text-sm text-gray-600">All times are shown in your local timezone.</p>
 			</div>
-		</Card>
+		</div>
+		<div bind:this={calendarElement} class="calendar-container"></div>
+	</Card>
 
-		<!-- Selected Slot Info -->
+	<Card class="h-full">
+		<h3 class="text-lg font-semibold text-gray-900 mb-3">Selected slot</h3>
 		{#if selectedSlot}
-			<Card>
-				<h3 class="text-lg font-semibold text-gray-900 mb-4">Selected Appointment</h3>
-
-				<div class="space-y-3">
-					<div class="flex items-center space-x-2">
-						<Calendar size={16} class="text-blue-600" />
-						<span class="text-sm">
-							{new Date(selectedSlot.start).toLocaleDateString('en-US', {
-								weekday: 'long',
-								year: 'numeric',
-								month: 'long',
-								day: 'numeric'
-							})}
-						</span>
-					</div>
-
-					<div class="flex items-center space-x-2">
-						<Clock size={16} class="text-blue-600" />
-						<span class="text-sm">
-							{new Date(selectedSlot.start).toLocaleTimeString('en-US', {
-								hour: 'numeric',
-								minute: '2-digit',
-								hour12: true
-							})} -
-							{new Date(selectedSlot.end).toLocaleTimeString('en-US', {
-								hour: 'numeric',
-								minute: '2-digit',
-								hour12: true
-							})}
-						</span>
-					</div>
-
-					<div class="flex items-center space-x-2">
-						<User size={16} class="text-blue-600" />
-						<span class="text-sm">
-							{serviceTypes.find(s => s.id === selectedSlot.service)?.name}
-						</span>
-					</div>
-
-					{#if selectedSlot.price}
-						<div class="flex items-center justify-between pt-2 border-t border-gray-200">
-							<span class="font-medium">Price:</span>
-							<span class="font-semibold text-green-600">{selectedSlot.price}</span>
-						</div>
-					{/if}
+			<div class="space-y-2 text-sm text-gray-700">
+				<div class="flex items-center gap-2">
+					<Clock size={16} class="text-blue-600" />
+					<span>
+						{new Date(selectedSlot.start).toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' })}
+					</span>
 				</div>
-
-				<Button
-					variant="primary"
-					class="w-full mt-4"
-					onclick={() => bookSlot(selectedSlot)}
-				>
-					Book This Appointment
-				</Button>
-			</Card>
-		{/if}
-	</div>
-
-	<!-- Calendar -->
-	<div class="lg:col-span-2">
-		<Card class="h-full">
-			<div class="mb-4">
-				<h3 class="text-lg font-semibold text-gray-900 mb-2">Available Times</h3>
-				<p class="text-sm text-gray-600">
-					Click on any available slot to select it. Green slots are available, gray slots are booked.
-				</p>
+				<div>Service: <span class="font-medium">{selectedSlot.service}</span></div>
+				<div>Duration: {selectedSlot.duration} min</div>
+				{#if selectedSlot.price}<div>Price: {selectedSlot.price}</div>{/if}
+				<Button class="w-full mt-2" onclick={() => onBookingSelect?.(selectedSlot)}>Continue</Button>
 			</div>
+		{:else}
+			<p class="text-sm text-gray-600">Select any green slot to continue.</p>
+		{/if}
 
-			<div bind:this={calendarElement} class="calendar-container"></div>
-		</Card>
-	</div>
+		<div class="mt-4 space-y-2 text-xs text-gray-500">
+			<div class="flex items-center gap-2">
+				<span class="inline-block h-3 w-3 rounded bg-[#22c55e]"></span>
+				<span>Available</span>
+			</div>
+			<div class="flex items-center gap-2">
+				<span class="inline-block h-3 w-3 rounded bg-[#9ca3af]"></span>
+				<span>Booked/Unavailable</span>
+			</div>
+		</div>
+	</Card>
 </div>
 
 <style>
 	:global(.calendar-container .sx__calendar) {
-		border: none;
-		box-shadow: none;
-	}
-
-	:global(.calendar-container .sx__calendar-header) {
-		background: #f8fafc;
-		border-bottom: 1px solid #e2e8f0;
-	}
-
-	:global(.calendar-container .sx__event) {
-		border-radius: 6px;
-		font-size: 12px;
-		font-weight: 500;
-	}
-
-	:global(.calendar-container .sx__event:hover) {
-		transform: translateY(-1px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+		min-height: 540px;
 	}
 </style>

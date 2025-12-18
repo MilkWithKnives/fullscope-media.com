@@ -1,12 +1,17 @@
 <script lang="ts">
-	import { Camera, Clock, Users, Lightbulb, Palette, Video } from 'lucide-svelte';
+	import Camera from 'lucide-svelte/icons/camera';
+	import Clock from 'lucide-svelte/icons/clock';
+	import Users from 'lucide-svelte/icons/users';
+	import Lightbulb from 'lucide-svelte/icons/lightbulb';
+	import Palette from 'lucide-svelte/icons/palette';
+	import Video from 'lucide-svelte/icons/video';
 	import Container from '$lib/components/ui/Container.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import ScheduleXStudioCalendar from '$lib/components/studio/ScheduleXStudioCalendar.svelte';
 	import StudioBookingForm from '$lib/components/studio/StudioBookingForm.svelte';
 
-	interface SelectedBooking {
+	interface SelectedSlot {
 		date: string;
 		start_time: string;
 		end_time: string;
@@ -20,7 +25,7 @@
 	}
 
 	let currentStep = $state<'info' | 'calendar' | 'booking' | 'confirmation'>('info');
-	let selectedBooking = $state<SelectedBooking | null>(null);
+	let selectedBooking = $state<SelectedSlot | null>(null);
 	let bookingComplete = $state(false);
 
 	const studioFeatures = [
@@ -56,7 +61,12 @@
 		}
 	];
 
-	function handleBookingSelect(booking: SelectedBooking) {
+	function handleBookingSelect(booking: SelectedSlot | null) {
+		if (!booking) {
+			selectedBooking = null;
+			return;
+		}
+
 		selectedBooking = booking;
 		currentStep = 'booking';
 	}
@@ -108,7 +118,10 @@
 					alt="Full Scope Media Studio Interior"
 					class="w-full h-full object-cover"
 					onerror={(e) => {
-						e.target.src = 'https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80';
+						const target = e.target as HTMLImageElement;
+						if (target) {
+							target.src = 'https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80';
+						}
 					}}
 				/>
 				<div class="absolute inset-0 bg-black/30 flex items-center justify-center">
@@ -214,7 +227,7 @@
 			</div>
 			
 			<StudioBookingForm
-				selectedSlot={selectedBooking}
+				selectedSlot={selectedBooking || undefined}
 				onSubmit={handleBookingSubmit}
 				onCancel={handleBookingCancel}
 			/>

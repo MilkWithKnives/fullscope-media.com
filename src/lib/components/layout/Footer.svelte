@@ -1,7 +1,13 @@
 <script lang="ts">
 	import Container from '../ui/Container.svelte';
 	import FooterDock from '../ui/dock/FooterDock.svelte';
-	import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-svelte';
+	import Facebook from 'lucide-svelte/icons/facebook';
+	import Twitter from 'lucide-svelte/icons/twitter';
+	import Instagram from 'lucide-svelte/icons/instagram';
+	import Linkedin from 'lucide-svelte/icons/linkedin';
+	import Mail from 'lucide-svelte/icons/mail';
+	import Phone from 'lucide-svelte/icons/phone';
+	import MapPin from 'lucide-svelte/icons/map-pin';
 
 	const socialLinks = [
 		{ name: 'Facebook', href: '#', icon: Facebook },

@@ -3,7 +3,10 @@
 	import Button from '../ui/Button.svelte';
 	import PortfolioCarousel from './PortfolioCarousel.svelte';
 	import PortfolioGrid from './PortfolioGrid.svelte';
-	import { Grid, List, Filter, Search } from 'lucide-svelte';
+	import Grid from 'lucide-svelte/icons/grid';
+	import List from 'lucide-svelte/icons/list';
+	import Filter from 'lucide-svelte/icons/filter';
+	import Search from 'lucide-svelte/icons/search';
 	import { cn } from '$lib/utils';
 
 	interface PortfolioItem {
@@ -151,17 +154,17 @@
 	];
 
 	// Featured items for carousel
-	$: featuredItems = portfolioItems.filter(item => item.featured);
+	const featuredItems = $derived(portfolioItems.filter((item) => item.featured));
 	
 	// Filtered items for grid
-	$: filteredItems = portfolioItems.filter(item => {
+	const filteredItems = $derived(portfolioItems.filter((item) => {
 		const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
 		const matchesSearch = searchQuery === '' || 
 			item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
 			item.client.toLowerCase().includes(searchQuery.toLowerCase()) ||
 			item.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
 		return matchesCategory && matchesSearch;
-	});
+	}));
 </script>
 
 <section class="py-24 bg-gray-50">

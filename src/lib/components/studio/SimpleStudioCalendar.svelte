@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Calendar, Clock, Users, DollarSign } from 'lucide-svelte';
+	import Calendar from 'lucide-svelte/icons/calendar';
+	import Clock from 'lucide-svelte/icons/clock';
+	import Users from 'lucide-svelte/icons/users';
+	import DollarSign from 'lucide-svelte/icons/dollar-sign';
 	import Button from '../ui/Button.svelte';
 	import Card from '../ui/Card.svelte';
 
@@ -32,8 +35,7 @@
 
 	let selectedDate = $state(new Date().toISOString().split('T')[0]);
 	let selectedBlocks = $state<TimeBlock[]>([]);
-	let selectedRentalType = $state('photographer_rental');
-	let existingBookings = $state([]);
+	let selectedRentalType = $state<RentalKey>('photographer_rental');
 	let isLoaded = $state(false);
 
 	// Initialize with some blocks immediately
@@ -95,6 +97,10 @@
 			color: '#8b5cf6'
 		}
 	};
+
+	type RentalKey = keyof typeof rentalTypes;
+
+	const rentalEntries = $derived(Object.entries(rentalTypes) as [RentalKey, (typeof rentalTypes)[RentalKey]][]);
 
 	onMount(() => {
 		console.log('SimpleStudioCalendar mounted');
@@ -225,7 +231,7 @@
 		<h3 class="text-lg font-semibold text-gray-900 mb-4">Select Rental Type</h3>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-			{#each Object.entries(rentalTypes) as [key, rental]}
+			{#each rentalEntries as [key, rental]}
 				<button
 					onclick={() => { selectedRentalType = key; updateBookingCalculation(); }}
 					class="p-4 border-2 rounded-lg transition-all text-left {selectedRentalType === key

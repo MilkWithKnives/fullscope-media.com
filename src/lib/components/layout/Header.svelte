@@ -3,7 +3,8 @@
 	import { cn } from '$lib/utils';
 	import Container from '../ui/Container.svelte';
 	import Button from '../ui/Button.svelte';
-	import { Menu, X } from 'lucide-svelte';
+	import Menu from 'lucide-svelte/icons/menu';
+	import X from 'lucide-svelte/icons/x';
 
 	let mobileMenuOpen = $state(false);
 
@@ -24,7 +25,7 @@
 			<!-- Logo -->
 			<div class="flex-shrink-0">
 				<a href="/" class="flex items-center">
-					<span class="text-2xl font-bold text-blue-600">Full Scope Media</span>
+					<span class="text-2xl font-bold text-[var(--color-primary-strong)]">Full Scope Media</span>
 				</a>
 			</div>
 
@@ -36,9 +37,9 @@
 						class={cn(
 							'px-3 py-2 text-sm font-medium transition-colors rounded-md',
 							item.highlight
-								? 'bg-blue-600 text-white hover:bg-blue-700'
-								: 'text-gray-700 hover:text-blue-600',
-							$page.url.pathname === item.href && !item.highlight && 'text-blue-600'
+								? 'bg-[var(--color-primary-strong)] text-black hover:bg-[var(--color-primary)]'
+								: 'text-gray-900 hover:text-[var(--color-primary-strong)]',
+							$page.url.pathname === item.href && !item.highlight && 'text-[var(--color-primary-strong)]'
 						)}
 					>
 						{item.name}
@@ -57,7 +58,7 @@
 			<div class="md:hidden">
 				<button
 					onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
-					class="text-gray-700 hover:text-blue-600 p-2"
+					class="text-gray-900 hover:text-[var(--color-primary-strong)] p-2"
 				>
 					{#if mobileMenuOpen}
 						<X size={24} />
@@ -78,9 +79,9 @@
 							class={cn(
 								'px-3 py-2 text-base font-medium transition-colors rounded-md',
 								item.highlight
-									? 'bg-blue-600 text-white hover:bg-blue-700'
-									: 'text-gray-700 hover:text-blue-600',
-								$page.url.pathname === item.href && !item.highlight && 'text-blue-600'
+									? 'bg-[var(--color-primary-strong)] text-black hover:bg-[var(--color-primary)]'
+									: 'text-gray-900 hover:text-[var(--color-primary-strong)]',
+								$page.url.pathname === item.href && !item.highlight && 'text-[var(--color-primary-strong)]'
 							)}
 							onclick={() => (mobileMenuOpen = false)}
 						>

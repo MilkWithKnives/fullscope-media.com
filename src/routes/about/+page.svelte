@@ -2,7 +2,12 @@
 	import Container from '$lib/components/ui/Container.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
-	import { Award, Users, Target, Zap, Linkedin, Mail } from 'lucide-svelte';
+	import Award from 'lucide-svelte/icons/award';
+	import Users from 'lucide-svelte/icons/users';
+	import Target from 'lucide-svelte/icons/target';
+	import Zap from 'lucide-svelte/icons/zap';
+	import Linkedin from 'lucide-svelte/icons/linkedin';
+	import Mail from 'lucide-svelte/icons/mail';
 
 	const values = [
 		{

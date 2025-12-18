@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { createCalendar } from '@schedule-x/calendar';
-	import { createViewWeek, createViewMonthGrid } from '@schedule-x/calendar';
+	import { createCalendar, createViewWeek, createViewMonthGrid } from '@schedule-x/calendar';
 	import '@schedule-x/theme-default/dist/index.css';
 
 	let calendarElement: HTMLElement;
@@ -9,7 +8,7 @@
 	onMount(() => {
 		const calendar = createCalendar({
 			locale: 'en-US',
-			firstDayOfWeek: 0,
+			firstDayOfWeek: 7 as any, // Sunday
 			defaultView: 'week',
 			views: [createViewWeek(), createViewMonthGrid()],
 			events: [

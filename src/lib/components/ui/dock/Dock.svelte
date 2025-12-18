@@ -5,7 +5,11 @@
 	interface Props {
 		direction?: 'top' | 'middle' | 'bottom';
 		class?: string;
-		children: Snippet<{ mouseX: number; distance: (x: number) => number; magnification: number }>;
+		children: Snippet<[{
+			mouseX: number;
+			distance: (x: number) => number;
+			magnification: number;
+		}]>;
 	}
 
 	let { direction = 'middle', class: className = '', children }: Props = $props();

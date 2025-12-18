@@ -2,7 +2,11 @@
 	import Container from '$lib/components/ui/Container.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
-	import { Mail, Phone, MapPin, Clock, Send } from 'lucide-svelte';
+	import Mail from 'lucide-svelte/icons/mail';
+	import Phone from 'lucide-svelte/icons/phone';
+	import MapPin from 'lucide-svelte/icons/map-pin';
+	import Clock from 'lucide-svelte/icons/clock';
+	import Send from 'lucide-svelte/icons/send';
 
 	let formData = $state({
 		name: '',
@@ -278,7 +282,7 @@
 						{#each contactInfo as info}
 							<div class="flex items-start space-x-4">
 								<div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-									<svelte:component this={info.icon} size={20} class="text-blue-600" />
+									<info.icon size={20} class="text-blue-600" />
 								</div>
 								<div>
 									<h3 class="font-semibold text-gray-900">{info.title}</h3>

@@ -2,10 +2,14 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { supabase } from '$lib/supabase';
 import { createBookingEvent, generateICalInvite } from '$lib/utils/ical';
-import { sendEmail, generateBookingConfirmationEmail } from '$lib/utils/email';
-import { BUSINESS_EMAIL } from '$env/static/private';
+import { sendEmail, generateBookingConfirmationEmail } from '$lib/utils/email.ts';
+import { env } from '$env/dynamic/private';
 
-export const POST: RequestHandler = async ({ request }) => {
+const BUSINESS_EMAIL = env.BUSINESS_EMAIL ?? '';
+
+type RouteEvent = Parameters<RequestHandler>[0];
+
+export const POST: RequestHandler = async ({ request }: RouteEvent) => {
 	try {
 		const rentalData = await request.json();
 		

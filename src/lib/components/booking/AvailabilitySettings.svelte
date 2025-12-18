@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { Clock, Calendar, Plus, Trash2, Save } from 'lucide-svelte';
+	import Clock from 'lucide-svelte/icons/clock';
+	import Calendar from 'lucide-svelte/icons/calendar';
+	import Plus from 'lucide-svelte/icons/plus';
+	import Trash2 from 'lucide-svelte/icons/trash-2';
+	import Save from 'lucide-svelte/icons/save';
 	import Button from '../ui/Button.svelte';
 	import Card from '../ui/Card.svelte';
 	import { cn } from '$lib/utils';
@@ -141,7 +145,12 @@
 								type="time"
 								value={slot.startTime}
 								disabled={!slot.available}
-								onchange={(e) => updateTimeSlot(slot.id, 'startTime', e.target.value)}
+								aria-label={`Start time for ${slot.day}`}
+								onchange={(e) => {
+									const target = e.target as HTMLInputElement | null;
+									if (!target) return;
+									updateTimeSlot(slot.id, 'startTime', target.value);
+								}}
 								class={cn(
 									'px-2 py-1 border rounded text-sm',
 									slot.available ? 'border-gray-300' : 'border-gray-200 bg-gray-50 text-gray-400'
@@ -152,7 +161,12 @@
 								type="time"
 								value={slot.endTime}
 								disabled={!slot.available}
-								onchange={(e) => updateTimeSlot(slot.id, 'endTime', e.target.value)}
+								aria-label={`End time for ${slot.day}`}
+								onchange={(e) => {
+									const target = e.target as HTMLInputElement | null;
+									if (!target) return;
+									updateTimeSlot(slot.id, 'endTime', target.value);
+								}}
 								class={cn(
 									'px-2 py-1 border rounded text-sm',
 									slot.available ? 'border-gray-300' : 'border-gray-200 bg-gray-50 text-gray-400'
@@ -176,13 +190,18 @@
 					
 					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 						<div>
-							<label class="block text-sm font-medium text-gray-700 mb-1">
+							<label class="block text-sm font-medium text-gray-700 mb-1" for={`duration-${service.id}`}>
 								Duration (minutes)
 							</label>
 							<input
 								type="number"
 								value={service.duration}
-								onchange={(e) => updateServiceSetting(service.id, 'duration', parseInt(e.target.value))}
+								id={`duration-${service.id}`}
+								onchange={(e) => {
+									const target = e.target as HTMLInputElement | null;
+									if (!target) return;
+									updateServiceSetting(service.id, 'duration', parseInt(target.value));
+								}}
 								class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
 								min="15"
 								step="15"
@@ -190,13 +209,18 @@
 						</div>
 						
 						<div>
-							<label class="block text-sm font-medium text-gray-700 mb-1">
+							<label class="block text-sm font-medium text-gray-700 mb-1" for={`buffer-${service.id}`}>
 								Buffer Time (minutes)
 							</label>
 							<input
 								type="number"
 								value={service.bufferTime}
-								onchange={(e) => updateServiceSetting(service.id, 'bufferTime', parseInt(e.target.value))}
+								id={`buffer-${service.id}`}
+								onchange={(e) => {
+									const target = e.target as HTMLInputElement | null;
+									if (!target) return;
+									updateServiceSetting(service.id, 'bufferTime', parseInt(target.value));
+								}}
 								class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
 								min="0"
 								step="5"
@@ -204,26 +228,36 @@
 						</div>
 						
 						<div>
-							<label class="block text-sm font-medium text-gray-700 mb-1">
+							<label class="block text-sm font-medium text-gray-700 mb-1" for={`max-bookings-${service.id}`}>
 								Max Bookings/Day
 							</label>
 							<input
 								type="number"
 								value={service.maxBookingsPerDay}
-								onchange={(e) => updateServiceSetting(service.id, 'maxBookingsPerDay', parseInt(e.target.value))}
+								id={`max-bookings-${service.id}`}
+								onchange={(e) => {
+									const target = e.target as HTMLInputElement | null;
+									if (!target) return;
+									updateServiceSetting(service.id, 'maxBookingsPerDay', parseInt(target.value));
+								}}
 								class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
 								min="1"
 							/>
 						</div>
 						
 						<div>
-							<label class="block text-sm font-medium text-gray-700 mb-1">
+							<label class="block text-sm font-medium text-gray-700 mb-1" for={`advance-${service.id}`}>
 								Advance Booking (days)
 							</label>
 							<input
 								type="number"
 								value={service.advanceBookingDays}
-								onchange={(e) => updateServiceSetting(service.id, 'advanceBookingDays', parseInt(e.target.value))}
+								id={`advance-${service.id}`}
+								onchange={(e) => {
+									const target = e.target as HTMLInputElement | null;
+									if (!target) return;
+									updateServiceSetting(service.id, 'advanceBookingDays', parseInt(target.value));
+								}}
 								class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
 								min="1"
 							/>

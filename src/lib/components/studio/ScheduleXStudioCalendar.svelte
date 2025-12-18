@@ -3,9 +3,25 @@
 	import { createCalendar } from '@schedule-x/calendar';
 	import { createViewWeek, createViewMonthGrid } from '@schedule-x/calendar';
 	import '@schedule-x/theme-default/dist/index.css';
-	import { Calendar, Clock, Users, DollarSign } from 'lucide-svelte';
+	import Calendar from 'lucide-svelte/icons/calendar';
+	import Clock from 'lucide-svelte/icons/clock';
+	import Users from 'lucide-svelte/icons/users';
+	import DollarSign from 'lucide-svelte/icons/dollar-sign';
+	import type { Temporal } from 'temporal-polyfill';
 	import Button from '../ui/Button.svelte';
 	import Card from '../ui/Card.svelte';
+
+	const WeekDay = {
+		MONDAY: 1,
+		TUESDAY: 2,
+		WEDNESDAY: 3,
+		THURSDAY: 4,
+		FRIDAY: 5,
+		SATURDAY: 6,
+		SUNDAY: 7
+	} as const;
+
+	type WeekDayValue = (typeof WeekDay)[keyof typeof WeekDay];
 
 	interface TimeBlock {
 		date: string;
@@ -27,16 +43,25 @@
 		cleanup_fee: number;
 	}
 
+	interface ExistingBooking {
+		id?: string;
+		title?: string;
+		booking_type?: string;
+		rental_date: string;
+		start_time?: string;
+		end_time?: string;
+	}
+
 	let {
 		onBookingSelect
 	}: {
-		onBookingSelect?: (booking: SelectedBooking) => void;
+		onBookingSelect?: (booking: SelectedBooking | null) => void;
 	} = $props();
 
 	let selectedDate = $state(new Date().toISOString().split('T')[0]);
 	let selectedBlocks = $state<TimeBlock[]>([]);
-	let selectedRentalType = $state('photographer_rental');
-	let existingBookings = $state([]);
+	let selectedRentalType = $state<RentalKey>('photographer_rental');
+	let existingBookings = $state<ExistingBooking[]>([]);
 	let calendar: any = $state(null);
 	let calendarElement: HTMLDivElement;
 
@@ -79,6 +104,10 @@
 			color: '#8b5cf6'
 		}
 	};
+
+	type RentalKey = keyof typeof rentalTypes;
+
+	const rentalEntries = $derived(Object.entries(rentalTypes) as [RentalKey, (typeof rentalTypes)[RentalKey]][]);
 
 	// Initialize with some blocks immediately
 	function initializeBlocks() {
@@ -165,43 +194,47 @@
 			console.log('Initializing Schedule-X calendar...');
 			calendar = createCalendar({
 				locale: 'en-US',
-				firstDayOfWeek: 0,
+				firstDayOfWeek: WeekDay.SUNDAY as WeekDayValue,
 				defaultView: 'week',
-			views: [createViewWeek(), createViewMonthGrid()],
-			events: existingBookings.map(booking => ({
-				id: booking.id || `booking-${Math.random()}`,
-				title: booking.title || 'Booking',
-				start: `${booking.rental_date} ${booking.start_time}`,
-				end: `${booking.rental_date} ${booking.end_time}`,
-				calendarId: booking.booking_type || 'default'
-			})),
-			calendars: {
-				studio_rental: {
-					colorName: 'studio',
-					lightColors: {
-						main: '#8b5cf6',
-						container: '#f3e8ff',
-						onContainer: '#581c87'
+				views: [createViewWeek(), createViewMonthGrid()],
+				events: existingBookings.map((booking) => {
+					const startTime = booking.start_time ?? '00:00';
+					const endTime = booking.end_time ?? startTime;
+
+					return {
+						id: booking.id || `booking-${Math.random()}`,
+						title: booking.title || 'Booking',
+						start: `${booking.rental_date} ${startTime}`,
+						end: `${booking.rental_date} ${endTime}`,
+						calendarId: booking.booking_type || 'default'
+					};
+				}),
+				calendars: {
+					studio_rental: {
+						colorName: 'studio',
+						lightColors: {
+							main: '#8b5cf6',
+							container: '#f3e8ff',
+							onContainer: '#581c87'
+						}
+					},
+					photography_service: {
+						colorName: 'service',
+						lightColors: {
+							main: '#3b82f6',
+							container: '#dbeafe',
+							onContainer: '#1e40af'
+						}
 					}
 				},
-				photography_service: {
-					colorName: 'service',
-					lightColors: {
-						main: '#3b82f6',
-						container: '#dbeafe',
-						onContainer: '#1e40af'
+				callbacks: {
+					onClickDate: (date: Temporal.PlainDate) => {
+						const clickedDate = date.toString();
+						selectedDate = clickedDate;
+						generateTimeBlocks();
 					}
 				}
-			},
-			callbacks: {
-				onDateClick: (date) => {
-					console.log('Date clicked:', date);
-					const clickedDate = new Date(date).toISOString().split('T')[0];
-					selectedDate = clickedDate;
-					generateTimeBlocks();
-				}
-			}
-		});
+			});
 
 		calendar.render(calendarElement);
 		console.log('Schedule-X calendar initialized successfully');
@@ -339,7 +372,7 @@
 		</div>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-			{#each Object.entries(rentalTypes) as [key, rental]}
+			{#each rentalEntries as [key, rental]}
 				<button
 					onclick={() => selectedRentalType = key}
 					class="p-4 border-2 rounded-lg transition-all text-left {selectedRentalType === key

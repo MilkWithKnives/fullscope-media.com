@@ -2,7 +2,12 @@
 	import Container from '$lib/components/ui/Container.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
-	import { Video, Camera, Megaphone, Globe, Check, ArrowRight } from 'lucide-svelte';
+	import Video from 'lucide-svelte/icons/video';
+	import Camera from 'lucide-svelte/icons/camera';
+	import Megaphone from 'lucide-svelte/icons/megaphone';
+	import Globe from 'lucide-svelte/icons/globe';
+	import Check from 'lucide-svelte/icons/check';
+	import ArrowRight from 'lucide-svelte/icons/arrow-right';
 
 	const services = [
 		{
@@ -74,11 +79,11 @@
 </svelte:head>
 
 <!-- Hero Section -->
-<section class="bg-gradient-to-br from-blue-900 to-purple-900 text-white py-24">
+<section class="bg-black text-white py-24">
 	<Container>
 		<div class="text-center space-y-6">
 			<h1 class="text-4xl md:text-5xl font-bold">Our Services</h1>
-			<p class="text-xl text-blue-100 max-w-3xl mx-auto">
+			<p class="text-xl text-gray-200 max-w-3xl mx-auto">
 				Comprehensive creative solutions designed to elevate your brand and drive results. 
 				From concept to completion, we deliver excellence in every project.
 			</p>
@@ -87,25 +92,25 @@
 </section>
 
 <!-- Services Grid -->
-<section class="py-24 bg-gray-50">
+<section class="py-24 bg-white">
 	<Container>
 		<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 			{#each services as service}
 				<Card class="relative overflow-hidden group hover:shadow-xl transition-all duration-300">
 					{#if service.popular}
-						<div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+						<div class="absolute top-4 right-4 bg-[var(--color-primary-strong)] text-black px-3 py-1 rounded-full text-sm font-medium">
 							Most Popular
 						</div>
 					{/if}
 					
 					<div class="space-y-6">
 						<div class="flex items-center space-x-4">
-							<div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center group-hover:bg-blue-200 transition-colors">
-								<svelte:component this={service.icon} size={32} class="text-blue-600" />
+							<div class="w-16 h-16 bg-[var(--color-primary)]/15 rounded-xl flex items-center justify-center group-hover:bg-[var(--color-primary)]/25 transition-colors">
+								<svelte:component this={service.icon} size={32} class="text-[var(--color-primary-strong)]" />
 							</div>
 							<div>
 								<h3 class="text-2xl font-bold text-gray-900">{service.title}</h3>
-								<p class="text-blue-600 font-semibold">{service.pricing}</p>
+								<p class="text-[var(--color-primary-strong)] font-semibold">{service.pricing}</p>
 							</div>
 						</div>
 						
@@ -118,7 +123,7 @@
 							<ul class="space-y-2">
 								{#each service.features as feature}
 									<li class="flex items-start space-x-3">
-										<Check size={16} class="text-green-600 mt-0.5 flex-shrink-0" />
+										<Check size={16} class="text-[var(--color-primary-strong)] mt-0.5 flex-shrink-0" />
 										<span class="text-gray-600">{feature}</span>
 									</li>
 								{/each}
@@ -126,7 +131,7 @@
 						</div>
 						
 						<div class="pt-4">
-							<Button variant="primary" class="w-full">
+							<Button variant="primary" class="w-full text-black">
 								<a href="/contact" class="flex items-center justify-center space-x-2">
 									<span>Get Started</span>
 									<ArrowRight size={16} />
@@ -152,29 +157,29 @@
 
 		<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
 			<div class="text-center">
-				<div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-					<span class="text-2xl font-bold text-blue-600">1</span>
+				<div class="w-16 h-16 bg-[var(--color-primary)]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+					<span class="text-2xl font-bold text-[var(--color-primary-strong)]">1</span>
 				</div>
 				<h3 class="text-lg font-semibold text-gray-900 mb-2">Discovery</h3>
 				<p class="text-gray-600">We learn about your goals, audience, and vision to create the perfect strategy.</p>
 			</div>
 			<div class="text-center">
-				<div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-					<span class="text-2xl font-bold text-blue-600">2</span>
+				<div class="w-16 h-16 bg-[var(--color-primary)]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+					<span class="text-2xl font-bold text-[var(--color-primary-strong)]">2</span>
 				</div>
 				<h3 class="text-lg font-semibold text-gray-900 mb-2">Planning</h3>
 				<p class="text-gray-600">Detailed project planning with timelines, deliverables, and creative concepts.</p>
 			</div>
 			<div class="text-center">
-				<div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-					<span class="text-2xl font-bold text-blue-600">3</span>
+				<div class="w-16 h-16 bg-[var(--color-primary)]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+					<span class="text-2xl font-bold text-[var(--color-primary-strong)]">3</span>
 				</div>
 				<h3 class="text-lg font-semibold text-gray-900 mb-2">Production</h3>
 				<p class="text-gray-600">Expert execution using professional equipment and proven techniques.</p>
 			</div>
 			<div class="text-center">
-				<div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-					<span class="text-2xl font-bold text-blue-600">4</span>
+				<div class="w-16 h-16 bg-[var(--color-primary)]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+					<span class="text-2xl font-bold text-[var(--color-primary-strong)]">4</span>
 				</div>
 				<h3 class="text-lg font-semibold text-gray-900 mb-2">Delivery</h3>
 				<p class="text-gray-600">Final delivery with ongoing support and optimization recommendations.</p>
@@ -184,15 +189,15 @@
 </section>
 
 <!-- CTA Section -->
-<section class="py-24 bg-blue-600 text-white">
+<section class="py-24 bg-black text-white">
 	<Container>
 		<div class="text-center space-y-8">
 			<h2 class="text-3xl md:text-4xl font-bold">Ready to Get Started?</h2>
-			<p class="text-xl text-blue-100 max-w-2xl mx-auto">
+			<p class="text-xl text-gray-200 max-w-2xl mx-auto">
 				Let's discuss your project and create a custom solution that fits your needs and budget.
 			</p>
 			<div class="flex flex-col sm:flex-row gap-4 justify-center">
-				<Button variant="primary" size="lg" class="bg-white text-blue-600 hover:bg-blue-50">
+				<Button variant="primary" size="lg" class="text-black">
 					<a href="/contact">Start Your Project</a>
 				</Button>
 				<Button variant="outline" size="lg" class="border-white text-white hover:bg-white/10">

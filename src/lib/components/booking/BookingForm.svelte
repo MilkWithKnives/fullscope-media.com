@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { User, Mail, Phone, MessageSquare, Calendar, Clock, DollarSign } from 'lucide-svelte';
+	import User from 'lucide-svelte/icons/user';
+	import Mail from 'lucide-svelte/icons/mail';
+	import Phone from 'lucide-svelte/icons/phone';
+	import MessageSquare from 'lucide-svelte/icons/message-square';
+	import Calendar from 'lucide-svelte/icons/calendar';
+	import Clock from 'lucide-svelte/icons/clock';
+	import DollarSign from 'lucide-svelte/icons/dollar-sign';
 	import Button from '../ui/Button.svelte';
 	import Card from '../ui/Card.svelte';
 	import Loading from '../ui/Loading.svelte';
@@ -47,10 +53,18 @@
 		company: '',
 		projectType: '',
 		message: '',
-		preferredDate: selectedSlot ? selectedSlot.start.split(' ')[0] : '',
-		preferredTime: selectedSlot ? selectedSlot.start.split(' ')[1] : '',
+		preferredDate: '',
+		preferredTime: '',
 		budget: '',
 		hearAboutUs: ''
+	});
+
+	$effect(() => {
+		if (selectedSlot) {
+			const [date, time] = selectedSlot.start.split(' ');
+			formData.preferredDate = date;
+			formData.preferredTime = time;
+		}
 	});
 
 	let isSubmitting = $state(false);

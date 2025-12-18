@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Calendar, Clock, DollarSign, Users, Camera } from 'lucide-svelte';
+	import Calendar from 'lucide-svelte/icons/calendar';
+	import Clock from 'lucide-svelte/icons/clock';
+	import DollarSign from 'lucide-svelte/icons/dollar-sign';
+	import Users from 'lucide-svelte/icons/users';
+	import Camera from 'lucide-svelte/icons/camera';
 	import Button from '../ui/Button.svelte';
 	import Card from '../ui/Card.svelte';
 
@@ -174,7 +178,7 @@
 				{#each packages as pkg}
 					<div class="border border-gray-200 rounded-lg p-4 hover:border-blue-500 transition-colors">
 						<div class="flex items-center gap-3 mb-3">
-							<svelte:component this={pkg.icon} class="text-blue-600" size={20} />
+							<pkg.icon class="text-blue-600" size={20} />
 							<h4 class="font-semibold text-gray-900">{pkg.name}</h4>
 						</div>
 						

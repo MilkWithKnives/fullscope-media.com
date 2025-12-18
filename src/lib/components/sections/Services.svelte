@@ -2,7 +2,11 @@
 	import Container from '../ui/Container.svelte';
 	import Card from '../ui/Card.svelte';
 	import Button from '../ui/Button.svelte';
-	import { Video, Camera, Megaphone, Globe, ArrowRight } from 'lucide-svelte';
+	import Video from 'lucide-svelte/icons/video';
+	import Camera from 'lucide-svelte/icons/camera';
+	import Megaphone from 'lucide-svelte/icons/megaphone';
+	import Globe from 'lucide-svelte/icons/globe';
+	import ArrowRight from 'lucide-svelte/icons/arrow-right';
 
 	const services = [
 		{

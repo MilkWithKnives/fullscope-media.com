@@ -1,9 +1,12 @@
 <script lang="ts">
-	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
+import { Splide, SplideSlide } from '@splidejs/svelte-splide/components';
 	import '@splidejs/svelte-splide/css';
-	import { Play, ExternalLink, Award, Calendar, Users } from 'lucide-svelte';
+	import Play from 'lucide-svelte/icons/play';
+	import ExternalLink from 'lucide-svelte/icons/external-link';
+	import Award from 'lucide-svelte/icons/award';
+	import Calendar from 'lucide-svelte/icons/calendar';
+	import Users from 'lucide-svelte/icons/users';
 	import Button from '../ui/Button.svelte';
-	import { cn } from '$lib/utils';
 
 	interface PortfolioItem {
 		id: number;
@@ -25,7 +28,10 @@
 
 	let { items, options = {} }: { items: PortfolioItem[]; options?: any } = $props();
 
-	const defaultOptions = {
+	const prefersReducedMotion =
+		typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	const baseOptions = {
 		type: 'loop',
 		perPage: 1,
 		perMove: 1,
@@ -45,13 +51,25 @@
 		interval: 5000,
 		pauseOnHover: true,
 		arrows: true,
-		pagination: true,
-		...options
+		pagination: true
+	};
+
+	const defaultOptions = {
+		...baseOptions,
+		...options,
+		autoplay: (options.autoplay ?? baseOptions.autoplay) && !prefersReducedMotion
 	};
 
 	function handleSlideClick(item: PortfolioItem) {
 		// Handle slide click - could open modal or navigate to detail page
 		console.log('Clicked item:', item);
+	}
+
+	function handleSlideKeydown(event: KeyboardEvent, item: PortfolioItem) {
+		if (event.key === 'Enter' || event.key === ' ') {
+			event.preventDefault();
+			handleSlideClick(item);
+		}
 	}
 </script>
 
@@ -59,21 +77,38 @@
 	<Splide options={defaultOptions} aria-label="Portfolio Showcase">
 		{#each items as item (item.id)}
 			<SplideSlide>
-				<div class="relative group cursor-pointer" onclick={() => handleSlideClick(item)}>
+				<div
+					class="relative group cursor-pointer"
+					onclick={() => handleSlideClick(item)}
+					onkeydown={(event) => handleSlideKeydown(event, item)}
+					role="button"
+					tabindex="0"
+					aria-label={`View ${item.title} project details`}
+				>
 					<!-- Main Image/Video Container -->
-					<div class="relative aspect-video bg-gradient-to-br from-blue-200 to-purple-200 rounded-2xl overflow-hidden">
-						<!-- Placeholder for actual image -->
-						<div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100">
-							<div class="text-center space-y-4">
-								{#if item.video}
-									<Play size={48} class="text-blue-600 mx-auto" />
-									<p class="text-blue-800 font-medium">Video Project</p>
-								{:else}
-									<ExternalLink size={48} class="text-blue-600 mx-auto" />
-									<p class="text-blue-800 font-medium">View Project</p>
-								{/if}
+					<div class="relative aspect-video bg-gradient-to-br from-[#121212] via-[#0f0f0f] to-[#090909] rounded-2xl overflow-hidden">
+						{#if item.image}
+							<img
+								src={item.image}
+								alt={`${item.title} project preview`}
+								loading="lazy"
+								decoding="async"
+								class="absolute inset-0 h-full w-full object-cover"
+							/>
+						{/if}
+						{#if !item.image}
+							<div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#1a1a1a] to-[#0c0c0c]">
+								<div class="text-center space-y-4">
+									{#if item.video}
+										<Play size={48} class="text-[var(--color-primary-strong)] mx-auto" />
+										<p class="text-gray-200 font-medium">Video Project</p>
+									{:else}
+										<ExternalLink size={48} class="text-[var(--color-primary-strong)] mx-auto" />
+										<p class="text-gray-200 font-medium">View Project</p>
+									{/if}
+								</div>
 							</div>
-						</div>
+						{/if}
 						
 						<!-- Overlay -->
 						<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -83,10 +118,10 @@
 								</Button>
 								{#if item.metrics}
 									<div class="flex space-x-6 text-white text-sm">
-										{#each item.metrics as metric}
+										{#each item.metrics as metric (metric.label ?? metric.value)}
 											<div class="text-center">
 												<div class="font-bold">{metric.value}</div>
-												<div class="opacity-80">{metric.label}</div>
+												<div class="opacity-80 text-gray-200">{metric.label}</div>
 											</div>
 										{/each}
 									</div>
@@ -96,7 +131,7 @@
 
 						<!-- Featured Badge -->
 						{#if item.featured}
-							<div class="absolute top-4 left-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1">
+							<div class="absolute top-4 left-4 bg-[var(--color-primary-strong)] text-black px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1 shadow-lg shadow-[var(--color-primary-strong)]/40">
 								<Award size={14} />
 								<span>Featured</span>
 							</div>
@@ -104,7 +139,7 @@
 
 						<!-- Award Badge -->
 						{#if item.award}
-							<div class="absolute top-4 right-4 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+							<div class="absolute top-4 right-4 bg-black/70 border border-[var(--color-primary-strong)] text-[var(--color-primary-strong)] px-3 py-1 rounded-full text-sm font-medium backdrop-blur">
 								{item.award}
 							</div>
 						{/if}
@@ -114,16 +149,16 @@
 					<div class="mt-6 space-y-4">
 						<div class="flex items-start justify-between">
 							<div class="space-y-2">
-								<div class="flex items-center space-x-2 text-sm text-gray-500">
+								<div class="flex items-center space-x-2 text-sm text-gray-400">
 									<Calendar size={14} />
 									<span>{new Date(item.date).toLocaleDateString()}</span>
 									<span>•</span>
-									<span class="text-blue-600 font-medium">{item.category}</span>
+									<span class="text-[var(--color-primary-strong)] font-medium">{item.category}</span>
 								</div>
-								<h3 class="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+								<h3 class="text-2xl font-bold text-gray-900 group-hover:text-[var(--color-primary-strong)] transition-colors">
 									{item.title}
 								</h3>
-								<p class="text-blue-600 font-medium flex items-center space-x-1">
+								<p class="text-[var(--color-primary-strong)] font-medium flex items-center space-x-1">
 									<Users size={14} />
 									<span>{item.client}</span>
 								</p>
@@ -135,8 +170,8 @@
 						</p>
 						
 						<div class="flex flex-wrap gap-2">
-							{#each item.tags as tag}
-								<span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-blue-100 hover:text-blue-700 transition-colors">
+							{#each item.tags as tag (tag)}
+								<span class="px-3 py-1 bg-gray-100 text-gray-800 text-sm rounded-full border border-gray-200 hover:bg-[var(--color-primary)] hover:text-black transition-colors">
 									{tag}
 								</span>
 							{/each}

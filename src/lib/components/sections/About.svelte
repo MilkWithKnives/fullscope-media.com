@@ -1,7 +1,10 @@
 <script lang="ts">
 	import Container from '../ui/Container.svelte';
 	import Button from '../ui/Button.svelte';
-	import { Award, Users, Target, Zap } from 'lucide-svelte';
+	import Award from 'lucide-svelte/icons/award';
+	import Users from 'lucide-svelte/icons/users';
+	import Target from 'lucide-svelte/icons/target';
+	import Zap from 'lucide-svelte/icons/zap';
 
 	const values = [
 		{

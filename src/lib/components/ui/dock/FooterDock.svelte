@@ -1,5 +1,14 @@
 <script lang="ts">
-	import { Home, Briefcase, Camera, Building, User, Mail, Facebook, Twitter, Instagram, Linkedin } from 'lucide-svelte';
+	import Home from 'lucide-svelte/icons/home';
+	import Briefcase from 'lucide-svelte/icons/briefcase';
+	import Camera from 'lucide-svelte/icons/camera';
+	import Building from 'lucide-svelte/icons/building';
+	import User from 'lucide-svelte/icons/user';
+	import Mail from 'lucide-svelte/icons/mail';
+	import Facebook from 'lucide-svelte/icons/facebook';
+	import Twitter from 'lucide-svelte/icons/twitter';
+	import Instagram from 'lucide-svelte/icons/instagram';
+	import Linkedin from 'lucide-svelte/icons/linkedin';
 	import Dock from './Dock.svelte';
 	import DockIcon from './DockIcon.svelte';
 	import Tooltip from '../Tooltip.svelte';

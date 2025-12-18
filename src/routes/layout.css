@@ -5,6 +5,20 @@
 @plugin '@tailwindcss/container-queries';
 @plugin '@headlessui/tailwindcss';
 
+/* Color system */
+:root {
+	--color-bg: #ffffff;
+	--color-fg: #0f172a;
+	--color-muted: #1f2937;
+	--color-border: #e5e7eb;
+	--color-primary: #ffb067; /* creamsicle */
+	--color-primary-strong: #ff8a33;
+	--color-focus: var(--color-primary-strong);
+	--color-scroll-track: #f5f5f5;
+	--color-scroll-thumb: #d6d6d6;
+	--color-scroll-thumb-hover: #bfbfbf;
+}
+
 /* Custom animations and transitions */
 @keyframes fadeInUp {
 	from {
@@ -95,27 +109,27 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-	background: #f1f5f9;
+	background: var(--color-scroll-track);
 }
 
 ::-webkit-scrollbar-thumb {
-	background: #cbd5e1;
+	background: var(--color-scroll-thumb);
 	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: #94a3b8;
+	background: var(--color-scroll-thumb-hover);
 }
 
 /* Focus styles */
 .focus-visible:focus {
-	outline: 2px solid #3b82f6;
+	outline: 2px solid var(--color-focus);
 	outline-offset: 2px;
 }
 
 /* Gradient text */
 .gradient-text {
-	background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+	background: linear-gradient(135deg, #111111, var(--color-primary));
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;

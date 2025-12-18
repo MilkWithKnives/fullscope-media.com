@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { User, Mail, Phone, Building, Camera, Users, MessageSquare } from 'lucide-svelte';
+	import User from 'lucide-svelte/icons/user';
+	import Mail from 'lucide-svelte/icons/mail';
+	import Phone from 'lucide-svelte/icons/phone';
+	import Building from 'lucide-svelte/icons/building';
+	import Camera from 'lucide-svelte/icons/camera';
+	import Users from 'lucide-svelte/icons/users';
+	import MessageSquare from 'lucide-svelte/icons/message-square';
 	import Button from '../ui/Button.svelte';
 	import Card from '../ui/Card.svelte';
 	import Loading from '../ui/Loading.svelte';
@@ -305,9 +311,9 @@
 			</div>
 
 			<div>
-				<label class="block text-sm font-medium text-gray-700 mb-2">
+				<p class="block text-sm font-medium text-gray-700 mb-2">
 					Equipment Needed
-				</label>
+				</p>
 				<div class="grid grid-cols-2 gap-2">
 					{#each equipmentOptions as equipment}
 						<label class="flex items-center">
@@ -316,7 +322,7 @@
 								value={equipment}
 								class="mr-2"
 								onchange={(e) => {
-									const checked = e.target?.checked;
+									const checked = (e.target as HTMLInputElement | null)?.checked;
 									if (checked) {
 										formData.equipment_needed = formData.equipment_needed 
 											? `${formData.equipment_needed}, ${equipment}`

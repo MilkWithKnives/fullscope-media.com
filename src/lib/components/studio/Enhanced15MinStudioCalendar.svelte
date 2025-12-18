@@ -3,13 +3,31 @@
 	import { createCalendar } from '@schedule-x/calendar';
 	import { createViewWeek, createViewMonthGrid } from '@schedule-x/calendar';
 	import '@schedule-x/theme-default/dist/index.css';
-	import { Calendar, Clock, Users, DollarSign, Plus, Minus } from 'lucide-svelte';
+	import Calendar from 'lucide-svelte/icons/calendar';
+	import Clock from 'lucide-svelte/icons/clock';
+	import Users from 'lucide-svelte/icons/users';
+	import DollarSign from 'lucide-svelte/icons/dollar-sign';
+	import Plus from 'lucide-svelte/icons/plus';
+	import Minus from 'lucide-svelte/icons/minus';
+	import type { Temporal } from 'temporal-polyfill';
 	import Button from '../ui/Button.svelte';
 	import Card from '../ui/Card.svelte';
 
-	interface TimeBlock {
-		date: string;
-		time: string;
+	const WeekDay = {
+		MONDAY: 1,
+		TUESDAY: 2,
+		WEDNESDAY: 3,
+		THURSDAY: 4,
+		FRIDAY: 5,
+		SATURDAY: 6,
+		SUNDAY: 7
+	} as const;
+
+type WeekDayValue = (typeof WeekDay)[keyof typeof WeekDay];
+
+interface TimeBlock {
+	date: string;
+	time: string;
 		available: boolean;
 		selected: boolean;
 	}
@@ -20,11 +38,20 @@
 		end_time: string;
 		total_blocks: number;
 		duration_minutes: number;
-		rental_type: string;
-		rate_per_block: number;
-		total_amount: number;
-		setup_fee: number;
-		cleanup_fee: number;
+	rental_type: string;
+	rate_per_block: number;
+	total_amount: number;
+	setup_fee: number;
+	cleanup_fee: number;
+	}
+
+	interface ExistingBooking {
+		id?: string;
+		title?: string;
+		booking_type?: string;
+		rental_date: string;
+		start_time?: string;
+		end_time?: string;
 	}
 
 	let {
@@ -37,8 +64,7 @@
 	let calendar: any;
 	let selectedDate = $state(new Date().toISOString().split('T')[0]);
 	let selectedBlocks = $state<TimeBlock[]>([]);
-	let selectedRentalType = $state('photographer_rental');
-	let existingBookings = $state([]);
+	let existingBookings = $state<ExistingBooking[]>([]);
 
 	// Rental types with 15-minute block pricing
 	const rentalTypes = {
@@ -79,6 +105,11 @@
 			color: '#8b5cf6'
 		}
 	};
+
+	type RentalKey = keyof typeof rentalTypes;
+	const rentalEntries = $derived(Object.entries(rentalTypes) as [RentalKey, (typeof rentalTypes)[RentalKey]][]);
+
+	let selectedRentalType = $state<RentalKey>('photographer_rental');
 
 	onMount(async () => {
 		console.log('Enhanced15MinStudioCalendar mounted');
@@ -156,16 +187,21 @@
 			console.log('Initializing Schedule-X calendar...');
 			calendar = createCalendar({
 				locale: 'en-US',
-				firstDayOfWeek: 0,
+				firstDayOfWeek: WeekDay.SUNDAY as WeekDayValue,
 				defaultView: 'week',
 				views: [createViewWeek(), createViewMonthGrid()],
-				events: existingBookings.map(booking => ({
-					id: booking.id || `booking-${Math.random()}`,
-					title: booking.title || 'Booking',
-					start: `${booking.rental_date} ${booking.start_time}`,
-					end: `${booking.rental_date} ${booking.end_time}`,
-					calendarId: booking.booking_type || 'default'
-				})),
+				events: existingBookings.map((booking) => {
+					const startTime = booking.start_time ?? '00:00';
+					const endTime = booking.end_time ?? startTime;
+
+					return {
+						id: booking.id || `booking-${Math.random()}`,
+						title: booking.title || 'Booking',
+						start: `${booking.rental_date} ${startTime}`,
+						end: `${booking.rental_date} ${endTime}`,
+						calendarId: booking.booking_type || 'default'
+					};
+				}),
 				calendars: {
 					studio_rental: {
 						colorName: 'studio',
@@ -193,9 +229,8 @@
 					}
 				},
 				callbacks: {
-					onDateClick: (date) => {
-						console.log('Date clicked:', date);
-						const clickedDate = new Date(date).toISOString().split('T')[0];
+					onClickDate: (date: Temporal.PlainDate) => {
+						const clickedDate = date.toString();
 						selectedDate = clickedDate;
 						generateTimeBlocks();
 					}
@@ -265,7 +300,7 @@
 		// Sort selected blocks by time
 		selectedTimeBlocks.sort((a, b) => timeToMinutes(a.time) - timeToMinutes(b.time));
 		
-		const rentalConfig = rentalTypes[selectedRentalType as keyof typeof rentalTypes];
+		const rentalConfig = rentalTypes[selectedRentalType];
 		const startTime = selectedTimeBlocks[0].time;
 		const lastBlock = selectedTimeBlocks[selectedTimeBlocks.length - 1];
 		const endMinutes = timeToMinutes(lastBlock.time) + 15;
@@ -346,7 +381,7 @@
 		<h3 class="text-lg font-semibold text-gray-900 mb-4">Select Rental Type</h3>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-			{#each Object.entries(rentalTypes) as [key, rental]}
+			{#each rentalEntries as [key, rental]}
 				<button
 					onclick={() => { selectedRentalType = key; updateBookingCalculation(); }}
 					class="p-4 border-2 rounded-lg transition-all text-left {selectedRentalType === key
@@ -409,21 +444,21 @@
 			<Button
 				variant="outline"
 				size="sm"
-				onclick={() => selectConsecutiveBlocks(32, 8)} // 2 hours starting at 2 PM
+				onclick={() => selectConsecutiveBlocks(32, 8)}
 			>
 				2 Hours (2 PM)
 			</Button>
 			<Button
 				variant="outline"
 				size="sm"
-				onclick={() => selectConsecutiveBlocks(36, 12)} // 3 hours starting at 3 PM
+				onclick={() => selectConsecutiveBlocks(36, 12)}
 			>
 				3 Hours (3 PM)
 			</Button>
 			<Button
 				variant="outline"
 				size="sm"
-				onclick={() => selectConsecutiveBlocks(40, 16)} // 4 hours starting at 4 PM
+				onclick={() => selectConsecutiveBlocks(40, 16)}
 			>
 				4 Hours (4 PM)
 			</Button>
