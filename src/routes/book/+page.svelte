@@ -6,18 +6,19 @@
 	import Mail from 'lucide-svelte/icons/mail';
 	import MapPin from 'lucide-svelte/icons/map-pin';
 
-	type BookingSlot = {
-		id: string;
-		title: string;
-		start: string;
-		end: string;
-		available: boolean;
-		service: string;
-		duration: number;
-		price?: string;
-	};
+	interface SelectedBooking {
+		date: string;
+		start_time: string;
+		end_time: string;
+		total_blocks: number;
+		duration_minutes: number;
+		service_type: string;
+		rate_per_block: number;
+		total_amount: number;
+		setup_fee: number;
+	}
 
-	let selectedSlot = $state<BookingSlot | null>(null);
+	let selectedBooking = $state<SelectedBooking | null>(null);
 </script>
 
 <svelte:head>
@@ -39,14 +40,14 @@
 		</div>
 
 		<div class="space-y-10">
-			<BookingCalendar onBookingSelect={(slot) => (selectedSlot = slot)} />
+			<BookingCalendar onBookingSelect={(booking) => (selectedBooking = booking)} />
 
-			{#if selectedSlot}
+			{#if selectedBooking}
 				<Card class="max-w-3xl mx-auto text-center">
 					<h3 class="text-xl font-semibold text-gray-900 mb-2">Selected</h3>
 					<p class="text-gray-700">
-						{new Date(selectedSlot.start).toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' })} •
-						{selectedSlot.service} • {selectedSlot.duration} min {selectedSlot.price ? `• ${selectedSlot.price}` : ''}
+						{new Date(selectedBooking.start).toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' })} •
+						{selectedBooking.service} • {selectedBooking.duration} min {selectedBooking.price ? `• ${selectedBooking.price}` : ''}
 					</p>
 					<p class="text-sm text-gray-500 mt-2">We’ll confirm the booking details right after.</p>
 				</Card>

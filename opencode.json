@@ -61,6 +61,15 @@
 				"GOOGLE_CLIENT_SECRET": "your-google-client-secret"
 			}
 		},
+		"google-calendar": {
+			"type": "local",
+			"command": ["npx", "-y", "@modelcontextprotocol/server-google-calendar"],
+			"env": {
+				"GOOGLE_CLIENT_ID": "your-google-client-id",
+				"GOOGLE_CLIENT_SECRET": "your-google-client-secret",
+				"GOOGLE_REFRESH_TOKEN": "your-google-refresh-token"
+			}
+		},
 		"memory": {
 			"type": "local",
 			"command": ["npx", "-y", "@modelcontextprotocol/server-memory"]
@@ -80,6 +89,13 @@
 				"WEATHER_API_KEY": "your-weather-api-key-here"
 			}
 		},
+		"cloudinary": {
+			"type": "local",
+			"command": ["npx", "-y", "@modelcontextprotocol/server-cloudinary"],
+			"env": {
+				"CLOUDINARY_URL": "cloudinary://api-key:api-secret@cloud-name"
+			}
+		},
 		"docker": {
 			"type": "local",
 			"command": ["npx", "-y", "@modelcontextprotocol/server-docker"]
@@ -87,6 +103,36 @@
 		"kubernetes": {
 			"type": "local",
 			"command": ["npx", "-y", "@modelcontextprotocol/server-kubernetes"]
+		},
+		"supabase": {
+			"type": "local",
+			"command": ["npx", "-y", "@modelcontextprotocol/server-supabase"],
+			"env": {
+				"SUPABASE_URL": "https://your-project.supabase.co",
+				"SUPABASE_SERVICE_ROLE_KEY": "your-supabase-service-role-key"
+			}
+		},
+		"stripe": {
+			"type": "local",
+			"command": ["npx", "-y", "@modelcontextprotocol/server-stripe"],
+			"env": {
+				"STRIPE_SECRET_KEY": "your-stripe-secret-key"
+			}
+		},
+		"sendgrid": {
+			"type": "local",
+			"command": ["npx", "-y", "@modelcontextprotocol/server-sendgrid"],
+			"env": {
+				"SENDGRID_API_KEY": "your-sendgrid-api-key"
+			}
+		},
+		"algolia": {
+			"type": "local",
+			"command": ["npx", "-y", "@modelcontextprotocol/server-algolia"],
+			"env": {
+				"ALGOLIA_APP_ID": "your-algolia-app-id",
+				"ALGOLIA_API_KEY": "your-algolia-api-key"
+			}
 		},
 		"npm-search": {
 			"type": "local",

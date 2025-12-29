@@ -45,6 +45,31 @@ This project now includes a comprehensive set of Model Context Protocol (MCP) se
 - **Features**: Repository management, issues, PRs, releases
 - **Configuration**: Requires `GITHUB_PERSONAL_ACCESS_TOKEN` environment variable
 
+#### **Supabase** (`@modelcontextprotocol/server-supabase`)
+- **Purpose**: Supabase database and storage integration
+- **Features**: CRUD queries, storage operations, RPC calls
+- **Configuration**: Requires `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`
+
+#### **Stripe** (`@modelcontextprotocol/server-stripe`)
+- **Purpose**: Payments and checkout for bookings
+- **Features**: Payment intents, customers, invoices
+- **Configuration**: Requires `STRIPE_SECRET_KEY`
+
+#### **SendGrid** (`@modelcontextprotocol/server-sendgrid`)
+- **Purpose**: Transactional email sending
+- **Features**: Single sends, templates, categories
+- **Configuration**: Requires `SENDGRID_API_KEY`
+
+#### **Google Calendar** (`@modelcontextprotocol/server-google-calendar`)
+- **Purpose**: Calendar sync for studio bookings
+- **Features**: Events read/write, calendar listing
+- **Configuration**: Requires `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_REFRESH_TOKEN`
+
+#### **Algolia** (`@modelcontextprotocol/server-algolia`)
+- **Purpose**: Site search indexing and querying
+- **Features**: Index management, search, analytics
+- **Configuration**: Requires `ALGOLIA_APP_ID` and `ALGOLIA_API_KEY`
+
 #### **NPM Search** (`@modelcontextprotocol/server-npm-search`)
 - **Purpose**: Search and retrieve NPM package information
 - **Features**: Package search, version info, dependencies
@@ -54,6 +79,11 @@ This project now includes a comprehensive set of Model Context Protocol (MCP) se
 - **Purpose**: Docker container management
 - **Features**: Container operations, image management, logs
 - **Configuration**: Requires Docker daemon running
+
+#### **Cloudinary** (`@modelcontextprotocol/server-cloudinary`)
+- **Purpose**: Media optimization and delivery
+- **Features**: Uploads, transformations, optimized URLs
+- **Configuration**: Requires `CLOUDINARY_URL`
 
 ### Utility Tools
 
@@ -93,10 +123,30 @@ POSTGRES_CONNECTION_STRING=postgresql://user:password@localhost:5432/database
 # GitHub Integration
 GITHUB_PERSONAL_ACCESS_TOKEN=your-github-token-here
 
+# Payments and bookings
+STRIPE_SECRET_KEY=your-stripe-secret-key
+
+# Email
+SENDGRID_API_KEY=your-sendgrid-api-key
+
+# Calendar
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+GOOGLE_REFRESH_TOKEN=your-google-refresh-token
+
+# Storage/media
+CLOUDINARY_URL=cloudinary://api-key:api-secret@cloud-name
+
+# Search
+ALGOLIA_APP_ID=your-algolia-app-id
+ALGOLIA_API_KEY=your-algolia-api-key
+
+# Database (Supabase)
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
+
 # Optional: Additional services (commented out in current config)
 # SLACK_BOT_TOKEN=your-slack-bot-token-here
-# GOOGLE_CLIENT_ID=your-google-client-id
-# GOOGLE_CLIENT_SECRET=your-google-client-secret
 # WEATHER_API_KEY=your-weather-api-key-here
 # JIRA_URL=your-jira-instance-url
 # JIRA_USERNAME=your-jira-username
