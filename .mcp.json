@@ -1,30 +1,24 @@
 {
-	"mcpServers": {
-		"svelte": {
-			"type": "stdio",
-			"command": "npx",
-			"env": {},
-			"args": ["-y", "@sveltejs/mcp"]
-		},
-		"filesystem": {
-			"type": "stdio",
-			"command": "npx",
-			"env": {},
-			"args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/entussuenos/projects/websites/fullscopemedia.com"]
-		},
-		"memory": {
-			"type": "stdio",
-			"command": "npx",
-			"env": {},
-			"args": ["-y", "@modelcontextprotocol/server-memory"]
-		},
-		"github": {
-			"type": "stdio",
-			"command": "npx",
-			"env": {
-				"GITHUB_PERSONAL_ACCESS_TOKEN": "your-github-token-here"
-			},
-			"args": ["-y", "@modelcontextprotocol/server-github"]
-		}
-	}
+  "mcpServers": {
+    "svelte": {
+      "command": "pnpm",
+      "args": ["dlx", "@sveltejs/mcp"]
+    },
+    "filesystem": {
+      "command": "pnpm",
+      "args": [
+        "dlx",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/entussuenos/projects/websites/fullscopemedia.com"
+      ]
+    },
+    "memory": {
+      "command": "pnpm",
+      "args": ["dlx", "@modelcontextprotocol/server-memory"]
+    },
+    "github": {
+      "command": "pnpm",
+      "args": ["dlx", "@modelcontextprotocol/server-github"]
+    }
+  }
 }

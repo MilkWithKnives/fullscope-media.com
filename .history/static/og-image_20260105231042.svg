@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+	<title id="title">Full Scope Media</title>
+	<desc id="desc">Brand mark for Full Scope Media featuring the Herman Miller inspired palette.</desc>
+	<defs>
+		<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0%" stop-color="#121212" />
+			<stop offset="100%" stop-color="#1f1f1f" />
+		</linearGradient>
+	</defs>
+	<rect width="1200" height="630" fill="url(#bg)" />
+	<g fill="#ff8a33" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif">
+		<text x="100" y="330" font-size="120" font-weight="700">Full Scope Media</text>
+		<text x="100" y="430" font-size="48" fill="#f4f4f4">Cinematic video, studio photography, and digital campaigns.</text>
+	</g>
+</svg>
