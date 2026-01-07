@@ -21,25 +21,113 @@
 
 	<Container>
 		<div class="text-center mb-16 relative z-10">
-		<section class="py-24 bg-black">
-			<Container>
-				<div class="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-3">
-					{#each filteredItems as item}
-						<PortfolioCard {item} />
-					{/each}
-				</div>
+			<h2 class="text-4xl md:text-5xl font-bold text-white mb-6 animate-slide-up">
+				<span class="bg-gradient-to-r from-[var(--color-primary-strong)] to-[var(--color-primary)] bg-clip-text text-transparent">Explore</span> Our Work
+			</h2>
+			<p class="text-lg text-zinc-300 max-w-3xl mx-auto animate-slide-up" style="animation-delay: 0.2s;">
+				Filter by category to see specific types of projects and their measurable impact on our clients' success
+			</p>
+		</div>
 
-				{#if filteredItems.length === 0}
-					<div class="text-center py-16">
-						<div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-zinc-900 mb-4">
-							<ExternalLink size={32} class="text-zinc-500" />
+		<div class="flex flex-wrap justify-center gap-6 relative z-10">
+			{#each categories as category, index}
+				<button
+					onclick={() => selectedCategory = category.id}
+					class="group relative flex items-center space-x-3 px-10 py-5 rounded-3xl font-semibold transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 animate-filter-appear {selectedCategory === category.id
+						? 'bg-[var(--color-primary-strong)] text-black shadow-[0_15px_40px_rgba(255,138,51,0.35)] scale-105 border border-[var(--color-primary-strong)]'
+						: 'bg-zinc-900 text-zinc-300 hover:text-white border-2 border-zinc-800 hover:border-[var(--color-primary-strong)] hover:shadow-lg backdrop-blur-sm'}"
+					style="animation-delay: {0.4 + index * 0.1}s;"
+				>
+					<!-- Animated background for active state -->
+					{#if selectedCategory === category.id}
+						<div class="absolute inset-0 bg-gradient-to-r from-[var(--color-primary-strong)] to-[var(--color-primary)] rounded-3xl animate-pulse-gentle opacity-80"></div>
+					{/if}
+
+					<category.icon size={24} class="relative z-10 transition-all duration-500 group-hover:rotate-12 group-hover:scale-125 {selectedCategory === category.id ? 'text-black animate-bounce-gentle' : 'text-zinc-500'}" />
+					<span class="relative z-10 transition-all duration-300">{category.name}</span>
+
+					<!-- Hover effect overlay -->
+					<div class="absolute inset-0 bg-gradient-to-r from-[var(--color-primary)]/10 to-[var(--color-primary-strong)]/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+				</button>
+			{/each}
+		</div>
+	</Container>
+</section>
+
+<!-- Portfolio Grid -->
+<section class="py-24 bg-black transition-colors duration-500 relative overflow-hidden">
+	<!-- Animated background texture -->
+	<div class="absolute inset-0 bg-texture-subtle opacity-20 animate-texture-drift"></div>
+	<div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[var(--color-primary)]/5 via-transparent to-[var(--color-primary)]/5"></div>
+
+	<Container>
+		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 relative z-10">
+			{#each filteredItems as item, index}
+				<div class="group relative bg-zinc-900 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-6 hover:rotate-1 border border-zinc-800 animate-card-appear hover:scale-105" style="animation-delay: {index * 0.15}s;">
+					<!-- Animated border gradient -->
+					<div class="absolute inset-0 bg-gradient-to-r from-[var(--color-primary-strong)] via-[var(--color-primary)] to-[var(--color-primary-strong)] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-gradient-rotate"></div>
+					<div class="absolute inset-0.5 bg-zinc-900 rounded-3xl"></div>
+
+					<div class="relative z-10">
+						<div class="relative overflow-hidden rounded-t-3xl">
+							<!-- Project Image -->
+							<div class="aspect-[4/3] overflow-hidden">
+								<img
+									src={item.image}
+									alt={item.title}
+									class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-125 group-hover:rotate-2"
+									loading="lazy"
+								/>
+							</div>
+
+							<!-- Animated overlay -->
+							<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+
+							<!-- Floating category badge -->
+							<div class="absolute top-6 left-6 transform group-hover:scale-110 group-hover:-rotate-3 transition-all duration-500">
+								<span class="inline-flex items-center space-x-2 px-4 py-2 bg-black/95 backdrop-blur-md rounded-2xl text-xs font-semibold text-zinc-300 border border-white/30 shadow-lg">
+									{#if item.category === 'video'}
+										<Play size={14} class="text-[var(--color-primary)] animate-pulse" />
+									{:else if item.category === 'photography'}
+										<ExternalLink size={14} class="text-[var(--color-primary)] animate-bounce-gentle" />
+									{:else if item.category === 'marketing'}
+										<TrendingUp size={14} class="text-[var(--color-primary)] animate-pulse" />
+									{:else}
+										<Award size={14} class="text-[var(--color-primary)] animate-bounce-gentle" />
+									{/if}
+									<span class="capitalize">{item.category}</span>
+								</span>
+							</div>
+
+							<!-- Enhanced Results Badge -->
+							<div class="absolute top-6 right-6 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+								<div class="bg-gradient-to-r from-[var(--color-primary-strong)] to-[var(--color-primary)] text-black px-4 py-2 rounded-2xl text-xs font-bold shadow-xl border border-white/20 animate-result-glow">
+									{item.results}
+								</div>
+							</div>
+
+							<!-- Animated view overlay -->
+							<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700 transform group-hover:scale-100 scale-75">
+								<a
+									href={`/portfolio/${item.category}`}
+									class="bg-zinc-900/90 backdrop-blur-md rounded-2xl p-6 border border-zinc-700 animate-pulse-gentle shadow-2xl flex items-center space-x-3 text-white"
+								>
+									<Eye size={24} class="animate-bounce-gentle" />
+									<span class="font-semibold text-lg">View {item.category} work</span>
+								</a>
+							</div>
 						</div>
-						<p class="text-zinc-500 text-lg">No projects found in this category.</p>
-						<p class="text-zinc-500 text-sm mt-2">Try selecting a different category to explore our work.</p>
-					</div>
-				{/if}
-			</Container>
-		</section>
+
+					<div class="p-8 space-y-6">
+						<div class="space-y-3">
+							<div class="flex items-start justify-between">
+								<h3 class="text-xl font-bold text-white group-hover:text-[var(--color-primary)] transition-colors duration-300 leading-tight">
+									{item.title}
+								</h3>
+								<div class="flex items-center space-x-1 text-sm text-zinc-500 ml-4">
+									<Calendar size={14} />
+									<span>{new Date(item.date).toLocaleDateString()}</span>
+								</div>
 							</div>
 							<p class="text-sm font-semibold text-[var(--color-primary)]">{item.client}</p>
 						</div>

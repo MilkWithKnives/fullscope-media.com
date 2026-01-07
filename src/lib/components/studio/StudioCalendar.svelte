@@ -27,6 +27,15 @@
 		rental_type: 'hourly' | 'half-day' | 'daily';
 	}
 
+	interface WeatherInfo {
+		date: string;
+		location: string;
+		summary: string;
+		temperature_min: number | null;
+		temperature_max: number | null;
+		precipitation_probability: number | null;
+	}
+
 	let {
 		onSlotSelect
 	}: {
@@ -38,6 +47,9 @@
 	let availableSlots = $state<TimeSlot[]>([]);
 	let selectedSlot = $state<SelectedSlot | null>(null);
 	let loading = $state(false);
+	let weather = $state<WeatherInfo | null>(null);
+	let weatherLoading = $state(false);
+	let weatherError = $state<string | null>(null);
 
 	// Generate time slots for a day (9 AM to 9 PM)
 	const timeSlots = [
@@ -86,7 +98,6 @@
 	onMount(() => {
 		// Set default selected date to today
 		selectedDate = new Date().toISOString().split('T')[0];
-		loadAvailableSlots();
 	});
 
 	async function loadAvailableSlots() {
@@ -101,6 +112,31 @@
 			console.error('Failed to load availability:', error);
 		} finally {
 			loading = false;
+		}
+	}
+
+	async function loadWeather() {
+		if (!selectedDate) return;
+
+		weatherLoading = true;
+		weatherError = null;
+
+		try {
+			const response = await fetch(`/api/weather?date=${selectedDate}`);
+			if (!response.ok) {
+				const errorData = await response.json().catch(() => null);
+				weatherError = errorData?.error || 'Unable to load weather.';
+				weather = null;
+				return;
+			}
+
+			weather = await response.json();
+		} catch (error) {
+			console.error('Failed to load weather:', error);
+			weatherError = 'Unable to load weather.';
+			weather = null;
+		} finally {
+			weatherLoading = false;
 		}
 	}
 
@@ -149,6 +185,7 @@
 	$effect(() => {
 		if (selectedDate) {
 			loadAvailableSlots();
+			loadWeather();
 		}
 	});
 </script>
@@ -168,6 +205,43 @@
 			class="w-full px-4 py-2 bg-zinc-900 text-white border border-zinc-700 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]"
 		/>
 	</Card>
+
+	<!-- Weather Forecast -->
+	{#if selectedDate}
+		<Card class="p-6 bg-zinc-900 border-zinc-800">
+			<h3 class="text-lg font-semibold text-white mb-4">Weather Forecast</h3>
+			{#if weatherLoading}
+				<p class="text-sm text-zinc-400">Loading forecast...</p>
+			{:else if weatherError}
+				<p class="text-sm text-red-400">{weatherError}</p>
+			{:else if weather}
+				<div class="space-y-2 text-sm text-zinc-200">
+					<div class="flex items-center justify-between">
+						<span class="text-zinc-400">Location</span>
+						<span class="font-semibold text-white">{weather.location}</span>
+					</div>
+					<div class="flex items-center justify-between">
+						<span class="text-zinc-400">Summary</span>
+						<span class="font-semibold text-white">{weather.summary}</span>
+					</div>
+					<div class="flex items-center justify-between">
+						<span class="text-zinc-400">High / Low</span>
+						<span class="font-semibold text-white">
+							{weather.temperature_max ?? '–'}°F / {weather.temperature_min ?? '–'}°F
+						</span>
+					</div>
+					<div class="flex items-center justify-between">
+						<span class="text-zinc-400">Precip. Chance</span>
+						<span class="font-semibold text-white">
+							{weather.precipitation_probability ?? '–'}%
+						</span>
+					</div>
+				</div>
+			{:else}
+				<p class="text-sm text-zinc-400">Select a date to see the forecast.</p>
+			{/if}
+		</Card>
+	{/if}
 
 	<!-- Package Selection -->
 	{#if selectedDate}
