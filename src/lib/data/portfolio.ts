@@ -2,16 +2,14 @@ import type { ComponentType } from 'svelte';
 import Play from 'lucide-svelte/icons/play';
 import ExternalLink from 'lucide-svelte/icons/external-link';
 import TrendingUp from 'lucide-svelte/icons/trending-up';
-import Award from 'lucide-svelte/icons/award';
 
-export type PortfolioCategory = 'video' | 'photography' | 'marketing' | 'web';
+export type PortfolioCategory = 'video' | 'photography' | 'marketing';
 
 export const categories: { id: 'all' | PortfolioCategory; name: string; icon: ComponentType }[] = [
 	{ id: 'all', name: 'All Work', icon: ExternalLink },
 	{ id: 'video', name: 'Video Production', icon: Play },
 	{ id: 'photography', name: 'Photography', icon: ExternalLink },
-	{ id: 'marketing', name: 'Digital Marketing', icon: TrendingUp },
-	{ id: 'web', name: 'Web Design', icon: Award }
+	{ id: 'marketing', name: 'Digital Marketing', icon: TrendingUp }
 ];
 
 export const portfolioItems = [
@@ -43,19 +41,6 @@ export const portfolioItems = [
 	},
 	{
 		id: 3,
-		title: 'E-commerce Website Redesign',
-		category: 'web' as PortfolioCategory,
-		description:
-			'Complete website redesign with modern UX/UI that dramatically improved user experience and conversions.',
-		image:
-			'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-		tags: ['Web Design', 'E-commerce', 'UX/UI'],
-		date: '2024-03-10',
-		client: 'Fashion Forward',
-		results: '65% conversion rate improvement'
-	},
-	{
-		id: 4,
 		title: 'Social Media Campaign',
 		category: 'marketing' as PortfolioCategory,
 		description:
@@ -68,7 +53,7 @@ export const portfolioItems = [
 		results: '2M+ impressions, 15% engagement'
 	},
 	{
-		id: 5,
+		id: 4,
 		title: 'Corporate Event Coverage',
 		category: 'video' as PortfolioCategory,
 		description:
@@ -81,7 +66,7 @@ export const portfolioItems = [
 		results: 'Used in 12 international markets'
 	},
 	{
-		id: 6,
+		id: 5,
 		title: 'Product Photography Collection',
 		category: 'photography' as PortfolioCategory,
 		description:

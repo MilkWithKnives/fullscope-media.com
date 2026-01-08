@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Container from '../ui/Container.svelte';
-	import FooterDock from '../ui/dock/FooterDock.svelte';
+	import { resolve } from '$app/paths';
 	import Facebook from 'lucide-svelte/icons/facebook';
 	import Twitter from 'lucide-svelte/icons/twitter';
 	import Instagram from 'lucide-svelte/icons/instagram';
@@ -9,61 +9,74 @@
 	import Phone from 'lucide-svelte/icons/phone';
 	import MapPin from 'lucide-svelte/icons/map-pin';
 
-	const socialLinks = [
-		{ name: 'Facebook', href: '#', icon: Facebook },
-		{ name: 'Twitter', href: '#', icon: Twitter },
-		{ name: 'Instagram', href: '#', icon: Instagram },
-		{ name: 'LinkedIn', href: '#', icon: Linkedin }
-	];
-
 	const quickLinks = [
 		{ name: 'Services', href: '/services' },
 		{ name: 'Portfolio', href: '/portfolio' },
 		{ name: 'About', href: '/about' },
 		{ name: 'Contact', href: '/contact' }
 	];
-
-	const services = [
-		{ name: 'Video Production', href: '/services#video' },
-		{ name: 'Photography', href: '/services#photography' },
-		{ name: 'Digital Marketing', href: '/services#marketing' },
-		{ name: 'Web Design', href: '/services#web' }
-	];
 </script>
 
 <footer class="bg-black text-white border-t border-zinc-800">
 	<Container>
-		<div class="py-6">
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+		<div class="py-4">
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
 				<!-- Company Info -->
-				<div>
-					<a href="/" class="inline-flex items-center gap-3 mb-3">
-						<img src="/logo.png" alt="Full Scope Media logo" class="h-12 w-auto" loading="lazy" />
-						<span class="text-xl font-bold text-[var(--color-primary)]">Full Scope Media</span>
+				<div class="space-y-3">
+					<a href={resolve('/')} class="inline-flex items-center gap-3">
+						<img src="/logo.png" alt="Full Scope Media logo" class="h-10 w-auto" loading="lazy" />
+						<span class="text-lg font-semibold text-[var(--color-primary)]">Full Scope Media</span>
 					</a>
-					<p class="text-zinc-400 mb-3">
-						Creating compelling visual stories that connect, inspire, and drive results for your brand.
+					<p class="text-sm text-zinc-400 leading-relaxed">
+						Real estate and portrait visuals by Ryan Champion. Clean lighting, accurate color, and reliable turnarounds.
 					</p>
-					<div class="flex space-x-4">
-						{#each socialLinks as social}
-							<a
-								href={social.href}
-								class="text-zinc-500 hover:text-[var(--color-primary)] transition-colors"
-								aria-label={social.name}
-							>
-								<svelte:component this={social.icon} size={20} />
-							</a>
-						{/each}
+					<div class="flex gap-3">
+						<a
+							href="https://facebook.com"
+							class="text-zinc-500 hover:text-[var(--color-primary)] transition-colors"
+							aria-label="Facebook"
+							target="_blank"
+							rel="noreferrer"
+						>
+							<Facebook size={18} />
+						</a>
+						<a
+							href="https://x.com"
+							class="text-zinc-500 hover:text-[var(--color-primary)] transition-colors"
+							aria-label="Twitter"
+							target="_blank"
+							rel="noreferrer"
+						>
+							<Twitter size={18} />
+						</a>
+						<a
+							href="https://instagram.com"
+							class="text-zinc-500 hover:text-[var(--color-primary)] transition-colors"
+							aria-label="Instagram"
+							target="_blank"
+							rel="noreferrer"
+						>
+							<Instagram size={18} />
+						</a>
+						<a
+							href="https://linkedin.com"
+							class="text-zinc-500 hover:text-[var(--color-primary)] transition-colors"
+							aria-label="LinkedIn"
+							target="_blank"
+							rel="noreferrer"
+						>
+							<Linkedin size={18} />
+						</a>
 					</div>
 				</div>
 
 				<!-- Quick Links -->
-				<div>
-					<h4 class="text-base font-semibold mb-2 text-white">Quick Links</h4>
-					<ul class="space-y-1">
-						{#each quickLinks as link}
+				<div class="space-y-2">
+					<h4 class="text-sm font-semibold text-white">Quick Links</h4>
+					<ul class="grid grid-cols-2 gap-2 text-sm">
+						{#each quickLinks as link (link.name)}
 							<li>
-								<a href={link.href} class="text-zinc-400 hover:text-[var(--color-primary)] transition-colors">
+								<a href={resolve(link.href)} class="text-zinc-400 hover:text-[var(--color-primary)] transition-colors">
 									{link.name}
 								</a>
 							</li>
@@ -71,59 +84,37 @@
 					</ul>
 				</div>
 
-				<!-- Services -->
-				<div>
-					<h4 class="text-base font-semibold mb-2 text-white">Services</h4>
-					<ul class="space-y-1">
-						{#each services as service}
-							<li>
-								<a href={service.href} class="text-zinc-400 hover:text-[var(--color-primary)] transition-colors">
-									{service.name}
-								</a>
-							</li>
-						{/each}
-					</ul>
-				</div>
-
 				<!-- Contact Info -->
-				<div>
-					<h4 class="text-base font-semibold mb-2 text-white">Contact</h4>
-						<div class="space-y-2">
-							<div class="flex items-center space-x-3">
-								<Mail size={16} class="text-[var(--color-primary)]" />
-								<span class="text-zinc-400">ryan@fullscope-media.com</span>
-							</div>
-							<div class="flex items-center space-x-3">
-								<Phone size={16} class="text-[var(--color-primary)]" />
-								<span class="text-zinc-400">(517) 220-2934</span>
-							</div>
-							<div class="flex items-center space-x-3">
-								<MapPin size={16} class="text-blue-400" />
-								<span class="text-gray-300">301 MAC Ave Ste 106, East Lansing, MI</span>
-							</div>
+				<div class="space-y-2">
+					<h4 class="text-sm font-semibold text-white">Contact</h4>
+					<div class="space-y-2 text-sm text-zinc-300">
+						<div class="flex items-center gap-2">
+							<Mail size={16} class="text-[var(--color-primary)]" />
+							<span>ryan@fullscope-media.com</span>
 						</div>
+						<div class="flex items-center gap-2">
+							<Phone size={16} class="text-[var(--color-primary)]" />
+							<span>(517) 220-2934</span>
+						</div>
+						<div class="flex items-start gap-2">
+							<MapPin size={16} class="text-blue-400 mt-0.5" />
+							<span>301 MAC Ave Ste 106, East Lansing, MI</span>
+						</div>
+						<p class="text-zinc-400">Open daily · 7am–10pm ET</p>
 					</div>
+				</div>
 			</div>
-		</div>
-
-		<!-- Interactive Dock -->
-		<div class="border-t border-gray-800">
-			<Container>
-				<FooterDock />
-			</Container>
 		</div>
 
 		<!-- Bottom Bar -->
 		<div class="border-t border-gray-800 py-3">
-			<div class="flex flex-col md:flex-row justify-between items-center">
-				<p class="text-gray-400 text-sm">
-					© {new Date().getFullYear()} Full Scope Media. All rights reserved.
-				</p>
-				<div class="flex space-x-6 mt-2 md:mt-0">
-					<a href="/privacy" class="text-gray-400 hover:text-white text-sm transition-colors">
+			<div class="flex flex-col md:flex-row justify-between items-center gap-2 text-sm">
+				<p class="text-gray-400">© {new Date().getFullYear()} Full Scope Media. All rights reserved.</p>
+				<div class="flex gap-4">
+					<a href={resolve('/privacy')} class="text-gray-400 hover:text-white transition-colors">
 						Privacy Policy
 					</a>
-					<a href="/terms" class="text-gray-400 hover:text-white text-sm transition-colors">
+					<a href={resolve('/terms')} class="text-gray-400 hover:text-white transition-colors">
 						Terms of Service
 					</a>
 				</div>

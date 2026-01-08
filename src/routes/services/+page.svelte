@@ -5,7 +5,6 @@
 	import Video from 'lucide-svelte/icons/video';
 	import Camera from 'lucide-svelte/icons/camera';
 	import Megaphone from 'lucide-svelte/icons/megaphone';
-	import Globe from 'lucide-svelte/icons/globe';
 	import Check from 'lucide-svelte/icons/check';
 	import ArrowRight from 'lucide-svelte/icons/arrow-right';
 	import { resolve } from '$app/paths';
@@ -55,28 +54,13 @@
 			],
 			pricing: 'Starting at $1,500/month',
 			popular: false
-		},
-		{
-			icon: Globe,
-			title: 'Web Design & Development',
-			description: 'Modern, responsive websites that showcase your brand and convert visitors into customers.',
-			features: [
-				'Custom Website Design',
-				'E-commerce Development',
-				'Mobile-First Responsive Design',
-				'SEO Optimization',
-				'Content Management Systems',
-				'Website Maintenance & Support'
-			],
-			pricing: 'Starting at $3,000',
-			popular: false
 		}
 	];
 </script>
 
 <svelte:head>
 	<title>Services - Full Scope Media</title>
-	<meta name="description" content="Professional video production, photography, digital marketing, and web design services. Comprehensive creative solutions for your business." />
+	<meta name="description" content="Professional video production, photography, and digital marketing services. Comprehensive creative solutions for your business." />
 </svelte:head>
 
 <!-- Hero Section -->

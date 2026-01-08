@@ -5,7 +5,6 @@
 	import Video from 'lucide-svelte/icons/video';
 	import Camera from 'lucide-svelte/icons/camera';
 	import Megaphone from 'lucide-svelte/icons/megaphone';
-	import Globe from 'lucide-svelte/icons/globe';
 	import ArrowRight from 'lucide-svelte/icons/arrow-right';
 	import { resolve } from '$app/paths';
 
@@ -27,12 +26,6 @@
 			title: 'Digital Marketing',
 			description: 'Campaign strategy, content, and reporting tailored to the channels that matter to you.',
 			features: ['Social & Content Strategy', 'Always-on Campaigns', 'Brand Positioning', 'Performance Reporting']
-		},
-		{
-			icon: Globe,
-			title: 'Web Design',
-			description: 'Modern, responsive sites that tell your story clearly and convert visitors into customers.',
-			features: ['UX/UI & Responsive Build', 'E-commerce', 'On-page SEO', 'CMS & Content Support']
 		}
 	];
 </script>

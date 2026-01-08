@@ -7,6 +7,7 @@
 	import List from 'lucide-svelte/icons/list';
 	import Filter from 'lucide-svelte/icons/filter';
 	import Search from 'lucide-svelte/icons/search';
+	import { resolve } from '$app/paths';
 	import { cn } from '$lib/utils';
 
 	interface PortfolioItem {
@@ -80,22 +81,6 @@
 		},
 		{
 			id: 3,
-			title: 'E-commerce Platform Redesign',
-			category: 'Web Design',
-			client: 'Fashion Forward',
-			description: 'Complete website redesign and development that improved user experience and increased conversion rates by 65% within the first quarter.',
-			image: '/portfolio/ecommerce.jpg',
-			tags: ['Web Design', 'E-commerce', 'UX/UI', 'Conversion'],
-			date: '2024-03-10',
-			results: '65% conversion rate improvement',
-			metrics: [
-				{ label: 'Conversion Rate', value: '+65%' },
-				{ label: 'Page Speed', value: '90%' },
-				{ label: 'User Satisfaction', value: '4.8/5' }
-			]
-		},
-		{
-			id: 4,
 			title: 'Fitness Brand Social Campaign',
 			category: 'Digital Marketing',
 			client: 'Fitness Plus',
@@ -111,7 +96,7 @@
 			]
 		},
 		{
-			id: 5,
+			id: 4,
 			title: 'Corporate Event Documentation',
 			category: 'Video Production',
 			client: 'Global Industries',
@@ -128,7 +113,7 @@
 			]
 		},
 		{
-			id: 6,
+			id: 5,
 			title: 'Luxury Watch Product Catalog',
 			category: 'Photography',
 			client: 'Timepiece Luxury',
@@ -149,8 +134,7 @@
 		{ id: 'all', name: 'All Projects', count: portfolioItems.length },
 		{ id: 'Video Production', name: 'Video Production', count: portfolioItems.filter(item => item.category === 'Video Production').length },
 		{ id: 'Photography', name: 'Photography', count: portfolioItems.filter(item => item.category === 'Photography').length },
-		{ id: 'Digital Marketing', name: 'Digital Marketing', count: portfolioItems.filter(item => item.category === 'Digital Marketing').length },
-		{ id: 'Web Design', name: 'Web Design', count: portfolioItems.filter(item => item.category === 'Web Design').length }
+		{ id: 'Digital Marketing', name: 'Digital Marketing', count: portfolioItems.filter(item => item.category === 'Digital Marketing').length }
 	];
 
 	// Featured items for carousel
@@ -284,15 +268,15 @@
 				<p class="text-zinc-400 mb-6 max-w-2xl mx-auto">
 					Let's discuss your project and create something that not only looks amazing but drives real results for your business.
 				</p>
-				<div class="flex flex-col sm:flex-row gap-4 justify-center">
-					<Button variant="primary" size="lg">
-						<a href="/contact">Start Your Project</a>
-					</Button>
-					<Button variant="outline" size="lg">
-						<a href="/services">View Our Services</a>
-					</Button>
+					<div class="flex flex-col sm:flex-row gap-4 justify-center">
+						<Button variant="primary" size="lg">
+							<a href={resolve('/contact')}>Start Your Project</a>
+						</Button>
+						<Button variant="outline" size="lg">
+							<a href={resolve('/services')}>View Our Services</a>
+						</Button>
+					</div>
 				</div>
 			</div>
-		</div>
-	</Container>
+		</Container>
 </section>

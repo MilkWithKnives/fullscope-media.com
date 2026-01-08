@@ -21,13 +21,7 @@
 	let isSubmitting = $state(false);
 	let submitStatus = $state<'idle' | 'success' | 'error'>('idle');
 
-	const services = [
-		'Video Production',
-		'Photography',
-		'Digital Marketing',
-		'Web Design',
-		'Other'
-	];
+	const services = ['Video Production', 'Photography', 'Digital Marketing', 'Other'];
 
 	const budgetRanges = [
 		'Under $5,000',
@@ -111,7 +105,7 @@
 		<div class="text-center space-y-6">
 			<h1 class="text-4xl md:text-5xl font-bold">Let's Create Together</h1>
 			<p class="text-xl text-zinc-400 max-w-3xl mx-auto">
-				Tell us what you’re working on—video, photography, web, or a full campaign. We’ll respond with next steps, timing, and a clear plan.
+				Tell us what you’re working on—video, photography, or a full campaign. We’ll respond with next steps, timing, and a clear plan.
 			</p>
 		</div>
 	</Container>

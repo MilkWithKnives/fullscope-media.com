@@ -9,6 +9,7 @@
 	import Button from '../ui/Button.svelte';
 	import Card from '../ui/Card.svelte';
 	import Loading from '../ui/Loading.svelte';
+	import { resolve } from '$app/paths';
 	import { cn } from '$lib/utils';
 
 	interface BookingData {
@@ -59,14 +60,6 @@
 		hearAboutUs: ''
 	});
 
-	$effect(() => {
-		if (selectedSlot) {
-			const [date, time] = selectedSlot.start.split(' ');
-			formData.preferredDate = date;
-			formData.preferredTime = time;
-		}
-	});
-
 	let isSubmitting = $state(false);
 	let errors = $state<Record<string, string>>({});
 
@@ -74,7 +67,6 @@
 		'Video Production',
 		'Photography',
 		'Digital Marketing',
-		'Web Design',
 		'Brand Strategy',
 		'Social Media Management',
 		'Other'
@@ -122,6 +114,10 @@
 		isSubmitting = true;
 
 		try {
+			const [slotDate = '', slotTime = ''] = selectedSlot?.start?.split(' ') ?? [];
+			const appointmentDate = formData.preferredDate || slotDate;
+			const appointmentTime = formData.preferredTime || slotTime;
+
 			// Prepare booking data
 			const bookingData = {
 				client_name: `${formData.firstName} ${formData.lastName}`,
@@ -129,8 +125,8 @@
 				client_phone: formData.phone,
 				client_company: formData.company,
 				service_type: formData.projectType,
-				appointment_date: formData.preferredDate,
-				appointment_time: formData.preferredTime,
+				appointment_date: appointmentDate,
+				appointment_time: appointmentTime,
 				duration_minutes: selectedSlot?.duration || 120,
 				property_address: formData.company, // Using company field as property address for now
 				special_requirements: formData.message,
@@ -324,7 +320,7 @@
 					)}
 				>
 					<option value="">Select a project type</option>
-					{#each projectTypes as type}
+					{#each projectTypes as type (type)}
 						<option value={type}>{type}</option>
 					{/each}
 				</select>
@@ -343,7 +339,7 @@
 					class="w-full px-3 py-2 bg-zinc-900 border border-zinc-700 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent text-white"
 				>
 					<option value="">Select budget range</option>
-					{#each budgetRanges as range}
+					{#each budgetRanges as range (range)}
 						<option value={range}>{range}</option>
 					{/each}
 				</select>
@@ -379,7 +375,7 @@
 				class="w-full px-3 py-2 bg-zinc-900 border border-zinc-700 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent text-white"
 			>
 				<option value="">Select an option</option>
-				{#each hearAboutOptions as option}
+				{#each hearAboutOptions as option (option)}
 					<option value={option}>{option}</option>
 				{/each}
 			</select>
@@ -417,9 +413,9 @@
 		<div class="text-center text-sm text-zinc-500">
 			<p>
 				By booking this appointment, you agree to our
-				<a href="/terms" class="text-[var(--color-primary)] hover:underline">Terms of Service</a>
+				<a href={resolve('/terms')} class="text-[var(--color-primary)] hover:underline">Terms of Service</a>
 				and
-				<a href="/privacy" class="text-[var(--color-primary)] hover:underline">Privacy Policy</a>.
+				<a href={resolve('/privacy')} class="text-[var(--color-primary)] hover:underline">Privacy Policy</a>.
 			</p>
 		</div>
 	</form>
