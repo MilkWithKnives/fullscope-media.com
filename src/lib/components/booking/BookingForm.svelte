@@ -63,14 +63,17 @@
 	let isSubmitting = $state(false);
 	let errors = $state<Record<string, string>>({});
 
-	const projectTypes = [
-		'Video Production',
-		'Photography',
-		'Digital Marketing',
-		'Brand Strategy',
-		'Social Media Management',
-		'Other'
-	];
+const projectTypes = [
+	'Real Estate Photography',
+	'3D & Video Tours',
+	'Drone & Aerial Media',
+	'Floorplans (Cubicasa)',
+	'Virtual Staging',
+	'Portraits & Headshots',
+	'Music Videos',
+	'Custom Creative / Case-by-case',
+	'Other'
+];
 
 	const budgetRanges = [
 		'Under $5,000',

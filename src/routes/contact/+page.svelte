@@ -21,7 +21,17 @@
 	let isSubmitting = $state(false);
 	let submitStatus = $state<'idle' | 'success' | 'error'>('idle');
 
-	const services = ['Video Production', 'Photography', 'Digital Marketing', 'Other'];
+	const services = [
+		'Real Estate Photography',
+		'3D & Video Tours',
+		'Drone & Aerial Media',
+		'Floorplans (Cubicasa)',
+		'Virtual Staging',
+		'Portraits & Headshots',
+		'Music Videos',
+		'Custom Creative / Case-by-case',
+		'Other'
+	];
 
 	const budgetRanges = [
 		'Under $5,000',
@@ -96,7 +106,7 @@
 
 <svelte:head>
 	<title>Contact - Full Scope Media</title>
-	<meta name="description" content="Get in touch with Full Scope Media. Let's discuss your project and create something amazing together. Professional video, photography, and digital marketing services." />
+	<meta name="description" content="Get in touch with Full Scope Media for real estate photography, 3D/video tours, drone, virtual staging, and portraits/headshots." />
 </svelte:head>
 
 <!-- Hero Section -->
@@ -105,7 +115,7 @@
 		<div class="text-center space-y-6">
 			<h1 class="text-4xl md:text-5xl font-bold">Let's Create Together</h1>
 			<p class="text-xl text-zinc-400 max-w-3xl mx-auto">
-				Tell us what you’re working on—video, photography, or a full campaign. We’ll respond with next steps, timing, and a clear plan.
+				Tell us what you’re working on—real estate media, tours, drone, virtual staging, or portraits. We’ll respond with next steps, timing, and a clear plan.
 			</p>
 		</div>
 	</Container>

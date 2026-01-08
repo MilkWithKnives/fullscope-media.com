@@ -4,28 +4,28 @@
 	import Button from '../ui/Button.svelte';
 	import Video from 'lucide-svelte/icons/video';
 	import Camera from 'lucide-svelte/icons/camera';
-	import Megaphone from 'lucide-svelte/icons/megaphone';
+	import User from 'lucide-svelte/icons/user';
 	import ArrowRight from 'lucide-svelte/icons/arrow-right';
 	import { resolve } from '$app/paths';
 
 	const services = [
 		{
-			icon: Video,
-			title: 'Video Production',
-			description: 'Concept-through-delivery video that clarifies your message and moves viewers to act.',
-			features: ['Brand & Corporate Films', 'Commercial Spots', 'Event Coverage', 'Documentary-style Stories']
-		},
-		{
 			icon: Camera,
-			title: 'Photography',
-			description: 'Clean, consistent images that showcase products, people, and spaces at their best.',
-			features: ['Product Sets', 'Executive Portraits', 'Events & Conferences', 'Brand/Lifestyle Campaigns']
+			title: 'Real Estate Photography',
+			description: 'Bright, accurate sets for MLS and marketing—delivered fast and formatted to upload.',
+			features: ['Interiors, Exteriors, Details', 'Cubicasa Floorplans', 'Virtual Staging Ready', 'Next-day Delivery']
 		},
 		{
-			icon: Megaphone,
-			title: 'Digital Marketing',
-			description: 'Campaign strategy, content, and reporting tailored to the channels that matter to you.',
-			features: ['Social & Content Strategy', 'Always-on Campaigns', 'Brand Positioning', 'Performance Reporting']
+			icon: Video,
+			title: '3D & Video Tours',
+			description: 'Immersive tours that keep buyers engaged—Matterport and Zillow 3D Home plus cinematic and AI-narrated video walkthroughs.',
+			features: ['Matterport & Zillow 3D Home', 'Cinematic / AI Video Tours', 'MLS & Social Exports', 'Agent-intro or Voiceover']
+		},
+		{
+			icon: User,
+			title: 'Portraits & Headshots',
+			description: 'Professional portraits that feel like you—corporate, creative, LinkedIn, and passport photos in-studio or on location.',
+			features: ['Corporate & Creative Portraits', 'LinkedIn & Passport Crops', 'Studio or On-location', 'Light Retouching Included']
 		}
 	];
 </script>
@@ -37,7 +37,7 @@
 				What we deliver
 			</h2>
 			<p class="text-xl text-zinc-400 max-w-3xl mx-auto">
-				Full-service creative support, from the first draft to launch day—built to keep your brand cohesive and effective.
+				Real estate media and portraits that keep listings moving and people looking their best.
 			</p>
 		</div>
 
@@ -82,6 +82,9 @@
 			<Button variant="primary" size="lg">
 				<a href={resolve('/services')}>View All Services</a>
 			</Button>
+			<p class="text-sm text-zinc-400 mt-3">
+				Need a music video or custom creative project? Let’s scope it together.
+			</p>
 		</div>
 	</Container>
 </section>

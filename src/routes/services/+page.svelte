@@ -4,55 +4,71 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Video from 'lucide-svelte/icons/video';
 	import Camera from 'lucide-svelte/icons/camera';
-	import Megaphone from 'lucide-svelte/icons/megaphone';
+	import Drone from 'lucide-svelte/icons/drone';
+	import User from 'lucide-svelte/icons/user';
 	import Check from 'lucide-svelte/icons/check';
 	import ArrowRight from 'lucide-svelte/icons/arrow-right';
 	import { resolve } from '$app/paths';
 
 	const services = [
 		{
-			icon: Video,
-			title: 'Video Production',
-			description: 'Professional video production services that tell your story with impact and authenticity.',
+			icon: Camera,
+			title: 'Real Estate Photography',
+			description: 'Clean, accurate sets for every listing—delivered fast and sized for MLS, print, and social.',
 			features: [
-				'Corporate Videos & Testimonials',
-				'Commercial & Advertising Content',
-				'Event Coverage & Live Streaming',
-				'Documentary & Narrative Films',
-				'Training & Educational Videos',
-				'Social Media Video Content'
+				'Interior, Exterior, and Detail Sets',
+				'Cubicasa Floorplans Included',
+				'Virtual Staging-Ready Files',
+				'MLS-safe color + verticals',
+				'Twilight & Blue-sky Options',
+				'Next-day Turnaround'
 			],
-			pricing: 'Starting at $2,500',
+			pricing: 'Photo packages from $250',
 			popular: true
 		},
 		{
-			icon: Camera,
-			title: 'Photography',
-			description: 'Stunning photography that captures your brand essence and connects with your audience.',
+			icon: Video,
+			title: '3D & Video Tours',
+			description: 'Immersive tours that keep buyers engaged—Matterport and Zillow 3D Home plus cinematic and AI-narrated video walkthroughs.',
 			features: [
-				'Product & E-commerce Photography',
-				'Corporate Headshots & Team Photos',
-				'Event & Conference Photography',
-				'Brand & Lifestyle Photography',
-				'Real Estate Photography',
-				'Food & Restaurant Photography'
+				'Matterport & Zillow 3D Home',
+				'Cinematic / AI Video Tours',
+				'Agent intro or Voiceover',
+				'MLS & Social Exports',
+				'Branded & Unbranded Links',
+				'Delivery-ready Hosting'
 			],
-			pricing: 'Starting at $500',
+			pricing: 'Tours from $400',
 			popular: false
 		},
 		{
-			icon: Megaphone,
-			title: 'Digital Marketing',
-			description: 'Strategic digital marketing campaigns that amplify your reach and drive conversions.',
+			icon: Drone,
+			title: 'Drone & Aerial Media',
+			description: 'FAA-compliant flights for hero shots, context, and coverage you can’t get from the ground.',
 			features: [
-				'Social Media Strategy & Management',
-				'Content Creation & Curation',
-				'Brand Development & Guidelines',
-				'Campaign Planning & Execution',
-				'Analytics & Performance Tracking',
-				'Influencer Partnership Management'
+				'Aerial Hero + Lot Coverage',
+				'Neighborhood & Amenity Context',
+				'Roofline and Elevation Angles',
+				'Vertical & Landscape Deliverables',
+				'FAA-compliant Planning',
+				'Add-on to Photo or Video'
 			],
-			pricing: 'Starting at $1,500/month',
+			pricing: 'Aerial from $200',
+			popular: false
+		},
+		{
+			icon: User,
+			title: 'Portraits & Headshots',
+			description: 'Professional portraits that feel like you—corporate, creative, LinkedIn, and passport-ready options.',
+			features: [
+				'Corporate & Team Headshots',
+				'Creative Portrait Sessions',
+				'LinkedIn / Passport Crops',
+				'Studio or On-location',
+				'Light Retouching Included',
+				'Delivery in Multiple Ratios'
+			],
+			pricing: 'Headshots from $175',
 			popular: false
 		}
 	];
@@ -60,7 +76,7 @@
 
 <svelte:head>
 	<title>Services - Full Scope Media</title>
-	<meta name="description" content="Professional video production, photography, and digital marketing services. Comprehensive creative solutions for your business." />
+	<meta name="description" content="Real estate photography, 3D and video tours, drone media, and portraits/headshots by Full Scope Media in East Lansing." />
 </svelte:head>
 
 <!-- Hero Section -->
@@ -69,7 +85,7 @@
 		<div class="text-center space-y-6">
 			<h1 class="text-4xl md:text-5xl font-bold">Our Services</h1>
 			<p class="text-xl text-zinc-300 max-w-3xl mx-auto">
-				End-to-end creative support that keeps messaging, visuals, and performance aligned. We plan, produce, and ship with the same team from start to finish.
+				Real estate media and portraits, built for fast turnarounds and clean, consistent results across photo, tours, drone, and headshots. Music videos and other creative projects are scoped case by case—reach out to talk details.
 			</p>
 		</div>
 	</Container>
