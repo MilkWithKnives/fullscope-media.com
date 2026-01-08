@@ -81,7 +81,7 @@
 						class="h-2.5 w-2.5 rounded-full border border-zinc-500 transition-all {i === currentSlide ? 'bg-[var(--color-primary)]' : 'bg-zinc-600'}"
 						on:click={() => (currentSlide = i)}
 						aria-label={`Go to slide ${i + 1}`}
-					/>
+					></button>
 				{/each}
 			</div>
 		</div>

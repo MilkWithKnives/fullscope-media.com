@@ -72,6 +72,11 @@
     "svelte"
   ],
   "dependencies": {
+    "@opentelemetry/exporter-trace-otlp-proto": "^0.203.0",
+    "@opentelemetry/instrumentation": "^0.203.0",
+    "@opentelemetry/resources": "^2.0.1",
+    "@opentelemetry/sdk-trace-node": "^2.0.1",
+    "@traceloop/instrumentation-openai": "^0.14.4",
     "@floating-ui/dom": "^1.7.4",
     "@formspree/core": "^4.0.0",
     "@headlessui/tailwindcss": "^0.2.2",
@@ -97,7 +102,6 @@
     "svelte-headlessui": "^0.0.46",
     "svelte-legos": "^0.2.5",
     "svelte-motion": "^0.12.2",
-    "tailwind-merge": "^3.4.0",
     "tailwind-merge": "^3.4.0"
   },
   "packageManager": "pnpm@10.27.0+sha512.72d699da16b1179c14ba9e64dc71c9a40988cbdc65c264cb0e489db7de917f20dcf4d64d8723625f2969ba52d4b7e2a1170682d9ac2a5dcaeaab732b7e16f04a"

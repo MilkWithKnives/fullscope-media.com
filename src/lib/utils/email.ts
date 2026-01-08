@@ -20,7 +20,7 @@ if (RESEND_API_KEY) {
 	resend = new Resend(RESEND_API_KEY);
 } else if (SMTP_HOST && SMTP_USER && SMTP_PASS) {
 	emailService = 'smtp';
-	transporter = nodemailer.createTransporter({
+	transporter = nodemailer.createTransport({
 		host: SMTP_HOST,
 		port: parseInt(SMTP_PORT || '587'),
 		secure: false,

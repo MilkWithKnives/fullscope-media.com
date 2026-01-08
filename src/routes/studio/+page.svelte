@@ -71,7 +71,7 @@
 	const guidelinesLeft = ['Arrive 15 minutes early for setup', 'Maximum 20 people in studio', 'Handle all equipment with care', 'Leave the space as you found it'];
 	const guidelinesRight = ['No smoking or food in studio', '24-hour cancellation policy', 'Studio address shared upon booking', 'Additional equipment available'];
 
-	let schedulerSection: HTMLDivElement | null = null;
+	let schedulerSection: HTMLElement | null = null;
 
 	function scrollToScheduler() {
 		schedulerSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });

@@ -1,5 +1,10 @@
-import ical from 'ical-generator';
-import { ICAL_DOMAIN, ICAL_ORGANIZER_EMAIL, ICAL_ORGANIZER_NAME } from '$env/static/private';
+import ical, {
+	ICalAttendeeStatus,
+	ICalAttendeeType,
+	ICalCalendarMethod,
+	ICalEventStatus
+} from 'ical-generator';
+import { ICAL_ORGANIZER_EMAIL, ICAL_ORGANIZER_NAME } from '$env/static/private';
 
 export interface BookingEvent {
 	id: string;
@@ -17,8 +22,8 @@ export interface BookingEvent {
 
 export function generateICalEvent(booking: BookingEvent): string {
 	const calendar = ical({
-		domain: ICAL_DOMAIN || 'fullscopemedia.com',
 		name: 'Full Scope Media Bookings',
+		method: ICalCalendarMethod.REQUEST,
 		timezone: 'America/New_York' // Adjust to your timezone
 	});
 
@@ -38,12 +43,11 @@ export function generateICalEvent(booking: BookingEvent): string {
 				name: booking.attendee.name,
 				email: booking.attendee.email,
 				rsvp: true,
-				status: 'needs-action',
-				type: 'individual'
+				status: ICalAttendeeStatus.NEEDSACTION,
+				type: ICalAttendeeType.INDIVIDUAL
 			}
 		],
-		method: 'request',
-		status: 'confirmed'
+		status: ICalEventStatus.CONFIRMED
 	});
 
 	return calendar.toString();

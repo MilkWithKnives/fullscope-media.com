@@ -2,7 +2,7 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { supabase } from '$lib/supabase';
 import { createBookingEvent, generateICalInvite } from '$lib/utils/ical';
-import { sendEmail, generateBookingConfirmationEmail } from '$lib/utils/email.ts';
+import { sendEmail, generateBookingConfirmationEmail } from '$lib/utils/email';
 import { env } from '$env/dynamic/private';
 
 const BUSINESS_EMAIL = env.BUSINESS_EMAIL ?? '';

@@ -1,4 +1,4 @@
-export interface Database {
+export type Database = {
 	public: {
 		Tables: {
 			bookings: {
@@ -363,4 +363,4 @@ export interface Database {
 			[_ in never]: never;
 		};
 	};
-}
+};

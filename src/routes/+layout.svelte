@@ -22,9 +22,9 @@
 
 	const keywords = SITE_KEYWORDS.join(', ');
 	const canonicalUrl = $derived(
-		() => new URL(`${page.url.pathname}${page.url.search}`, SITE_URL).toString()
+		new URL(`${page.url.pathname}${page.url.search}`, SITE_URL).toString()
 	);
-	const structuredData = $derived(() =>
+	const structuredData = $derived(
 		JSON.stringify({
 			'@context': 'https://schema.org',
 			'@type': 'Organization',
@@ -83,4 +83,3 @@
 		--color-primary-strong: #ff6f00;
 	}
 </style>
-

@@ -18,11 +18,11 @@
 
 	let { item }: { item: PortfolioItem } = $props();
 
-	const categoryLink = `/portfolio/${item.category}`;
-	const formattedDate = $derived(() => new Date(item.date).toLocaleDateString());
+	const categoryLink = $derived(`/portfolio/${item.category}`);
+	const formattedDate = $derived(new Date(item.date).toLocaleDateString());
 </script>
 
-<div class="portfolio-card" tabindex="0" role="group" aria-labelledby={`portfolio-card-${item.id}-title`}>
+<article class="portfolio-card" aria-labelledby={`portfolio-card-${item.id}-title`}>
 	<div class="portfolio-card__front">
 		<img src={item.image} alt={item.title} loading="lazy" decoding="async" />
 		<div class="portfolio-card__overlay"></div>
@@ -63,7 +63,7 @@
 			<span>View more {item.category}</span>
 		</a>
 	</div>
-</div>
+</article>
 
 <style>
 	.portfolio-card {

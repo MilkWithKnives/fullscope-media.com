@@ -42,17 +42,17 @@
 		lg: 'px-6 py-3 text-lg'
 	} as const;
 
-	function handleClick(event: MouseEvent) {
+	function handleClick(event: MouseEvent & { currentTarget: HTMLButtonElement }) {
 		onclick?.(event);
 		dispatch('click', event);
 	}
 
-	function handleFocus(event: FocusEvent) {
+	function handleFocus(event: FocusEvent & { currentTarget: HTMLButtonElement }) {
 		onfocus?.(event);
 		dispatch('focus', event);
 	}
 
-	function handleBlur(event: FocusEvent) {
+	function handleBlur(event: FocusEvent & { currentTarget: HTMLButtonElement }) {
 		onblur?.(event);
 		dispatch('blur', event);
 	}
@@ -65,9 +65,9 @@
 		sizes[size],
 		className
 	)}
-	on:click={handleClick}
-	on:focus={handleFocus}
-	on:blur={handleBlur}
+	onclick={handleClick}
+	onfocus={handleFocus}
+	onblur={handleBlur}
 	{...restProps}
 >
 	{@render children?.()}
