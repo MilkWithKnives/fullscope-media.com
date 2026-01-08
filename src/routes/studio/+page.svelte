@@ -36,8 +36,8 @@
 		},
 		{
 			icon: Video,
-			title: 'Student Special 🎓',
-			description: 'MSU, LCC, or grad school students get up to $15 Uber credit home'
+			title: 'Student Special',
+			description: 'MSU, LCC, or grad students qualify for up to $15 in ride credit home'
 		},
 		{
 			icon: Clock,
@@ -103,9 +103,9 @@
 				/>
 				<div class="absolute inset-0 bg-black/35 flex items-center justify-center">
 					<div class="text-center text-white space-y-4">
-						<h1 class="text-4xl font-bold">Professional Photography Studio</h1>
+						<h1 class="text-4xl font-bold">Professional studio, ready when you are</h1>
 						<p class="text-lg text-zinc-200 max-w-2xl">
-							Your one-stop shop for real estate photography, professional portraits, creative shoots, and content production.
+							A flexible space for real estate shoots, polished portraits, creative sessions, and content production—with gear and support on site.
 						</p>
 						<Button
 							onclick={scrollToScheduler}
@@ -120,7 +120,7 @@
 		</section>
 
 		<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-			{#each studioFeatures as feature}
+			{#each studioFeatures as feature (feature.title)}
 				<Card class="p-6 text-center bg-zinc-900 border border-zinc-800">
 					<div class="flex justify-center mb-4">
 						<feature.icon size={48} class="text-[var(--color-primary)]" />
@@ -134,7 +134,7 @@
 		<Card class="p-8 bg-zinc-900 border border-zinc-800">
 			<h2 class="text-2xl font-bold text-white mb-6 text-center">Rental Packages</h2>
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-				{#each pricingOptions as option}
+				{#each pricingOptions as option (option.label)}
 					<div
 						class={`text-center p-6 border rounded-lg ${
 							option.featured
@@ -147,7 +147,7 @@
 						<p class="text-3xl font-bold text-[var(--color-primary)] mb-2">
 							{option.price}<span class="text-lg text-zinc-500">{option.caption}</span>
 						</p>
-						{#each option.details as detail}
+						{#each option.details as detail (detail)}
 							<p class="text-sm text-zinc-400">{detail}</p>
 						{/each}
 					</div>
@@ -163,12 +163,12 @@
 			<h3 class="text-lg font-semibold text-white mb-4">Studio Guidelines</h3>
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-zinc-400">
 				<ul class="space-y-2">
-					{#each guidelinesLeft as guideline}
+					{#each guidelinesLeft as guideline (guideline)}
 						<li>• {guideline}</li>
 					{/each}
 				</ul>
 				<ul class="space-y-2">
-					{#each guidelinesRight as guideline}
+					{#each guidelinesRight as guideline (guideline)}
 						<li>• {guideline}</li>
 					{/each}
 				</ul>

@@ -20,8 +20,7 @@
 		<div class="max-w-3xl mx-auto text-center mb-12 space-y-4">
 			<h1 class="text-3xl md:text-4xl font-bold text-white">Book Your Appointment</h1>
 			<p class="text-lg text-zinc-400">
-				Choose a convenient time using the scheduler below. All availability is kept in sync with our team's
-				live calendar, and you'll receive a confirmation as soon as you submit.
+				Pick a time that works for you. Our scheduler is synced to our live calendar, and we’ll confirm your booking immediately.
 			</p>
 		</div>
 

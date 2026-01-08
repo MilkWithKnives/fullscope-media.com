@@ -8,6 +8,7 @@
 	import Zap from 'lucide-svelte/icons/zap';
 	import Linkedin from 'lucide-svelte/icons/linkedin';
 	import Mail from 'lucide-svelte/icons/mail';
+	import { resolve } from '$app/paths';
 
 	const values = [
 		{
@@ -38,7 +39,7 @@
 			role: 'Creative Director & Founder',
 			bio: 'With over 10 years in the industry, Sarah leads our creative vision and ensures every project tells a compelling story.',
 			image: '/api/placeholder/300/300',
-			linkedin: '#',
+			linkedin: 'https://www.linkedin.com',
 			email: 'sarah@fullscopemedia.com'
 		},
 		{
@@ -46,7 +47,7 @@
 			role: 'Lead Video Producer',
 			bio: 'Mike brings technical expertise and creative flair to every video project, from concept development to final delivery.',
 			image: '/api/placeholder/300/300',
-			linkedin: '#',
+			linkedin: 'https://www.linkedin.com',
 			email: 'mike@fullscopemedia.com'
 		},
 		{
@@ -54,7 +55,7 @@
 			role: 'Senior Photographer',
 			bio: 'Emily captures stunning visuals that tell your brand story, specializing in commercial and lifestyle photography.',
 			image: '/api/placeholder/300/300',
-			linkedin: '#',
+			linkedin: 'https://www.linkedin.com',
 			email: 'emily@fullscopemedia.com'
 		},
 		{
@@ -62,7 +63,7 @@
 			role: 'Digital Marketing Strategist',
 			bio: 'David develops comprehensive digital strategies that amplify your content and connect with your target audience.',
 			image: '/api/placeholder/300/300',
-			linkedin: '#',
+			linkedin: 'https://www.linkedin.com',
 			email: 'david@fullscopemedia.com'
 		}
 	];
@@ -86,8 +87,7 @@
 		<div class="text-center space-y-6">
 			<h1 class="text-4xl md:text-5xl font-bold">About Full Scope Media</h1>
 			<p class="text-xl text-zinc-400 max-w-3xl mx-auto">
-				We're a passionate team of creatives dedicated to telling stories that matter. 
-				Our mission is to help businesses connect with their audiences through powerful visual content.
+				We’re a small, senior team that blends strategy, production, and design to make brands look and feel intentional—on camera, online, and in every campaign.
 			</p>
 		</div>
 	</Container>
@@ -101,25 +101,20 @@
 				<h2 class="text-3xl md:text-4xl font-bold text-white">Our Story</h2>
 				<div class="space-y-4 text-zinc-400 leading-relaxed">
 					<p>
-						Founded in 2019, Full Scope Media began with a simple belief: every brand has a unique story 
-						worth telling. What started as a small creative studio has grown into a full-service agency 
-						that combines artistic vision with strategic thinking.
+						We started in 2019 with one goal: produce work that’s both beautiful and useful. Today we’re a full-service studio that still operates with the same focus—clear process, thoughtful creative, and consistent delivery.
 					</p>
 					<p>
-						We've had the privilege of working with startups finding their voice, established businesses 
-						evolving their brand, and everything in between. Each project teaches us something new and 
-						reinforces our commitment to excellence.
+						We partner with teams at every stage—launching new products, refreshing brands, and capturing key moments. Every engagement teaches us something new and sharpens how we collaborate.
 					</p>
 					<p>
-						Today, we're proud to be trusted partners to businesses across industries, helping them 
-						create content that not only looks great but drives real, measurable results.
+						What stays constant is our commitment to organized projects, direct communication, and work that performs in the real world.
 					</p>
 				</div>
 			</div>
 			
 			<!-- Stats -->
 			<div class="grid grid-cols-2 gap-8">
-				{#each stats as stat}
+				{#each stats as stat (stat.label)}
 					<div class="text-center p-6 bg-zinc-900 rounded-xl border border-zinc-800">
 						<div class="text-4xl font-bold text-[var(--color-primary)] mb-2">{stat.number}</div>
 						<div class="text-zinc-400">{stat.label}</div>
@@ -136,16 +131,16 @@
 		<div class="text-center mb-16">
 			<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Our Values</h2>
 			<p class="text-xl text-zinc-400 max-w-3xl mx-auto">
-				These core values guide everything we do and shape how we work with our clients and each other.
+				These principles guide how we plan, produce, and support every engagement.
 			</p>
 		</div>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-			{#each values as value}
+			{#each values as value (value.title)}
 				<Card class="text-center hover:shadow-lg transition-shadow duration-300 bg-zinc-900 border border-zinc-800">
 					<div class="space-y-4">
 						<div class="w-16 h-16 bg-zinc-800 rounded-full flex items-center justify-center mx-auto">
-							<svelte:component this={value.icon} size={32} class="text-[var(--color-primary)]" />
+							<value.icon size={32} class="text-[var(--color-primary)]" />
 						</div>
 						<h3 class="text-xl font-semibold text-white">{value.title}</h3>
 						<p class="text-zinc-400 leading-relaxed">{value.description}</p>
@@ -162,12 +157,12 @@
 		<div class="text-center mb-16">
 			<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Meet Our Team</h2>
 			<p class="text-xl text-zinc-400 max-w-3xl mx-auto">
-				Our diverse team of creatives, strategists, and technical experts work together to bring your vision to life.
+				A nimble group of creatives, strategists, and technologists who stay hands-on from kickoff through delivery.
 			</p>
 		</div>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-			{#each team as member}
+			{#each team as member (member.email)}
 				<Card class="text-center group hover:shadow-lg transition-all duration-300 bg-zinc-900 border border-zinc-800">
 					<div class="space-y-4">
 						<!-- Placeholder for team member photo -->
@@ -182,7 +177,7 @@
 						</div>
 
 						<div class="flex justify-center space-x-3 pt-2">
-							<a href={member.linkedin} class="text-zinc-500 hover:text-[var(--color-primary)] transition-colors">
+							<a href="https://www.linkedin.com" target="_blank" rel="noreferrer" class="text-zinc-500 hover:text-[var(--color-primary)] transition-colors">
 								<Linkedin size={20} />
 							</a>
 							<a href={`mailto:${member.email}`} class="text-zinc-500 hover:text-[var(--color-primary)] transition-colors">
@@ -202,10 +197,10 @@
 		<div class="text-center space-y-8">
 			<h2 class="text-3xl md:text-4xl font-bold">Ready to Work Together?</h2>
 			<p class="text-xl text-zinc-400 max-w-2xl mx-auto">
-				We'd love to learn about your project and discuss how we can help you achieve your goals.
+				Tell us what you’re building. We’ll share a clear plan, timeline, and team to get it done.
 			</p>
 			<Button variant="primary" size="lg" class="bg-[var(--color-primary)] text-black hover:bg-[var(--color-primary-strong)]">
-				<a href="/contact">Get in Touch</a>
+				<a href={resolve('/contact')}>Get in Touch</a>
 			</Button>
 		</div>
 	</Container>

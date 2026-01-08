@@ -3,6 +3,7 @@
 	import Button from '../ui/Button.svelte';
 	import ArrowRight from 'lucide-svelte/icons/arrow-right';
 	import Phone from 'lucide-svelte/icons/phone';
+	import { resolve } from '$app/paths';
 </script>
 
 <section class="py-24 bg-black text-white">
@@ -10,17 +11,16 @@
 		<div class="text-center space-y-8">
 			<div class="space-y-4">
 				<h2 class="text-3xl md:text-4xl font-bold">
-					Ready to Bring Your Vision to Life?
+					Ready to make the next project your best one yet?
 				</h2>
 				<p class="text-xl text-zinc-300 max-w-3xl mx-auto leading-relaxed">
-					Let's discuss your project and create something amazing together. 
-					Our team is ready to help you tell your story in a way that resonates with your audience.
+					Tell us what you need—strategy, production, or a full campaign—and we’ll bring a clear plan, a senior team, and on-time delivery.
 				</p>
 			</div>
 
 			<div class="flex flex-col sm:flex-row gap-4 justify-center">
 				<Button variant="primary" size="lg" class="text-black">
-					<a href="/contact" class="flex items-center gap-2">
+					<a href={resolve('/contact')} class="flex items-center gap-2">
 						Start Your Project
 						<ArrowRight size={20} />
 					</a>
@@ -39,16 +39,16 @@
 				<div class="flex flex-wrap justify-center items-center gap-8 opacity-60">
 					<!-- Placeholder for client logos -->
 					<div class="h-12 w-24 bg-zinc-800 rounded flex items-center justify-center">
-						<span class="text-xs">Client Logo</span>
+						<span class="text-xs">Client</span>
 					</div>
 					<div class="h-12 w-24 bg-zinc-800 rounded flex items-center justify-center">
-						<span class="text-xs">Client Logo</span>
+						<span class="text-xs">Client</span>
 					</div>
 					<div class="h-12 w-24 bg-zinc-800 rounded flex items-center justify-center">
-						<span class="text-xs">Client Logo</span>
+						<span class="text-xs">Client</span>
 					</div>
 					<div class="h-12 w-24 bg-zinc-800 rounded flex items-center justify-center">
-						<span class="text-xs">Client Logo</span>
+						<span class="text-xs">Client</span>
 					</div>
 				</div>
 			</div>

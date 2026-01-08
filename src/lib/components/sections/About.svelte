@@ -5,6 +5,7 @@
 	import Users from 'lucide-svelte/icons/users';
 	import Target from 'lucide-svelte/icons/target';
 	import Zap from 'lucide-svelte/icons/zap';
+	import { resolve } from '$app/paths';
 
 	const values = [
 		{
@@ -40,36 +41,30 @@
 						About Full Scope Media
 					</h2>
 					<p class="text-xl text-zinc-400 leading-relaxed">
-						We're a creative agency passionate about telling stories that matter. 
-						With years of experience and a team of talented professionals, we help 
-						businesses connect with their audiences through powerful visual content.
+						We're a creative studio focused on clear storytelling and crisp execution. Our team blends strategy, production, and design to help brands communicate with confidence.
 					</p>
 				</div>
 
 				<div class="space-y-6">
 					<p class="text-zinc-400 leading-relaxed">
-						Founded on the belief that every brand has a unique story to tell, Full Scope Media 
-						combines creative vision with strategic thinking to deliver content that not only 
-						looks great but drives real business results.
+						We pair creative direction with measurable goals so every deliverable earns its keep—whether that's a launch film, a refreshed library of photos, or a site that finally tells your story.
 					</p>
 					<p class="text-zinc-400 leading-relaxed">
-						From startups to established enterprises, we've helped hundreds of clients 
-						amplify their message and achieve their goals through compelling video, 
-						photography, and digital marketing campaigns.
+						From early-stage teams to established organizations, we keep projects organized, communication clear, and quality consistent from start to finish.
 					</p>
 				</div>
 
 				<Button variant="primary" size="lg">
-					<a href="/about">Learn More About Us</a>
+					<a href={resolve('/about')}>Learn More About Us</a>
 				</Button>
 			</div>
 
 			<!-- Values Grid -->
 			<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-				{#each values as value}
+				{#each values as value (value.title)}
 					<div class="p-6 bg-zinc-900 border border-zinc-800 rounded-xl hover:bg-zinc-800 transition-colors">
 						<div class="w-12 h-12 bg-[var(--color-primary)]/10 rounded-lg flex items-center justify-center mb-4">
-							<svelte:component this={value.icon} size={24} class="text-[var(--color-primary)]" />
+							<value.icon size={24} class="text-[var(--color-primary)]" />
 						</div>
 						<h3 class="text-lg font-semibold text-white mb-2">{value.title}</h3>
 						<p class="text-zinc-400 text-sm leading-relaxed">{value.description}</p>

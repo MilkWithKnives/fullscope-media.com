@@ -8,6 +8,7 @@
 	import Globe from 'lucide-svelte/icons/globe';
 	import Check from 'lucide-svelte/icons/check';
 	import ArrowRight from 'lucide-svelte/icons/arrow-right';
+	import { resolve } from '$app/paths';
 
 	const services = [
 		{
@@ -84,8 +85,7 @@
 		<div class="text-center space-y-6">
 			<h1 class="text-4xl md:text-5xl font-bold">Our Services</h1>
 			<p class="text-xl text-zinc-300 max-w-3xl mx-auto">
-				Comprehensive creative solutions designed to elevate your brand and drive results. 
-				From concept to completion, we deliver excellence in every project.
+				End-to-end creative support that keeps messaging, visuals, and performance aligned. We plan, produce, and ship with the same team from start to finish.
 			</p>
 		</div>
 	</Container>
@@ -95,7 +95,7 @@
 <section class="py-24 bg-black">
 	<Container>
 		<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-			{#each services as service}
+			{#each services as service (service.title)}
 				<Card class="relative overflow-hidden group hover:shadow-xl transition-all duration-300 bg-zinc-900 border border-zinc-800">
 					{#if service.popular}
 						<div class="absolute top-4 right-4 bg-[var(--color-primary-strong)] text-black px-3 py-1 rounded-full text-sm font-medium">
@@ -106,7 +106,7 @@
 					<div class="space-y-6">
 						<div class="flex items-center space-x-4">
 							<div class="w-16 h-16 bg-[var(--color-primary)]/15 rounded-xl flex items-center justify-center group-hover:bg-[var(--color-primary)]/25 transition-colors">
-								<svelte:component this={service.icon} size={32} class="text-[var(--color-primary-strong)]" />
+								<service.icon size={32} class="text-[var(--color-primary-strong)]" />
 							</div>
 							<div>
 								<h3 class="text-2xl font-bold text-white">{service.title}</h3>
@@ -121,7 +121,7 @@
 						<div class="space-y-3">
 							<h4 class="font-semibold text-white">What's Included:</h4>
 							<ul class="space-y-2">
-								{#each service.features as feature}
+								{#each service.features as feature (feature)}
 									<li class="flex items-start space-x-3">
 										<Check size={16} class="text-[var(--color-primary-strong)] mt-0.5 flex-shrink-0" />
 										<span class="text-zinc-400">{feature}</span>
@@ -132,7 +132,7 @@
 						
 						<div class="pt-4">
 							<Button variant="primary" class="w-full text-black">
-								<a href="/contact" class="flex items-center justify-center space-x-2">
+								<a href={resolve('/contact')} class="flex items-center justify-center space-x-2">
 									<span>Get Started</span>
 									<ArrowRight size={16} />
 								</a>
@@ -156,33 +156,33 @@
 		</div>
 
 		<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-			<div class="text-center">
-				<div class="w-16 h-16 bg-[var(--color-primary)]/20 rounded-full flex items-center justify-center mx-auto mb-4">
-					<span class="text-2xl font-bold text-[var(--color-primary-strong)]">1</span>
-				</div>
-				<h3 class="text-lg font-semibold text-white mb-2">Discovery</h3>
-				<p class="text-zinc-400">We learn about your goals, audience, and vision to create the perfect strategy.</p>
+				<div class="text-center">
+					<div class="w-16 h-16 bg-[var(--color-primary)]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+						<span class="text-2xl font-bold text-[var(--color-primary-strong)]">1</span>
+					</div>
+					<h3 class="text-lg font-semibold text-white mb-2">Discovery</h3>
+				<p class="text-zinc-400">We get clear on goals, audience, and success metrics before we lift a camera or open a doc.</p>
 			</div>
 			<div class="text-center">
 				<div class="w-16 h-16 bg-[var(--color-primary)]/20 rounded-full flex items-center justify-center mx-auto mb-4">
 					<span class="text-2xl font-bold text-[var(--color-primary-strong)]">2</span>
 				</div>
 				<h3 class="text-lg font-semibold text-white mb-2">Planning</h3>
-				<p class="text-zinc-400">Detailed project planning with timelines, deliverables, and creative concepts.</p>
+				<p class="text-zinc-400">A detailed plan with timelines, approvals, and creative direction everyone can follow.</p>
 			</div>
 			<div class="text-center">
 				<div class="w-16 h-16 bg-[var(--color-primary)]/20 rounded-full flex items-center justify-center mx-auto mb-4">
 					<span class="text-2xl font-bold text-[var(--color-primary-strong)]">3</span>
 				</div>
 				<h3 class="text-lg font-semibold text-white mb-2">Production</h3>
-				<p class="text-zinc-400">Expert execution using professional equipment and proven techniques.</p>
+				<p class="text-zinc-400">Tight production with experienced crew, pro gear, and an eye on the brief.</p>
 			</div>
 			<div class="text-center">
 				<div class="w-16 h-16 bg-[var(--color-primary)]/20 rounded-full flex items-center justify-center mx-auto mb-4">
 					<span class="text-2xl font-bold text-[var(--color-primary-strong)]">4</span>
 				</div>
 				<h3 class="text-lg font-semibold text-white mb-2">Delivery</h3>
-				<p class="text-zinc-400">Final delivery with ongoing support and optimization recommendations.</p>
+				<p class="text-zinc-400">Polished deliverables, clear handoff, and recommendations for distribution and optimization.</p>
 			</div>
 		</div>
 	</Container>
@@ -198,10 +198,10 @@
 			</p>
 			<div class="flex flex-col sm:flex-row gap-4 justify-center">
 				<Button variant="primary" size="lg" class="text-black">
-					<a href="/contact">Start Your Project</a>
+					<a href={resolve('/contact')}>Start Your Project</a>
 				</Button>
 				<Button variant="outline" size="lg" class="border-zinc-700 text-white hover:bg-zinc-800">
-					<a href="/portfolio">View Our Work</a>
+					<a href={resolve('/portfolio')}>View Our Work</a>
 				</Button>
 			</div>
 		</div>

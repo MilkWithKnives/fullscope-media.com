@@ -5,6 +5,7 @@
 	import Play from 'lucide-svelte/icons/play';
 	import ArrowRight from 'lucide-svelte/icons/arrow-right';
 	import { onMount } from 'svelte';
+	import { resolve } from '$app/paths';
 
 	let heroRef: HTMLElement;
 	let mouseX = $state(0);
@@ -46,27 +47,26 @@
 				<ScrollReveal animation="fade-right" class="space-y-8">
 					<div class="space-y-4">
 						<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-							Bringing Your
+							Creative production
 							<span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-[var(--color-primary)] animate-pulse-slow">
-								Vision
+								built for impact
 							</span>
-							to Life
 						</h1>
 						<p class="text-xl text-zinc-300 leading-relaxed">
-							Full Scope Media creates compelling visual stories that connect, inspire, and drive results.
-							From concept to completion, we deliver exceptional video production, photography, and digital marketing solutions.
+							We plan, produce, and polish visuals that make people stop and care. From the first idea to the final deliverable,
+							our team handles video, photography, and digital content with a focus on clarity, craft, and measurable results.
 						</p>
 					</div>
 
 					<div class="flex flex-col sm:flex-row gap-4">
 						<Button variant="primary" size="lg" class="text-black">
-							<a href="/contact" class="flex items-center gap-2">
+							<a href={resolve('/contact')} class="flex items-center gap-2">
 								Get Started
 								<ArrowRight size={20} />
 							</a>
 						</Button>
 						<Button variant="outline" size="lg" class="border-zinc-700 text-white hover:bg-zinc-800">
-							<a href="/portfolio" class="flex items-center gap-2">
+							<a href={resolve('/portfolio')} class="flex items-center gap-2">
 								<Play size={20} />
 								View Our Work
 							</a>
@@ -76,16 +76,16 @@
 					<!-- Stats -->
 					<div class="grid grid-cols-3 gap-8 pt-8 border-t border-zinc-800">
 						<div class="text-center">
-							<div class="text-3xl font-bold text-[var(--color-primary)]">500+</div>
-							<div class="text-sm text-zinc-400">Projects Completed</div>
+							<div class="text-3xl font-bold text-[var(--color-primary)]">400+</div>
+							<div class="text-sm text-zinc-400">Projects delivered</div>
 						</div>
 						<div class="text-center">
-							<div class="text-3xl font-bold text-[var(--color-primary)]">50+</div>
-							<div class="text-sm text-zinc-400">Happy Clients</div>
+							<div class="text-3xl font-bold text-[var(--color-primary)]">60+</div>
+							<div class="text-sm text-zinc-400">Client partners</div>
 						</div>
 						<div class="text-center">
 							<div class="text-3xl font-bold text-[var(--color-primary)]">5+</div>
-							<div class="text-sm text-zinc-400">Years Experience</div>
+							<div class="text-sm text-zinc-400">Years producing</div>
 						</div>
 					</div>
 				</ScrollReveal>

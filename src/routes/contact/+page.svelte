@@ -41,26 +41,22 @@
 		{
 			icon: Mail,
 			title: 'Email',
-			details: 'info@fullscopemedia.com',
-			link: 'mailto:info@fullscopemedia.com'
+			details: 'info@fullscopemedia.com'
 		},
 		{
 			icon: Phone,
 			title: 'Phone',
-			details: '(555) 123-4567',
-			link: 'tel:+15551234567'
+			details: '(555) 123-4567'
 		},
 		{
 			icon: MapPin,
 			title: 'Location',
-			details: 'Your City, State 12345',
-			link: '#'
+			details: 'Based in Michigan — serving clients nationwide'
 		},
 		{
 			icon: Clock,
 			title: 'Business Hours',
-			details: 'Mon-Fri: 9AM-6PM',
-			link: '#'
+			details: 'Mon–Fri · 9am–6pm ET'
 		}
 	];
 
@@ -115,8 +111,7 @@
 		<div class="text-center space-y-6">
 			<h1 class="text-4xl md:text-5xl font-bold">Let's Create Together</h1>
 			<p class="text-xl text-zinc-400 max-w-3xl mx-auto">
-				Ready to bring your vision to life? We'd love to hear about your project and 
-				discuss how we can help you achieve your goals.
+				Tell us what you’re working on—video, photography, web, or a full campaign. We’ll respond with next steps, timing, and a clear plan.
 			</p>
 		</div>
 	</Container>
@@ -132,7 +127,7 @@
 					<div class="space-y-6">
 						<div>
 							<h2 class="text-2xl font-bold text-white mb-2">Start Your Project</h2>
-							<p class="text-zinc-400">Fill out the form below and we'll get back to you within 24 hours.</p>
+							<p class="text-zinc-400">Share a few details and we’ll reply within one business day.</p>
 						</div>
 
 						{#if submitStatus === 'success'}
@@ -199,9 +194,9 @@
 										class="w-full px-4 py-3 bg-zinc-950 border border-zinc-700 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent text-white"
 									>
 										<option value="">Select a service</option>
-										{#each services as service}
-											<option value={service}>{service}</option>
-										{/each}
+							{#each services as service (service)}
+								<option value={service}>{service}</option>
+							{/each}
 									</select>
 								</div>
 							</div>
@@ -217,7 +212,7 @@
 										class="w-full px-4 py-3 bg-zinc-950 border border-zinc-700 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent text-white"
 									>
 										<option value="">Select budget range</option>
-										{#each budgetRanges as range}
+										{#each budgetRanges as range (range)}
 											<option value={range}>{range}</option>
 										{/each}
 									</select>
@@ -279,15 +274,19 @@
 				<div>
 					<h2 class="text-2xl font-bold text-white mb-6">Get in Touch</h2>
 					<div class="space-y-6">
-						{#each contactInfo as info}
+						{#each contactInfo as info (info.title)}
 							<div class="flex items-start space-x-4">
 								<div class="w-12 h-12 bg-zinc-900 border border-zinc-800 rounded-lg flex items-center justify-center flex-shrink-0">
 									<info.icon size={20} class="text-[var(--color-primary)]" />
 								</div>
 								<div>
 									<h3 class="font-semibold text-white">{info.title}</h3>
-									{#if info.link !== '#'}
-										<a href={info.link} class="text-[var(--color-primary)] hover:text-[var(--color-primary-strong)] transition-colors">
+									{#if info.title === 'Email'}
+										<a href="mailto:info@fullscopemedia.com" class="text-[var(--color-primary)] hover:text-[var(--color-primary-strong)] transition-colors">
+											{info.details}
+										</a>
+									{:else if info.title === 'Phone'}
+										<a href="tel:+15551234567" class="text-[var(--color-primary)] hover:text-[var(--color-primary-strong)] transition-colors">
 											{info.details}
 										</a>
 									{:else}
@@ -306,15 +305,15 @@
 						<div class="space-y-4">
 							<div>
 								<h4 class="font-medium text-white mb-1">How long does a typical project take?</h4>
-								<p class="text-zinc-400 text-sm">Project timelines vary based on scope and complexity. Most video projects take 2-4 weeks, while photography sessions can be completed within 1-2 weeks.</p>
+								<p class="text-zinc-400 text-sm">Most video projects wrap in 2–4 weeks after kickoff. Photo sessions are typically scheduled and delivered within 7–10 days.</p>
 							</div>
 							<div>
 								<h4 class="font-medium text-white mb-1">Do you work with clients remotely?</h4>
-								<p class="text-zinc-400 text-sm">Yes! We work with clients nationwide and have experience managing remote projects effectively through digital collaboration tools.</p>
+								<p class="text-zinc-400 text-sm">Yes. We collaborate with teams nationwide and run remote reviews, approvals, and delivery seamlessly.</p>
 							</div>
 							<div>
 								<h4 class="font-medium text-white mb-1">What's included in your pricing?</h4>
-								<p class="text-zinc-400 text-sm">Our pricing includes pre-production planning, production/shooting, post-production, and final delivery. We provide detailed quotes for each project.</p>
+								<p class="text-zinc-400 text-sm">Every estimate includes planning, production, post, and delivery. You’ll see a detailed scope, timeline, and any add-ons before we begin.</p>
 							</div>
 						</div>
 					</div>
