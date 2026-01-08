@@ -12,13 +12,13 @@
 	import { resolve } from '$app/paths';
 
 	const owner = {
-		name: 'Your Name',
-		title: 'Founder & Creative Lead',
+		name: 'Ryan',
+		title: 'Owner & Lead Photographer',
 		image: '/images/headshot.jpg',
-		bio: 'I run Full Scope Media end-to-end—from the first brief to the final delivery. You get a single point of contact, thoughtful planning, and production that actually matches the strategy.',
+		bio: 'Real estate and portrait photographer based in East Lansing, MI. I handle strategy, shooting, and delivery myself so every property and portrait feels intentional—and you always know who’s accountable.',
 		email: 'hello@fullscopemedia.com',
-		phone: '(555) 123-4567',
-		location: 'Based in Michigan · Serving clients nationwide',
+		phone: '(517) 258-8244',
+		location: 'East Lansing, MI · Serving clients nationwide',
 		linkedin: 'https://www.linkedin.com'
 	};
 
@@ -31,7 +31,7 @@
 		{
 			icon: Target,
 			title: 'Strategy first',
-			description: 'Clear goals, audiences, and success metrics before we hit record or shoot.'
+			description: 'MLS-ready framing, clean lines, and assets sized for the channels you actually use.'
 		},
 		{
 			icon: Zap,
@@ -67,18 +67,21 @@
 <!-- Story Section -->
 <section class="py-24 bg-black">
 	<Container>
-		<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-			<div class="space-y-6">
-				<h2 class="text-3xl md:text-4xl font-bold text-white">Our Story</h2>
-				<div class="space-y-4 text-zinc-400 leading-relaxed">
-					<p>
-						I started Full Scope Media to make production simpler for clients: one lead, a tight process, and deliverables that are as strategic as they are polished. I stay involved from kickoff to delivery so nothing gets lost between idea and execution.
-					</p>
-					<p>
-						Whether you need a launch film, a refreshed photo library, or a site that finally tells your story, I keep projects organized, timelines honest, and communication straightforward.
-					</p>
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+				<div class="space-y-6">
+					<h2 class="text-3xl md:text-4xl font-bold text-white">Our Story</h2>
+					<div class="space-y-4 text-zinc-400 leading-relaxed">
+						<p>
+							I started Full Scope Media to make production simpler: one lead, a tight process, and deliverables that are as strategic as they are polished. Most of my work is for real estate agents who need on-time media that helps listings stand out in a crowded MLS feed.
+						</p>
+						<p>
+							From interiors, exteriors, and 3D tours to portrait sessions, the goal is straightforward: accurate color, clean lighting, and images that feel intentional, not generic. The studio is set up like a lived-in space—comfortable furniture, artwork, and room to move—so it works for headshots, brand sessions, and creatives renting by the hour.
+						</p>
+						<p>
+							Outside of shoots, I’m usually buried in Motown and code. Fourteen months of self-taught coding sharpened how I organize projects and sweat small details. Before this, running busy restaurant operations hard-wired communication, reliability, and handling pressure—habits I bring to every shoot, delivery, and studio booking.
+						</p>
+					</div>
 				</div>
-			</div>
 			
 			<!-- Stats -->
 			<div class="grid grid-cols-2 gap-8">
