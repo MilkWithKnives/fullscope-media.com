@@ -15,6 +15,7 @@
 		SITE_URL,
 		SOCIAL_IMAGE
 	} from '$lib/config/site';
+	import { PUBLIC_GA_ID } from '$env/static/public';
 	import { page } from '$app/state';
 	import { dev } from '$app/environment';
 
@@ -62,6 +63,15 @@
 	<meta name="twitter:title" content={SITE_TITLE} />
 	<meta name="twitter:description" content={SITE_TAGLINE} />
 	<meta name="twitter:image" content={SOCIAL_IMAGE} />
+	{#if !dev && PUBLIC_GA_ID}
+		<script async src={`https://www.googletagmanager.com/gtag/js?id=${PUBLIC_GA_ID}`}></script>
+		<script>
+			{`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${PUBLIC_GA_ID}');`}
+		</script>
+	{/if}
 	{#if !dev}
 		<script type="application/ld+json">{structuredData}</script>
 	{/if}
