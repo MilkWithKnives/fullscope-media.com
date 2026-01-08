@@ -12,13 +12,13 @@
 	import { resolve } from '$app/paths';
 
 	const owner = {
-		name: 'Ryan',
+		name: 'Ryan Champion',
 		title: 'Owner & Lead Photographer',
 		image: '/images/headshot.jpg',
 		bio: 'Real estate and portrait photographer based in East Lansing, MI. I handle strategy, shooting, and delivery myself so every property and portrait feels intentional—and you always know who’s accountable.',
-		email: 'hello@fullscopemedia.com',
-		phone: '(517) 258-8244',
-		location: 'East Lansing, MI · Serving clients nationwide',
+		email: 'ryan@fullscope-media.com',
+		phone: '(517) 220-2934',
+		location: '301 MAC Ave Ste 106, East Lansing, MI · Serving clients nationwide',
 		linkedin: 'https://www.linkedin.com'
 	};
 

@@ -41,22 +41,22 @@
 		{
 			icon: Mail,
 			title: 'Email',
-			details: 'info@fullscopemedia.com'
+			details: 'ryan@fullscope-media.com'
 		},
 		{
 			icon: Phone,
 			title: 'Phone',
-			details: '(555) 123-4567'
+			details: '(517) 220-2934'
 		},
 		{
 			icon: MapPin,
 			title: 'Location',
-			details: 'Based in Michigan — serving clients nationwide'
+			details: '301 MAC Ave Ste 106, East Lansing, MI'
 		},
 		{
 			icon: Clock,
 			title: 'Business Hours',
-			details: 'Mon–Fri · 9am–6pm ET'
+			details: 'Open daily · 7am–10pm ET'
 		}
 	];
 
@@ -281,15 +281,15 @@
 								</div>
 								<div>
 									<h3 class="font-semibold text-white">{info.title}</h3>
-									{#if info.title === 'Email'}
-										<a href="mailto:info@fullscopemedia.com" class="text-[var(--color-primary)] hover:text-[var(--color-primary-strong)] transition-colors">
-											{info.details}
-										</a>
-									{:else if info.title === 'Phone'}
-										<a href="tel:+15551234567" class="text-[var(--color-primary)] hover:text-[var(--color-primary-strong)] transition-colors">
-											{info.details}
-										</a>
-									{:else}
+							{#if info.title === 'Email'}
+								<a href="mailto:ryan@fullscope-media.com" class="text-[var(--color-primary)] hover:text-[var(--color-primary-strong)] transition-colors">
+									{info.details}
+								</a>
+							{:else if info.title === 'Phone'}
+								<a href="tel:+15172202934" class="text-[var(--color-primary)] hover:text-[var(--color-primary-strong)] transition-colors">
+									{info.details}
+								</a>
+							{:else}
 										<p class="text-zinc-400">{info.details}</p>
 									{/if}
 								</div>

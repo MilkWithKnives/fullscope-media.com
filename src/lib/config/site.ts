@@ -13,9 +13,9 @@ export const SITE_KEYWORDS = [
 	'Full Scope Media'
 ];
 export const SOCIAL_IMAGE = `${SITE_URL}/og-image.svg`;
-export const BUSINESS_PHONE = '+1-555-123-4567';
-export const BUSINESS_EMAIL = 'hello@fullscopemedia.com';
-export const BUSINESS_LOCATION = 'Los Angeles, CA';
+export const BUSINESS_PHONE = '+1-517-220-2934';
+export const BUSINESS_EMAIL = 'ryan@fullscope-media.com';
+export const BUSINESS_LOCATION = '301 MAC Ave Ste 106, East Lansing, MI';
 export const BUSINESS_SAME_AS = [
 	'https://www.instagram.com/fullscopemedia',
 	'https://www.linkedin.com/company/fullscopemedia'

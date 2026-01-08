@@ -88,21 +88,21 @@
 				<!-- Contact Info -->
 				<div>
 					<h4 class="text-base font-semibold mb-2 text-white">Contact</h4>
-					<div class="space-y-2">
-						<div class="flex items-center space-x-3">
-							<Mail size={16} class="text-[var(--color-primary)]" />
-							<span class="text-zinc-400">info@fullscopemedia.com</span>
-						</div>
-						<div class="flex items-center space-x-3">
-							<Phone size={16} class="text-[var(--color-primary)]" />
-							<span class="text-zinc-400">(555) 123-4567</span>
-						</div>
-						<div class="flex items-center space-x-3">
-							<MapPin size={16} class="text-blue-400" />
-							<span class="text-gray-300">Your City, State</span>
+						<div class="space-y-2">
+							<div class="flex items-center space-x-3">
+								<Mail size={16} class="text-[var(--color-primary)]" />
+								<span class="text-zinc-400">ryan@fullscope-media.com</span>
+							</div>
+							<div class="flex items-center space-x-3">
+								<Phone size={16} class="text-[var(--color-primary)]" />
+								<span class="text-zinc-400">(517) 220-2934</span>
+							</div>
+							<div class="flex items-center space-x-3">
+								<MapPin size={16} class="text-blue-400" />
+								<span class="text-gray-300">301 MAC Ave Ste 106, East Lansing, MI</span>
+							</div>
 						</div>
 					</div>
-				</div>
 			</div>
 		</div>
 

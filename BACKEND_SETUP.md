@@ -46,7 +46,7 @@ Add to `.env`:
 ICAL_DOMAIN=fullscopemedia.com
 ICAL_ORGANIZER_EMAIL=your_email@fullscopemedia.com
 ICAL_ORGANIZER_NAME="Full Scope Media"
-BUSINESS_PHONE="+1-555-123-4567"
+BUSINESS_PHONE="+1-517-220-2934"
 BUSINESS_ADDRESS="Your Business Address"
 ```
 

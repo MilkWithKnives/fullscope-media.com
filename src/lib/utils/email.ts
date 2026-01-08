@@ -131,7 +131,7 @@ export function generateBookingConfirmationEmail(booking: {
 				<p>If you need to reschedule or have any questions, please contact us:</p>
 				<p>
 					📧 Email: ${BUSINESS_EMAIL || 'contact@fullscopemedia.com'}<br>
-					📞 Phone: ${BUSINESS_PHONE || '(555) 123-4567'}
+					📞 Phone: ${BUSINESS_PHONE || '(517) 220-2934'}
 				</p>
 				
 				<p>We look forward to working with you!</p>

@@ -26,7 +26,7 @@
 					</a>
 				</Button>
 				<Button variant="outline" size="lg" class="border-zinc-700 text-white hover:bg-zinc-800">
-					<a href="tel:+15551234567" class="flex items-center gap-2">
+					<a href="tel:+15172202934" class="flex items-center gap-2">
 						<Phone size={20} />
 						Call Us Now
 					</a>

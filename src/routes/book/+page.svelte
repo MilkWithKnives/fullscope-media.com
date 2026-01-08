@@ -37,11 +37,11 @@
 					>
 						<div class="flex items-center space-x-2">
 							<Phone size={16} class="text-[var(--color-primary)]" />
-							<span>(555) 123-4567</span>
+							<span>(517) 220-2934</span>
 						</div>
 						<div class="flex items-center space-x-2">
 							<Mail size={16} class="text-[var(--color-primary)]" />
-							<span>hello@fullscopemedia.com</span>
+							<span>ryan@fullscope-media.com</span>
 						</div>
 						<div class="flex items-center space-x-2">
 							<MapPin size={16} class="text-[var(--color-primary)]" />

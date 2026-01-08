@@ -192,14 +192,14 @@
 			<div class="text-center space-y-4 p-6">
 				<h3 class="text-lg font-semibold text-white">Need help or have questions?</h3>
 				<div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-zinc-400">
-					<div class="flex items-center gap-2">
-						<Phone size={16} class="text-[var(--color-primary)]" />
-						<span>(555) 123-4567</span>
-					</div>
-					<div class="flex items-center gap-2">
-						<Mail size={16} class="text-[var(--color-primary)]" />
-						<span>hello@fullscopemedia.com</span>
-					</div>
+				<div class="flex items-center gap-2">
+					<Phone size={16} class="text-[var(--color-primary)]" />
+					<span>(517) 220-2934</span>
+				</div>
+				<div class="flex items-center gap-2">
+					<Mail size={16} class="text-[var(--color-primary)]" />
+					<span>ryan@fullscope-media.com</span>
+				</div>
 					<div class="flex items-center gap-2">
 						<MapPin size={16} class="text-[var(--color-primary)]" />
 						<span>Available Nationwide</span>
