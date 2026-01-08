@@ -31,7 +31,7 @@
 			</div>
 
 			<!-- Desktop Navigation -->
-			<nav class="hidden md:flex space-x-8">
+			<nav class="hidden sm:flex space-x-6 md:space-x-8">
 				{#each navigation as item}
 					<a
 						href={item.href}
@@ -49,14 +49,14 @@
 			</nav>
 
 			<!-- CTA Button -->
-			<div class="hidden md:block">
+			<div class="hidden sm:block">
 				<Button variant="primary" size="sm">
 					<a href="/contact">Get Started</a>
 				</Button>
 			</div>
 
 			<!-- Mobile menu button -->
-			<div class="md:hidden">
+			<div class="sm:hidden">
 				<button
 					onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
 					class="text-zinc-300 hover:text-[var(--color-primary)] p-2"

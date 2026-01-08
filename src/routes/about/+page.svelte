@@ -3,76 +3,47 @@
 	import Card from '$lib/components/ui/Card.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Award from 'lucide-svelte/icons/award';
-	import Users from 'lucide-svelte/icons/users';
 	import Target from 'lucide-svelte/icons/target';
 	import Zap from 'lucide-svelte/icons/zap';
 	import Linkedin from 'lucide-svelte/icons/linkedin';
 	import Mail from 'lucide-svelte/icons/mail';
+	import Phone from 'lucide-svelte/icons/phone';
+	import MapPin from 'lucide-svelte/icons/map-pin';
 	import { resolve } from '$app/paths';
 
-	const values = [
+	const owner = {
+		name: 'Your Name',
+		title: 'Founder & Creative Lead',
+		image: '/images/headshot.jpg',
+		bio: 'I run Full Scope Media end-to-end—from the first brief to the final delivery. You get a single point of contact, thoughtful planning, and production that actually matches the strategy.',
+		email: 'hello@fullscopemedia.com',
+		phone: '(555) 123-4567',
+		location: 'Based in Michigan · Serving clients nationwide',
+		linkedin: 'https://www.linkedin.com'
+	};
+
+	const principles = [
 		{
 			icon: Award,
-			title: 'Excellence',
-			description: 'We strive for perfection in every project, delivering exceptional quality that exceeds expectations and drives real results for our clients.'
-		},
-		{
-			icon: Users,
-			title: 'Collaboration',
-			description: 'We work closely with our clients as true partners, ensuring their vision is brought to life authentically and effectively.'
+			title: 'Quality over volume',
+			description: 'Fewer projects at a time so every deliverable gets the attention it needs.'
 		},
 		{
 			icon: Target,
-			title: 'Results-Driven',
-			description: 'Every creative decision is made with your business goals in mind, ensuring measurable impact and return on investment.'
+			title: 'Strategy first',
+			description: 'Clear goals, audiences, and success metrics before we hit record or shoot.'
 		},
 		{
 			icon: Zap,
-			title: 'Innovation',
-			description: 'We stay ahead of trends and technology to deliver cutting-edge solutions that make your brand stand out from the competition.'
-		}
-	];
-
-	const team = [
-		{
-			name: 'Sarah Johnson',
-			role: 'Creative Director & Founder',
-			bio: 'With over 10 years in the industry, Sarah leads our creative vision and ensures every project tells a compelling story.',
-			image: '/api/placeholder/300/300',
-			linkedin: 'https://www.linkedin.com',
-			email: 'sarah@fullscopemedia.com'
-		},
-		{
-			name: 'Mike Chen',
-			role: 'Lead Video Producer',
-			bio: 'Mike brings technical expertise and creative flair to every video project, from concept development to final delivery.',
-			image: '/api/placeholder/300/300',
-			linkedin: 'https://www.linkedin.com',
-			email: 'mike@fullscopemedia.com'
-		},
-		{
-			name: 'Emily Rodriguez',
-			role: 'Senior Photographer',
-			bio: 'Emily captures stunning visuals that tell your brand story, specializing in commercial and lifestyle photography.',
-			image: '/api/placeholder/300/300',
-			linkedin: 'https://www.linkedin.com',
-			email: 'emily@fullscopemedia.com'
-		},
-		{
-			name: 'David Park',
-			role: 'Digital Marketing Strategist',
-			bio: 'David develops comprehensive digital strategies that amplify your content and connect with your target audience.',
-			image: '/api/placeholder/300/300',
-			linkedin: 'https://www.linkedin.com',
-			email: 'david@fullscopemedia.com'
+			title: 'Calm production',
+			description: 'Organized timelines, transparent comms, and predictable delivery.'
 		}
 	];
 
 	const stats = [
-		{ number: '500+', label: 'Projects Completed' },
-		{ number: '50+', label: 'Happy Clients' },
-		{ number: '5+', label: 'Years Experience' },
-		{ number: '15+', label: 'Industry Awards' }
+		{ number: '150+', label: 'Projects delivered' },
+		{ number: '60+', label: 'Client partners' },
+		{ number: '5+', label: 'Years producing' }
 	];
 </script>
 
@@ -87,7 +58,7 @@
 		<div class="text-center space-y-6">
 			<h1 class="text-4xl md:text-5xl font-bold">About Full Scope Media</h1>
 			<p class="text-xl text-zinc-400 max-w-3xl mx-auto">
-				We’re a small, senior team that blends strategy, production, and design to make brands look and feel intentional—on camera, online, and in every campaign.
+				Full Scope Media is led by {owner.name}, your hands-on partner for strategy, production, and delivery. One point of contact, no handoffs, consistent quality.
 			</p>
 		</div>
 	</Container>
@@ -101,13 +72,10 @@
 				<h2 class="text-3xl md:text-4xl font-bold text-white">Our Story</h2>
 				<div class="space-y-4 text-zinc-400 leading-relaxed">
 					<p>
-						We started in 2019 with one goal: produce work that’s both beautiful and useful. Today we’re a full-service studio that still operates with the same focus—clear process, thoughtful creative, and consistent delivery.
+						I started Full Scope Media to make production simpler for clients: one lead, a tight process, and deliverables that are as strategic as they are polished. I stay involved from kickoff to delivery so nothing gets lost between idea and execution.
 					</p>
 					<p>
-						We partner with teams at every stage—launching new products, refreshing brands, and capturing key moments. Every engagement teaches us something new and sharpens how we collaborate.
-					</p>
-					<p>
-						What stays constant is our commitment to organized projects, direct communication, and work that performs in the real world.
+						Whether you need a launch film, a refreshed photo library, or a site that finally tells your story, I keep projects organized, timelines honest, and communication straightforward.
 					</p>
 				</div>
 			</div>
@@ -129,14 +97,14 @@
 <section class="py-24 bg-black">
 	<Container>
 		<div class="text-center mb-16">
-			<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Our Values</h2>
+			<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">How I work</h2>
 			<p class="text-xl text-zinc-400 max-w-3xl mx-auto">
-				These principles guide how we plan, produce, and support every engagement.
+				These principles guide every engagement—from first call to final delivery.
 			</p>
 		</div>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-			{#each values as value (value.title)}
+			{#each principles as value (value.title)}
 				<Card class="text-center hover:shadow-lg transition-shadow duration-300 bg-zinc-900 border border-zinc-800">
 					<div class="space-y-4">
 						<div class="w-16 h-16 bg-zinc-800 rounded-full flex items-center justify-center mx-auto">
@@ -155,38 +123,48 @@
 <section class="py-24 bg-black">
 	<Container>
 		<div class="text-center mb-16">
-			<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Meet Our Team</h2>
+			<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Meet your partner</h2>
 			<p class="text-xl text-zinc-400 max-w-3xl mx-auto">
-				A nimble group of creatives, strategists, and technologists who stay hands-on from kickoff through delivery.
+				I stay hands-on from kickoff to delivery so you have one accountable lead for every project.
 			</p>
 		</div>
 
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-			{#each team as member (member.email)}
-				<Card class="text-center group hover:shadow-lg transition-all duration-300 bg-zinc-900 border border-zinc-800">
-					<div class="space-y-4">
-						<!-- Placeholder for team member photo -->
-						<div class="w-32 h-32 bg-zinc-800 rounded-full mx-auto flex items-center justify-center border border-zinc-700">
-							<span class="text-2xl font-bold text-[var(--color-primary)]">{member.name.split(' ').map(n => n[0]).join('')}</span>
-						</div>
-
-						<div class="space-y-2">
-							<h3 class="text-lg font-semibold text-white">{member.name}</h3>
-							<p class="text-[var(--color-primary)] font-medium">{member.role}</p>
-							<p class="text-zinc-400 text-sm leading-relaxed">{member.bio}</p>
-						</div>
-
-						<div class="flex justify-center space-x-3 pt-2">
-							<a href="https://www.linkedin.com" target="_blank" rel="noreferrer" class="text-zinc-500 hover:text-[var(--color-primary)] transition-colors">
-								<Linkedin size={20} />
-							</a>
-							<a href={`mailto:${member.email}`} class="text-zinc-500 hover:text-[var(--color-primary)] transition-colors">
-								<Mail size={20} />
-							</a>
-						</div>
+		<div class="max-w-3xl mx-auto">
+			<Card class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center bg-zinc-900 border border-zinc-800">
+				<div class="flex justify-center">
+					<div class="w-36 h-36 rounded-full overflow-hidden border border-zinc-700 bg-zinc-800">
+						<img
+							src={owner.image}
+							alt={`${owner.name} headshot`}
+							class="w-full h-full object-cover"
+							loading="lazy"
+							onerror={(event) => {
+								const target = event.target as HTMLImageElement | null;
+								if (target) {
+									target.src = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80';
+								}
+							}}
+						/>
 					</div>
-				</Card>
-			{/each}
+				</div>
+				<div class="md:col-span-2 space-y-3 text-center md:text-left">
+					<h3 class="text-2xl font-semibold text-white">{owner.name}</h3>
+					<p class="text-[var(--color-primary)] font-medium">{owner.title}</p>
+					<p class="text-zinc-400 leading-relaxed">{owner.bio}</p>
+					<div class="flex flex-wrap gap-4 text-sm justify-center md:justify-start text-zinc-300">
+						<span class="inline-flex items-center gap-2"><Mail size={16} class="text-[var(--color-primary)]" /> {owner.email}</span>
+						<span class="inline-flex items-center gap-2"><Phone size={16} class="text-[var(--color-primary)]" /> {owner.phone}</span>
+						<span class="inline-flex items-center gap-2"><MapPin size={16} class="text-[var(--color-primary)]" /> {owner.location}</span>
+						<button
+							type="button"
+							class="inline-flex items-center gap-2 text-[var(--color-primary)] hover:text-[var(--color-primary-strong)]"
+							onclick={() => window.open(owner.linkedin, '_blank', 'noopener')}
+						>
+							<Linkedin size={16} /> LinkedIn
+						</button>
+					</div>
+				</div>
+			</Card>
 		</div>
 	</Container>
 </section>
