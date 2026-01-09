@@ -88,9 +88,9 @@ gtag('config', '${gaId}');`}
 
 <style>
 	:global(:root) {
-		--color-background: #121212;
-		--color-text: #e0e0e0;
-		--color-primary: #ff8a33;
-		--color-primary-strong: #ff6f00;
+		--color-background: #0a0b0f;
+		--color-text: #f5f6f8;
+		--color-primary: #e7e9ef;
+		--color-primary-strong: #ff5f3b;
 	}
 </style>

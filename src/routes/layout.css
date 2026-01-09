@@ -7,16 +7,16 @@
 
 /* Color system */
 :root {
-	--color-bg: #000000;
-	--color-fg: #ffffff;
-	--color-muted: #a1a1aa;
-	--color-border: #27272a;
-	--color-primary: #ffb067; /* creamsicle */
-	--color-primary-strong: #ff8a33;
+	--color-bg: #0a0b0f;
+	--color-fg: #f5f6f8;
+	--color-muted: #aeb1bb;
+	--color-border: #1c1d22;
+	--color-primary: #e7e9ef; /* luxe silver */
+	--color-primary-strong: #ff5f3b; /* subtle red-orange accent */
 	--color-focus: var(--color-primary-strong);
-	--color-scroll-track: #18181b;
-	--color-scroll-thumb: #3f3f46;
-	--color-scroll-thumb-hover: #52525b;
+	--color-scroll-track: #111218;
+	--color-scroll-thumb: #2a2c34;
+	--color-scroll-thumb-hover: #343743;
 }
 
 body {
