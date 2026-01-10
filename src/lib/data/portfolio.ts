@@ -1,81 +1,109 @@
 import type { ComponentType } from 'svelte';
-import Play from 'lucide-svelte/icons/play';
-import ExternalLink from 'lucide-svelte/icons/external-link';
-import TrendingUp from 'lucide-svelte/icons/trending-up';
+import Camera from 'lucide-svelte/icons/camera';
+import Layers3 from 'lucide-svelte/icons/layers-3';
+import House from 'lucide-svelte/icons/house';
+import Building from 'lucide-svelte/icons/building-2';
+import Drone from 'lucide-svelte/icons/drone';
+import Image from 'lucide-svelte/icons/image';
+import Ruler from 'lucide-svelte/icons/ruler';
+import User from 'lucide-svelte/icons/user';
 
-export type PortfolioCategory = 'video' | 'photography' | 'marketing';
+export type PortfolioCategory =
+	| '3d-tours'
+	| 'interior'
+	| 'exterior'
+	| 'drone'
+	| 'virtual-staging'
+	| 'floorplans'
+	| 'portraits';
 
 export const categories: { id: 'all' | PortfolioCategory; name: string; icon: ComponentType }[] = [
-	{ id: 'all', name: 'All Work', icon: ExternalLink },
-	{ id: 'video', name: 'Video Production', icon: Play },
-	{ id: 'photography', name: 'Photography', icon: ExternalLink },
-	{ id: 'marketing', name: 'Digital Marketing', icon: TrendingUp }
+	{ id: 'all', name: 'All Work', icon: Layers3 },
+	{ id: '3d-tours', name: '3D Tours', icon: Layers3 },
+	{ id: 'interior', name: 'Interior Photography', icon: House },
+	{ id: 'exterior', name: 'Exterior Photography', icon: Building },
+	{ id: 'drone', name: 'Drone & Aerial', icon: Drone },
+	{ id: 'virtual-staging', name: 'Virtual Staging', icon: Image },
+	{ id: 'floorplans', name: 'Floorplans (Cubicasa)', icon: Ruler },
+	{ id: 'portraits', name: 'Portraits & Headshots', icon: User }
 ];
 
 export const portfolioItems = [
 	{
 		id: 1,
-		title: 'Tech Startup Brand Video',
-		category: 'video' as PortfolioCategory,
-		description:
-			'A compelling brand story video that helped a tech startup secure Series A funding and establish market presence.',
-		image:
-			'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-		tags: ['Brand Video', 'Startup', 'Technology'],
-		date: '2024-01-15',
-		client: 'TechFlow Solutions',
-		results: '300% increase in investor inquiries'
+		title: 'Downtown Loft 3D Tour',
+		category: '3d-tours' as PortfolioCategory,
+		description: 'Matterport walkthrough highlighting natural light, flow, and key amenities.',
+		image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80',
+		tags: ['Matterport', 'Zillow 3D Home', 'Walkthrough'],
+		date: '2024-02-12',
+		client: 'Loft Collective',
+		results: 'Average view time +48%'
 	},
 	{
 		id: 2,
-		title: 'Restaurant Photography Series',
-		category: 'photography' as PortfolioCategory,
-		description:
-			'Mouth-watering food photography that transformed online presence and drove significant order growth.',
-		image:
-			'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-		tags: ['Food Photography', 'Restaurant', 'Commercial'],
-		date: '2024-02-20',
-		client: 'Bella Vista Restaurant',
-		results: '40% increase in online orders'
+		title: 'Warm Interior Set',
+		category: 'interior' as PortfolioCategory,
+		description: 'Clean, true-to-color interiors with verticals straight and windows balanced.',
+		image: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80',
+		tags: ['Interior', 'Verticals', 'Natural Light'],
+		date: '2024-03-05',
+		client: 'Main Street Realty',
+		results: 'Listing under contract in 5 days'
 	},
 	{
 		id: 3,
-		title: 'Social Media Campaign',
-		category: 'marketing' as PortfolioCategory,
-		description:
-			'Multi-platform digital campaign that achieved exceptional reach and engagement across all demographics.',
-		image:
-			'https://images.unsplash.com/photo-1611926653458-09294b3142bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-		tags: ['Social Media', 'Campaign', 'Digital Marketing'],
-		date: '2024-02-05',
-		client: 'Fitness Plus',
-		results: '2M+ impressions, 15% engagement'
+		title: 'Curb Appeal Exterior',
+		category: 'exterior' as PortfolioCategory,
+		description: 'Twilight exterior with sky replacement and lawn touch-ups for MLS.',
+		image: 'https://images.unsplash.com/photo-1505693415763-3ed5e04ba4cd?auto=format&fit=crop&w=1200&q=80',
+		tags: ['Twilight', 'Sky Replacement', 'MLS Safe'],
+		date: '2024-01-18',
+		client: 'Pine Ridge Homes',
+		results: 'Showings up 30% week one'
 	},
 	{
 		id: 4,
-		title: 'Corporate Event Coverage',
-		category: 'video' as PortfolioCategory,
-		description:
-			'Professional event documentation capturing key moments and presentations for Fortune 500 annual conference.',
-		image:
-			'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-		tags: ['Event Video', 'Corporate', 'Live Coverage'],
-		date: '2024-01-30',
-		client: 'Global Industries',
-		results: 'Used in 12 international markets'
+		title: 'Golf Course Drone Pass',
+		category: 'drone' as PortfolioCategory,
+		description: 'FAA-compliant aerials capturing lot lines, amenities, and hero shots.',
+		image: 'https://images.unsplash.com/photo-1505691938895-1758d7feb512?auto=format&fit=crop&w=1200&q=80',
+		tags: ['Drone', 'FAA', 'Lot Coverage'],
+		date: '2024-04-02',
+		client: 'Fairway Estates',
+		results: 'Used across social + print'
 	},
 	{
 		id: 5,
-		title: 'Product Photography Collection',
-		category: 'photography' as PortfolioCategory,
-		description:
-			'High-end product photography showcasing luxury timepieces with precision lighting and composition.',
-		image:
-			'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-		tags: ['Product Photography', 'Luxury', 'Catalog'],
-		date: '2024-03-25',
-		client: 'Timepiece Luxury',
-		results: '50+ product shots delivered'
+		title: 'Virtual Staging Set',
+		category: 'virtual-staging' as PortfolioCategory,
+		description: 'Minimal staging for a studio—light furniture and art to guide scale.',
+		image: 'https://images.unsplash.com/photo-1505691938895-1758d7feb510?auto=format&fit=crop&w=1200&q=80',
+		tags: ['Virtual Staging', 'Style Guides', 'Fast Turn'],
+		date: '2024-03-22',
+		client: 'Studio Collective',
+		results: 'Bounce rate down 22%'
+	},
+	{
+		id: 6,
+		title: 'Cubicasa Floorplan Pack',
+		category: 'floorplans' as PortfolioCategory,
+		description: 'Cubicasa scan with branded floorplans and room dimensions.',
+		image: 'https://images.unsplash.com/photo-1505691938895-1758d7feb513?auto=format&fit=crop&w=1200&q=80',
+		tags: ['Cubicasa', 'Dimensions', 'Branded'],
+		date: '2024-02-28',
+		client: 'Eastside Realty',
+		results: 'Attachment download rate +60%'
+	},
+	{
+		id: 7,
+		title: 'Portraits for Leadership Team',
+		category: 'portraits' as PortfolioCategory,
+		description: 'Clean studio headshots plus environmental portraits for LinkedIn and press.',
+		image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80',
+		tags: ['Headshots', 'LinkedIn', 'Studio'],
+		date: '2024-04-12',
+		client: 'Northwood Partners',
+		results: 'Brand kit refreshed in 48 hours'
 	}
 ];

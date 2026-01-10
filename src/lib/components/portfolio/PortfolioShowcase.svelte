@@ -9,25 +9,7 @@
 	import Search from 'lucide-svelte/icons/search';
 	import { resolve } from '$app/paths';
 	import { cn } from '$lib/utils';
-
-	interface PortfolioItem {
-		id: number;
-		title: string;
-		category: string;
-		client: string;
-		description: string;
-		image: string;
-		video?: string;
-		tags: string[];
-		date: string;
-		metrics?: {
-			label: string;
-			value: string;
-		}[];
-		featured?: boolean;
-		award?: string;
-		results?: string;
-	}
+	import { categories, portfolioItems } from '$lib/data/portfolio';
 
 	let { 
 		title = "Our Portfolio",
@@ -38,107 +20,25 @@
 	} = $props();
 
 	let viewMode = $state<'carousel' | 'grid'>('carousel');
-	let selectedCategory = $state('all');
+	let selectedCategory = $state<'all' | typeof categories[number]['id']>('all');
 	let searchQuery = $state('');
 
-	// Sample portfolio data - replace with real data
-	const portfolioItems: PortfolioItem[] = [
-		{
-			id: 1,
-			title: 'Tech Startup Brand Revolution',
-			category: 'Video Production',
-			client: 'TechFlow Solutions',
-			description: 'A comprehensive brand video campaign that helped a tech startup secure $2M in Series A funding through compelling storytelling and professional production.',
-			image: '/portfolio/tech-startup.jpg',
-			video: '/portfolio/tech-startup.mp4',
-			tags: ['Brand Video', 'Startup', 'Technology', 'Funding'],
-			date: '2024-01-15',
-			featured: true,
-			award: 'Best Brand Video 2024',
-			results: '200% increase in investor inquiries',
-			metrics: [
-				{ label: 'Views', value: '50K+' },
-				{ label: 'Conversion', value: '15%' },
-				{ label: 'Funding Raised', value: '$2M' }
-			]
-		},
-		{
-			id: 2,
-			title: 'Luxury Restaurant Photography',
-			category: 'Photography',
-			client: 'Bella Vista Restaurant',
-			description: 'Mouth-watering food photography and ambiance shots that transformed the restaurant\'s online presence and increased reservations by 40%.',
-			image: '/portfolio/restaurant.jpg',
-			tags: ['Food Photography', 'Restaurant', 'Commercial', 'Lifestyle'],
-			date: '2024-02-20',
-			featured: true,
-			results: '40% increase in online orders',
-			metrics: [
-				{ label: 'Orders Increase', value: '40%' },
-				{ label: 'Social Engagement', value: '300%' },
-				{ label: 'New Customers', value: '25%' }
-			]
-		},
-		{
-			id: 3,
-			title: 'Fitness Brand Social Campaign',
-			category: 'Digital Marketing',
-			client: 'Fitness Plus',
-			description: 'Multi-platform social media campaign that generated 2M+ impressions and achieved a 15% engagement rate across all platforms.',
-			image: '/portfolio/fitness-campaign.jpg',
-			tags: ['Social Media', 'Campaign', 'Digital Marketing', 'Fitness'],
-			date: '2024-02-05',
-			results: '2M+ impressions, 15% engagement',
-			metrics: [
-				{ label: 'Impressions', value: '2M+' },
-				{ label: 'Engagement', value: '15%' },
-				{ label: 'New Followers', value: '10K+' }
-			]
-		},
-		{
-			id: 4,
-			title: 'Corporate Event Documentation',
-			category: 'Video Production',
-			client: 'Global Industries',
-			description: 'Professional event coverage for Fortune 500 company annual conference, including live streaming and post-event highlight reel.',
-			image: '/portfolio/corporate-event.jpg',
-			video: '/portfolio/corporate-event.mp4',
-			tags: ['Event Video', 'Corporate', 'Live Coverage', 'Fortune 500'],
-			date: '2024-01-30',
-			results: 'Successful live stream to 5K+ viewers',
-			metrics: [
-				{ label: 'Live Viewers', value: '5K+' },
-				{ label: 'Video Views', value: '25K+' },
-				{ label: 'Client Satisfaction', value: '5/5' }
-			]
-		},
-		{
-			id: 5,
-			title: 'Luxury Watch Product Catalog',
-			category: 'Photography',
-			client: 'Timepiece Luxury',
-			description: 'High-end product photography for luxury watch brand catalog, featuring macro details and lifestyle shots that elevated brand perception.',
-			image: '/portfolio/luxury-watches.jpg',
-			tags: ['Product Photography', 'Luxury', 'Catalog', 'Macro'],
-			date: '2024-03-25',
-			results: '30% increase in online sales',
-			metrics: [
-				{ label: 'Sales Increase', value: '30%' },
-				{ label: 'Catalog Downloads', value: '15K+' },
-				{ label: 'Brand Perception', value: '+25%' }
-			]
-		}
-	];
-
-	const categories = [
-		{ id: 'all', name: 'All Projects', count: portfolioItems.length },
-		{ id: 'Video Production', name: 'Video Production', count: portfolioItems.filter(item => item.category === 'Video Production').length },
-		{ id: 'Photography', name: 'Photography', count: portfolioItems.filter(item => item.category === 'Photography').length },
-		{ id: 'Digital Marketing', name: 'Digital Marketing', count: portfolioItems.filter(item => item.category === 'Digital Marketing').length }
-	];
+	const categoryCounts = $derived(
+		categories.map((cat) => ({
+			...cat,
+			count:
+				cat.id === 'all'
+					? portfolioItems.length
+					: portfolioItems.filter((item) => item.category === cat.id).length
+		}))
+	);
 
 	// Featured items for carousel
-	const featuredItems = $derived(portfolioItems.filter((item) => item.featured));
+	const featuredItems = $derived(portfolioItems.slice(0, 8));
+	const categoryLinks = categoryCounts.filter((c) => c.id !== 'all').map((c) => ({
+		...c,
+		href: resolve(`/portfolio/${c.id}`)
+	}));
 	
 	// Filtered items for grid
 	const filteredItems = $derived(portfolioItems.filter((item) => {
@@ -157,6 +57,27 @@
 		<div class="text-center mb-16">
 			<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">{title}</h2>
 			<p class="text-xl text-zinc-400 max-w-3xl mx-auto">{subtitle}</p>
+		</div>
+
+		<!-- All-items Carousel -->
+		<div class="mb-16">
+			<h3 class="text-2xl font-bold text-white mb-6 text-center">Featured Highlights</h3>
+			<PortfolioCarousel items={featuredItems} />
+		</div>
+
+		<!-- Quick category links -->
+		<div class="flex flex-wrap justify-center gap-3 mb-12">
+			{#each categoryLinks as cat (cat.id)}
+				{@const Icon = cat.icon}
+				<a
+					href={cat.href}
+					class="flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-800 bg-zinc-900 hover:border-[var(--color-primary)]/50 hover:text-[var(--color-primary)] transition-colors text-sm"
+				>
+					<Icon size={14} />
+					<span>{cat.name}</span>
+					<span class="text-xs text-zinc-500">({cat.count})</span>
+				</a>
+			{/each}
 		</div>
 
 		<!-- Featured Carousel -->
@@ -202,7 +123,7 @@
 					<!-- Category Filters -->
 					{#if showFilters}
 						<div class="flex flex-wrap gap-3">
-							{#each categories as category}
+							{#each categoryCounts as category (category.id)}
 								<button
 									onclick={() => selectedCategory = category.id}
 									class={cn(

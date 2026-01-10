@@ -28,6 +28,12 @@
 			features: ['Corporate & Creative Portraits', 'LinkedIn & Passport Crops', 'Studio or On-location', 'Light Retouching Included']
 		}
 	];
+
+	const rows = services.reduce((acc, service, idx) => {
+		if (idx % 2 === 0) acc.push([service]);
+		else acc[acc.length - 1].push(service);
+		return acc;
+	}, [] as typeof services[]);
 </script>
 
 <section class="py-24 bg-black">
@@ -41,40 +47,49 @@
 			</p>
 		</div>
 
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-			{#each services as service (service.title)}
-				<Card class="group bg-zinc-900 border border-zinc-800 hover:border-[var(--color-primary)]/50 transition-all duration-300 hover:-translate-y-1">
-					<div class="space-y-4">
-						<div class="flex items-center space-x-4">
-							<div class="w-12 h-12 bg-zinc-800 rounded-lg flex items-center justify-center group-hover:bg-[var(--color-primary)]/10 transition-colors">
-								<service.icon size={24} class="text-[var(--color-primary)]" />
-							</div>
-							<h3 class="text-xl font-semibold text-white">{service.title}</h3>
+		<div class="inline-table table-auto border-separate border-spacing-6 mx-auto mb-12">
+			{#each rows as row (row[0].title)}
+				<div class="table-row">
+					{#each row as service (service.title)}
+						<div class="table-cell align-top">
+							<Card class="group bg-zinc-900 border border-zinc-800 hover:border-[var(--color-primary)]/50 transition-all duration-300 hover:-translate-y-1 w-full">
+								<div class="space-y-4">
+									<div class="flex items-center space-x-4">
+										<div class="w-12 h-12 bg-zinc-800 rounded-lg flex items-center justify-center group-hover:bg-[var(--color-primary)]/10 transition-colors">
+											<service.icon size={24} class="text-[var(--color-primary)]" />
+										</div>
+										<h3 class="text-xl font-semibold text-white">{service.title}</h3>
+									</div>
+									
+									<p class="text-zinc-400 leading-relaxed">
+										{service.description}
+									</p>
+									
+									<ul class="space-y-2">
+										{#each service.features as feature (feature)}
+											<li class="flex items-center space-x-2 text-sm text-zinc-500">
+												<div class="w-1.5 h-1.5 bg-[var(--color-primary)] rounded-full"></div>
+												<span>{feature}</span>
+											</li>
+										{/each}
+									</ul>
+									
+									<div class="pt-4">
+										<Button variant="ghost" size="sm" class="text-[var(--color-primary)] hover:text-[var(--color-primary-strong)] p-0 hover:bg-transparent">
+											<a href={resolve('/services')} class="flex items-center space-x-1">
+												<span>Learn More</span>
+												<ArrowRight size={16} />
+											</a>
+										</Button>
+									</div>
+								</div>
+							</Card>
 						</div>
-						
-						<p class="text-zinc-400 leading-relaxed">
-							{service.description}
-						</p>
-						
-						<ul class="space-y-2">
-							{#each service.features as feature (feature)}
-								<li class="flex items-center space-x-2 text-sm text-zinc-500">
-									<div class="w-1.5 h-1.5 bg-[var(--color-primary)] rounded-full"></div>
-									<span>{feature}</span>
-								</li>
-							{/each}
-						</ul>
-						
-						<div class="pt-4">
-							<Button variant="ghost" size="sm" class="text-[var(--color-primary)] hover:text-[var(--color-primary-strong)] p-0 hover:bg-transparent">
-								<a href={resolve('/services')} class="flex items-center space-x-1">
-									<span>Learn More</span>
-									<ArrowRight size={16} />
-								</a>
-							</Button>
-						</div>
-					</div>
-				</Card>
+					{/each}
+					{#if row.length === 1}
+						<div class="table-cell"></div>
+					{/if}
+				</div>
 			{/each}
 		</div>
 
