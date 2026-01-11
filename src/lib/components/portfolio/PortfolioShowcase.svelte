@@ -35,10 +35,7 @@
 
 	// Featured items for carousel
 	const featuredItems = $derived(portfolioItems.slice(0, 8));
-	const categoryLinks = categoryCounts.filter((c) => c.id !== 'all').map((c) => ({
-		...c,
-		href: resolve(`/portfolio/${c.id}`)
-	}));
+	const categoryLinks = $derived(categoryCounts.filter((c) => c.id !== 'all'));
 	
 	// Filtered items for grid
 	const filteredItems = $derived(portfolioItems.filter((item) => {
@@ -66,16 +63,16 @@
 		</div>
 
 		<!-- Quick category links -->
-		<div class="flex flex-wrap justify-center gap-3 mb-12">
-			{#each categoryLinks as cat (cat.id)}
-				{@const Icon = cat.icon}
-				<a
-					href={cat.href}
-					class="flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-800 bg-zinc-900 hover:border-[var(--color-primary)]/50 hover:text-[var(--color-primary)] transition-colors text-sm"
-				>
-					<Icon size={14} />
-					<span>{cat.name}</span>
-					<span class="text-xs text-zinc-500">({cat.count})</span>
+			<div class="flex flex-wrap justify-center gap-3 mb-12">
+				{#each categoryLinks as cat (cat.id)}
+					{@const Icon = cat.icon}
+					<a
+						href={resolve(`/portfolio/${cat.id}`)}
+						class="flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-800 bg-zinc-900 hover:border-[var(--color-primary)]/50 hover:text-[var(--color-primary)] transition-colors text-sm"
+					>
+						<Icon size={14} />
+						<span>{cat.name}</span>
+						<span class="text-xs text-zinc-500">({cat.count})</span>
 				</a>
 			{/each}
 		</div>
