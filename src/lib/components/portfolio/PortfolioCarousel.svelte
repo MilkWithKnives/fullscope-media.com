@@ -198,7 +198,18 @@
 		}
 	}
 	.nav-btn {
-		@apply px-3 py-1 rounded-full bg-zinc-900 border border-zinc-700 text-zinc-200 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors;
+		padding: 0.25rem 0.75rem;
+		border-radius: 9999px;
+		background: #18181b;
+		border: 1px solid #3f3f46;
+		color: #e5e7eb;
+		transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+	}
+	.nav-btn:hover,
+	.nav-btn:focus-visible {
+		color: var(--color-primary);
+		border-color: var(--color-primary);
+		background: #111114;
 	}
 	.dot-btn {
 		height: 10px;
