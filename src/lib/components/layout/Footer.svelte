@@ -18,7 +18,7 @@
 				<!-- Company Info -->
 				<div class="space-y-3">
 					<a href={resolve('/')} class="inline-flex items-center gap-3">
-						<img src="/logo.png" alt="Full Scope Media logo" class="h-10 w-auto" loading="lazy" />
+						<img src="/images/branding/logo.svg" alt="Full Scope Media logo" class="h-10 w-auto" loading="lazy" />
 						<span class="text-lg font-semibold text-[var(--color-primary)]">Full Scope Media</span>
 					</a>
 					<p class="text-sm text-zinc-400 leading-relaxed">

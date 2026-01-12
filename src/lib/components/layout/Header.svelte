@@ -26,7 +26,7 @@
 			<!-- Logo -->
 			<div class="flex-shrink-0">
 				<a href={resolve('/')} class="flex items-center gap-2">
-					<img src="/logo.png" alt="Full Scope Media logo" class="h-10 w-auto" loading="lazy" />
+					<img src="/images/branding/logo.svg" alt="Full Scope Media logo" class="h-10 w-auto" loading="lazy" />
 					<span class="hidden sm:inline text-xl font-bold text-[var(--color-primary)]">Full Scope Media</span>
 				</a>
 			</div>
