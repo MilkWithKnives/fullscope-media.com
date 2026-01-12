@@ -9,18 +9,12 @@
 	import Phone from 'lucide-svelte/icons/phone';
 	import MapPin from 'lucide-svelte/icons/map-pin';
 
-	const quickLinks = [
-		{ name: 'Services', href: '/services' },
-		{ name: 'Portfolio', href: '/portfolio' },
-		{ name: 'About', href: '/about' },
-		{ name: 'Contact', href: '/contact' }
-	];
 </script>
 
 <footer class="bg-black text-white border-t border-zinc-800">
 	<Container>
 		<div class="py-4">
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
 				<!-- Company Info -->
 				<div class="space-y-3">
 					<a href={resolve('/')} class="inline-flex items-center gap-3">
@@ -68,20 +62,6 @@
 							<Linkedin size={18} />
 						</a>
 					</div>
-				</div>
-
-				<!-- Quick Links -->
-				<div class="space-y-2">
-					<h4 class="text-sm font-semibold text-white">Quick Links</h4>
-					<ul class="grid grid-cols-2 gap-2 text-sm">
-						{#each quickLinks as link (link.name)}
-							<li>
-								<a href={resolve(link.href)} class="text-zinc-400 hover:text-[var(--color-primary)] transition-colors">
-									{link.name}
-								</a>
-							</li>
-						{/each}
-					</ul>
 				</div>
 
 				<!-- Contact Info -->
