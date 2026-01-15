@@ -1,13 +1,13 @@
 import { Resend } from 'resend';
 import nodemailer from 'nodemailer';
-import { 
-	RESEND_API_KEY, 
-	SMTP_HOST, 
-	SMTP_PORT, 
-	SMTP_USER, 
-	SMTP_PASS,
+import {
 	BUSINESS_EMAIL,
-	BUSINESS_PHONE 
+	BUSINESS_PHONE,
+	RESEND_API_KEY,
+	SMTP_HOST,
+	SMTP_PASS,
+	SMTP_PORT,
+	SMTP_USER
 } from '$env/static/private';
 
 // Initialize email service
@@ -20,15 +20,21 @@ if (RESEND_API_KEY) {
 	resend = new Resend(RESEND_API_KEY);
 } else if (SMTP_HOST && SMTP_USER && SMTP_PASS) {
 	emailService = 'smtp';
-	transporter = nodemailer.createTransport({
-		host: SMTP_HOST,
-		port: parseInt(SMTP_PORT || '587'),
-		secure: false,
-		auth: {
-			user: SMTP_USER,
-			pass: SMTP_PASS
+	const port = parseInt(SMTP_PORT || '587', 10);
+	transporter = nodemailer.createTransport(
+		{
+			host: SMTP_HOST,
+			port,
+			secure: port === 465, // TLS on 465
+			auth: {
+				user: SMTP_USER,
+				pass: SMTP_PASS
+			}
+		},
+		{
+			from: BUSINESS_EMAIL || 'contact@fullscopemedia.com'
 		}
-	});
+	);
 }
 
 export interface EmailData {
