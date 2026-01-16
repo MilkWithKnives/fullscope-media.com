@@ -1,38 +1,30 @@
 import { Resend } from 'resend';
 import nodemailer from 'nodemailer';
-import {
-	BUSINESS_EMAIL,
-	BUSINESS_PHONE,
-	RESEND_API_KEY,
-	SMTP_HOST,
-	SMTP_PASS,
-	SMTP_PORT,
-	SMTP_USER
-} from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 // Initialize email service
 let emailService: 'resend' | 'smtp' | null = null;
 let resend: Resend | null = null;
 let transporter: nodemailer.Transporter | null = null;
 
-if (RESEND_API_KEY) {
+if (env.RESEND_API_KEY) {
 	emailService = 'resend';
-	resend = new Resend(RESEND_API_KEY);
-} else if (SMTP_HOST && SMTP_USER && SMTP_PASS) {
+	resend = new Resend(env.RESEND_API_KEY);
+} else if (env.SMTP_HOST && env.SMTP_USER && env.SMTP_PASS) {
 	emailService = 'smtp';
-	const port = parseInt(SMTP_PORT || '587', 10);
+	const port = parseInt(env.SMTP_PORT || '587', 10);
 	transporter = nodemailer.createTransport(
 		{
-			host: SMTP_HOST,
+			host: env.SMTP_HOST,
 			port,
 			secure: port === 465, // TLS on 465
 			auth: {
-				user: SMTP_USER,
-				pass: SMTP_PASS
+				user: env.SMTP_USER,
+				pass: env.SMTP_PASS
 			}
 		},
 		{
-			from: BUSINESS_EMAIL || 'contact@fullscopemedia.com'
+			from: env.BUSINESS_EMAIL || 'contact@fullscopemedia.com'
 		}
 	);
 }
@@ -52,7 +44,7 @@ export async function sendEmail(emailData: EmailData): Promise<boolean> {
 	try {
 		if (emailService === 'resend' && resend) {
 			await resend.emails.send({
-				from: BUSINESS_EMAIL || 'contact@fullscopemedia.com',
+				from: env.BUSINESS_EMAIL || 'contact@fullscopemedia.com',
 				to: emailData.to,
 				subject: emailData.subject,
 				html: emailData.html,
@@ -61,7 +53,7 @@ export async function sendEmail(emailData: EmailData): Promise<boolean> {
 			return true;
 		} else if (emailService === 'smtp' && transporter) {
 			await transporter.sendMail({
-				from: BUSINESS_EMAIL || 'contact@fullscopemedia.com',
+				from: env.BUSINESS_EMAIL || 'contact@fullscopemedia.com',
 				to: emailData.to,
 				subject: emailData.subject,
 				html: emailData.html,
@@ -136,8 +128,8 @@ export function generateBookingConfirmationEmail(booking: {
 				
 				<p>If you need to reschedule or have any questions, please contact us:</p>
 				<p>
-					📧 Email: ${BUSINESS_EMAIL || 'contact@fullscopemedia.com'}<br>
-					📞 Phone: ${BUSINESS_PHONE || '(517) 220-2934'}
+					📧 Email: ${env.BUSINESS_EMAIL || 'contact@fullscopemedia.com'}<br>
+					📞 Phone: ${env.BUSINESS_PHONE || '(517) 220-2934'}
 				</p>
 				
 				<p>We look forward to working with you!</p>

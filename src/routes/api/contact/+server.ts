@@ -2,7 +2,7 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { supabase } from '$lib/supabase';
 import { sendEmail } from '$lib/utils/email';
-import { BUSINESS_EMAIL } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 export const POST: RequestHandler = async ({ request }) => {
 	try {
@@ -22,25 +22,41 @@ export const POST: RequestHandler = async ({ request }) => {
 			return json({ error: 'Invalid email format' }, { status: 400 });
 		}
 
-		// Insert contact submission into database
-		const { data: submission, error: dbError } = await supabase
-			.from('contact_submissions')
-			.insert({
-				name: contactData.name,
-				email: contactData.email,
-				company: contactData.company,
-				service: contactData.service,
-				budget: contactData.budget,
-				message: contactData.message,
-				timeline: contactData.timeline,
-				status: 'new'
-			})
-			.select()
-			.single();
+		// Insert contact submission into database (best effort)
+		let submission = {
+			name: contactData.name,
+			email: contactData.email,
+			company: contactData.company,
+			service: contactData.service,
+			budget: contactData.budget,
+			message: contactData.message,
+			timeline: contactData.timeline,
+			created_at: new Date().toISOString()
+		};
 
-		if (dbError) {
-			console.error('Database error:', dbError);
-			return json({ error: 'Failed to submit contact form' }, { status: 500 });
+		try {
+			const { data: inserted, error: dbError } = await supabase
+				.from('contact_submissions')
+				.insert({
+					name: contactData.name,
+					email: contactData.email,
+					company: contactData.company,
+					service: contactData.service,
+					budget: contactData.budget,
+					message: contactData.message,
+					timeline: contactData.timeline,
+					status: 'new'
+				})
+				.select()
+				.single();
+
+			if (dbError) {
+				console.error('Database error (continuing without DB save):', dbError);
+			} else if (inserted) {
+				submission = inserted;
+			}
+		} catch (dbErr) {
+			console.error('Database exception (continuing without DB save):', dbErr);
 		}
 
 		// Send notification email to business owner
@@ -123,7 +139,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 		// Send emails
 		const ownerEmailSent = await sendEmail({
-			to: BUSINESS_EMAIL || 'contact@fullscopemedia.com',
+			to: env.BUSINESS_EMAIL || 'contact@fullscopemedia.com',
 			subject: `New Contact: ${submission.service} - ${submission.name}`,
 			html: ownerEmailHtml
 		});
