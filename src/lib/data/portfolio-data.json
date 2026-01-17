@@ -47,7 +47,7 @@
   {
     "id": 5,
     "title": "Virtual Staging Set",
-    "category": "virtual-staging",
+    "category": "side-projects",
     "description": "Minimal staging for a studio—light furniture and art to guide scale.",
     "image": "/images/portfolio/interiors/24-web-or-mls-RGC08129.jpg",
     "tags": ["Virtual Staging", "Style Guides", "Fast Turn"],
@@ -58,7 +58,7 @@
   {
     "id": 6,
     "title": "Cubicasa Floorplan Pack",
-    "category": "floorplans",
+    "category": "side-projects",
     "description": "Cubicasa scan with branded floorplans and room dimensions.",
     "image": "/images/portfolio/interiors/7-web-or-mls-RGC08685.jpg",
     "tags": ["Cubicasa", "Dimensions", "Branded"],

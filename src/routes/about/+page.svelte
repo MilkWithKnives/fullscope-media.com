@@ -14,7 +14,7 @@
 	const owner = {
 		name: 'Ryan Champion',
 		title: 'Owner & Lead Photographer',
-		image: '/images/headshot.jpg',
+		image: '/images/about/ryan-headshot.jpg',
 		bio: 'Real estate and portrait photographer based in East Lansing, MI. I handle strategy, shooting, and delivery myself so every property and portrait feels intentional—and you always know who’s accountable.',
 		email: 'ryan@fullscope-media.com',
 		phone: '(517) 220-2934',
@@ -72,13 +72,16 @@
 					<h2 class="text-3xl md:text-4xl font-bold text-white">Our Story</h2>
 					<div class="space-y-4 text-zinc-400 leading-relaxed">
 						<p>
-							I started Full Scope Media to make production simpler: one lead, a tight process, and deliverables that are as strategic as they are polished. Most of my work is for real estate agents who need on-time media that helps listings stand out in a crowded MLS feed.
+							I’m Ryan, a real estate and portrait photographer based in East Lansing, MI, and the owner of Full Scope Media. This site brings together two things I care about: a studio you can actually create in, and a portfolio that shows what the right visuals can do for a listing or a brand.
 						</p>
 						<p>
-							From interiors, exteriors, and 3D tours to portrait sessions, the goal is straightforward: accurate color, clean lighting, and images that feel intentional, not generic. The studio is set up like a lived-in space—comfortable furniture, artwork, and room to move—so it works for headshots, brand sessions, and creatives renting by the hour.
+							Most of my work is for real estate agents who need consistent, on-time media that makes their listings stand out in a crowded MLS feed. From interior and exterior photography to video and 3D tours, the goal is simple: make every property look its best while keeping the process straightforward for you and your clients.
 						</p>
 						<p>
-							Outside of shoots, I’m usually buried in Motown and code. Fourteen months of self-taught coding sharpened how I organize projects and sweat small details. Before this, running busy restaurant operations hard-wired communication, reliability, and handling pressure—habits I bring to every shoot, delivery, and studio booking.
+							The studio is designed more like a lived-in space than a blank white box—comfortable furniture, artwork, and room to move—so it works just as well for headshots and brand sessions as it does for creatives renting it by the hour. Whether we’re shooting on location or in the studio, the focus is on clean lighting, accurate color, and images that feel intentional, not generic.
+						</p>
+						<p>
+							Outside of shooting, a lot of my time goes into two things that quietly shape my work: Motown music and coding. Motown is usually playing in the background while editing, and about 14 months of teaching myself to code has made me increasingly focused on small details, systems, and using the right tools to keep projects organized and on schedule. Before photography became the full-time focus, I spent several years running busy restaurant operations and managing large teams on game days. That experience hard-wired a respect for communication, reliability, and handling pressure—habits that now carry over into every shoot, delivery, and studio booking.
 						</p>
 					</div>
 				</div>
@@ -132,29 +135,30 @@
 			</p>
 		</div>
 
-		<div class="max-w-3xl mx-auto">
-			<Card class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center bg-zinc-900 border border-zinc-800">
-				<div class="flex justify-center">
-					<div class="w-36 h-36 rounded-full overflow-hidden border border-zinc-700 bg-zinc-800">
-						<img
-							src={owner.image}
-							alt={`${owner.name} headshot`}
-							class="w-full h-full object-cover"
-							loading="lazy"
-							onerror={(event) => {
-								const target = event.target as HTMLImageElement | null;
-								if (target) {
-									target.src = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80';
-								}
-							}}
-						/>
-					</div>
+		<div class="max-w-5xl mx-auto">
+			<Card class="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-zinc-900 border border-zinc-800 overflow-hidden">
+				<div class="relative h-80 lg:h-full">
+					<img
+						src={owner.image}
+						alt={`${owner.name} headshot`}
+						class="w-full h-full object-cover"
+						loading="lazy"
+						onerror={(event) => {
+							const target = event.target as HTMLImageElement | null;
+							if (target) {
+								target.src = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80';
+							}
+						}}
+					/>
+					<div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent lg:hidden"></div>
 				</div>
-				<div class="md:col-span-2 space-y-3 text-center md:text-left">
-					<h3 class="text-2xl font-semibold text-white">{owner.name}</h3>
-					<p class="text-[var(--color-primary)] font-medium">{owner.title}</p>
-					<p class="text-zinc-400 leading-relaxed">{owner.bio}</p>
-					<div class="flex flex-wrap gap-4 text-sm justify-center md:justify-start text-zinc-300">
+				<div class="p-8 space-y-4 flex flex-col justify-center">
+					<div>
+						<h3 class="text-3xl font-semibold text-white">{owner.name}</h3>
+						<p class="text-[var(--color-primary)] font-medium">{owner.title}</p>
+					</div>
+					<p class="text-zinc-300 leading-relaxed">{owner.bio}</p>
+					<div class="flex flex-wrap gap-3 text-sm text-zinc-200">
 						<span class="inline-flex items-center gap-2"><Mail size={16} class="text-[var(--color-primary)]" /> {owner.email}</span>
 						<span class="inline-flex items-center gap-2"><Phone size={16} class="text-[var(--color-primary)]" /> {owner.phone}</span>
 						<span class="inline-flex items-center gap-2"><MapPin size={16} class="text-[var(--color-primary)]" /> {owner.location}</span>
