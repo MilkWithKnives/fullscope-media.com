@@ -96,6 +96,7 @@
     "acuity": "^0.0.0",
     "clsx": "^2.1.1",
     "dependencies": "^0.0.1",
+    "flowbite-svelte": "^0.46.2",
     "embla-carousel-svelte": "^8.6.0",
     "flowbite": "^4.0.1",
     "ical-generator": "^10.0.0",

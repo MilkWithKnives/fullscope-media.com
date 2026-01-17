@@ -1,5 +1,4 @@
 <script lang="ts">
-	import 'flowbite-svelte/dist/flowbite.css';
 	import { Carousel, Controls, CarouselIndicators, Thumbnails } from 'flowbite-svelte';
 	import Container from '$lib/components/ui/Container.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
