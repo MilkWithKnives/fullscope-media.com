@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Carousel, Controls, CarouselIndicators, Thumbnails } from 'flowbite-svelte';
+	import { Carousel, CarouselIndicators, CarouselCaptions, Thumbnails } from 'flowbite-svelte';
 	import Container from '$lib/components/ui/Container.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 	import Calendar from 'lucide-svelte/icons/calendar';
@@ -41,7 +41,7 @@
 		{#if images.length}
 			<div class="max-w-5xl mx-auto mb-12 space-y-4">
 				<Carousel {images} bind:index>
-					<Controls />
+					<CarouselCaptions />
 					<CarouselIndicators />
 				</Carousel>
 				<Thumbnails {images} bind:index />
