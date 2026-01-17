@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Carousel, CarouselIndicators, CarouselCaptions, Thumbnails } from 'flowbite-svelte';
+	import { Carousel } from 'flowbite-svelte';
 	import Container from '$lib/components/ui/Container.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 	import Calendar from 'lucide-svelte/icons/calendar';
@@ -9,15 +9,16 @@
 
 	let { data } = $props<{ data: PageData }>();
 
-	let index = $state(0);
-	const images = $derived(
-		data.items
-			.filter((item) => item.image)
-			.map((item) => ({
-				src: item.image!,
-				alt: item.title
-			}))
-	);
+const images = $derived(
+	data.items
+		.filter((item) => item.image)
+		.map((item) => ({
+			src: item.image!,
+			alt: item.title
+		}))
+);
+
+const carouselItems = $derived(images.map((img) => ({ src: img.src, alt: img.alt })));
 </script>
 
 <svelte:head>
@@ -40,11 +41,7 @@
 
 		{#if images.length}
 			<div class="max-w-5xl mx-auto mb-12 space-y-4">
-				<Carousel {images} bind:index>
-					<CarouselCaptions />
-					<CarouselIndicators />
-				</Carousel>
-				<Thumbnails {images} bind:index />
+				<Carousel items={carouselItems} indicators controls />
 			</div>
 		{:else}
 			<p class="text-center text-zinc-500 mb-12">No media available yet.</p>
