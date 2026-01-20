@@ -41,7 +41,7 @@
 	></div>
 	
 	<Container class="relative">
-		<div class="py-24 lg:py-32">
+		<div class="py-16 lg:py-32">
 			<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 				<!-- Content -->
 				<ScrollReveal animation="fade-right" class="space-y-8">

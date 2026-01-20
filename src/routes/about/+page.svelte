@@ -53,7 +53,7 @@
 </svelte:head>
 
 <!-- Hero Section -->
-<section class="bg-black text-white py-24">
+<section class="bg-black text-white py-16 md:py-24">
 	<Container>
 		<div class="text-center space-y-6">
 			<h1 class="text-4xl md:text-5xl font-bold">About Full Scope Media</h1>
@@ -65,7 +65,7 @@
 </section>
 
 <!-- Story Section -->
-<section class="py-24 bg-black">
+<section class="py-16 md:py-24 bg-black">
 	<Container>
 			<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 				<div class="space-y-6">
@@ -100,7 +100,7 @@
 </section>
 
 <!-- Values Section -->
-<section class="py-24 bg-black">
+<section class="py-16 md:py-24 bg-black">
 	<Container>
 		<div class="text-center mb-16">
 			<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">How I work</h2>
@@ -126,7 +126,7 @@
 </section>
 
 <!-- Team Section -->
-<section class="py-24 bg-black">
+<section class="py-16 md:py-24 bg-black">
 	<Container>
 		<div class="text-center mb-16">
 			<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Meet your partner</h2>
@@ -177,7 +177,7 @@
 </section>
 
 <!-- CTA Section -->
-<section class="py-24 bg-zinc-900 text-white border-t border-zinc-800">
+<section class="py-16 md:py-24 bg-zinc-900 text-white border-t border-zinc-800">
 	<Container>
 		<div class="text-center space-y-8">
 			<h2 class="text-3xl md:text-4xl font-bold">Ready to Work Together?</h2>

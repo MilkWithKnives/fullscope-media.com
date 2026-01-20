@@ -1,13 +1,13 @@
 <script lang="ts">
 	import Container from '../ui/Container.svelte';
-	import { resolve } from '$app/paths';
-	import Facebook from 'lucide-svelte/icons/facebook';
+		import Facebook from 'lucide-svelte/icons/facebook';
 	import Twitter from 'lucide-svelte/icons/twitter';
 	import Instagram from 'lucide-svelte/icons/instagram';
 	import Linkedin from 'lucide-svelte/icons/linkedin';
 	import Mail from 'lucide-svelte/icons/mail';
 	import Phone from 'lucide-svelte/icons/phone';
 	import MapPin from 'lucide-svelte/icons/map-pin';
+import { resolve } from '$app/paths';
 
 </script>
 
@@ -17,7 +17,7 @@
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
 				<!-- Company Info -->
 				<div class="space-y-3">
-					<a href={resolve('/')} class="inline-flex items-center gap-3">
+					<a href='/' class="inline-flex items-center gap-3">
 						<img src="/images/branding/logo.svg" alt="Full Scope Media logo" class="h-10 w-auto" loading="lazy" />
 						<span class="text-lg font-semibold text-[var(--color-primary)]">Full Scope Media</span>
 					</a>
@@ -91,10 +91,10 @@
 			<div class="flex flex-col md:flex-row justify-between items-center gap-2 text-sm">
 				<p class="text-gray-400">© {new Date().getFullYear()} Full Scope Media. All rights reserved.</p>
 				<div class="flex gap-4">
-					<a href={resolve('/privacy')} class="text-gray-400 hover:text-white transition-colors">
+					<a href='/privacy' class="text-gray-400 hover:text-white transition-colors">
 						Privacy Policy
 					</a>
-					<a href={resolve('/terms')} class="text-gray-400 hover:text-white transition-colors">
+					<a href='/terms' class="text-gray-400 hover:text-white transition-colors">
 						Terms of Service
 					</a>
 				</div>

@@ -31,7 +31,7 @@
 	];
 </script>
 
-<section class="py-24 bg-black">
+<section class="py-16 md:py-24 bg-black">
 	<Container>
 		<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 			<!-- Content -->

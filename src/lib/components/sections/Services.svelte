@@ -36,7 +36,7 @@
 	}, [] as typeof services[]);
 </script>
 
-<section class="py-24 bg-black">
+<section class="py-16 md:py-24 bg-black">
 	<Container>
 		<div class="text-center mb-16">
 			<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">

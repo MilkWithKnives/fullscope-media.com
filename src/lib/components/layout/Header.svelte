@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+import { resolve } from '$app/paths';
 	import { cn } from '$lib/utils';
 	import Container from '../ui/Container.svelte';
 	import Button from '../ui/Button.svelte';
 	import Menu from 'lucide-svelte/icons/menu';
 	import X from 'lucide-svelte/icons/x';
-	import { resolve } from '$app/paths';
-
+	
 	let mobileMenuOpen = $state(false);
 
 	const navigation = [
@@ -25,7 +25,7 @@
 		<div class="flex items-center justify-between h-16">
 			<!-- Logo -->
 			<div class="flex-shrink-0">
-				<a href={resolve('/')} class="flex items-center gap-2">
+				<a href={resolve('/' as any)} class="flex items-center gap-2">
 					<img src="/images/branding/logo.svg" alt="Full Scope Media logo" class="h-10 w-auto" loading="lazy" />
 					<span class="hidden sm:inline text-xl font-bold text-[var(--color-primary)]">Full Scope Media</span>
 				</a>
@@ -35,7 +35,7 @@
 				<nav class="hidden sm:flex space-x-6 md:space-x-8">
 					{#each navigation as item (item.href)}
 						<a
-							href={resolve(item.href)}
+							href={resolve(item.href as any)}
 							class={cn(
 								'px-3 py-2 text-sm font-medium transition-colors rounded-md',
 								item.highlight
@@ -52,7 +52,7 @@
 				<!-- CTA Button -->
 				<div class="hidden sm:block">
 					<Button variant="primary" size="sm">
-						<a href={resolve('/contact')}>Get Started</a>
+						<a href={resolve('/contact' as any)}>Get Started</a>
 					</Button>
 				</div>
 
@@ -61,6 +61,9 @@
 				<button
 					onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
 					class="text-zinc-300 hover:text-[var(--color-primary)] p-2"
+					aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+					aria-expanded={mobileMenuOpen}
+					aria-controls="mobile-primary-nav"
 				>
 					{#if mobileMenuOpen}
 						<X size={24} />
@@ -74,10 +77,10 @@
 		<!-- Mobile Navigation -->
 			{#if mobileMenuOpen}
 				<div class="md:hidden border-t border-zinc-800 py-4">
-					<nav class="flex flex-col space-y-2">
+					<nav id="mobile-primary-nav" class="flex flex-col space-y-2">
 						{#each navigation as item (item.href)}
 							<a
-								href={resolve(item.href)}
+								href={resolve(item.href as any)}
 								class={cn(
 									'px-3 py-2 text-base font-medium transition-colors rounded-md',
 									item.highlight
@@ -92,7 +95,7 @@
 						{/each}
 						<div class="pt-2">
 							<Button variant="primary" size="sm" class="w-full">
-								<a href={resolve('/contact')}>Get Started</a>
+								<a href={resolve('/contact' as any)}>Get Started</a>
 							</Button>
 						</div>
 					</nav>

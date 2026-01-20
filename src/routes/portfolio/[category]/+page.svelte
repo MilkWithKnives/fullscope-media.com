@@ -1,24 +1,16 @@
 <script lang="ts">
-	import { Carousel } from 'flowbite-svelte';
 	import Container from '$lib/components/ui/Container.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 	import Calendar from 'lucide-svelte/icons/calendar';
 	import Tag from 'lucide-svelte/icons/tag';
-	import type { PageData } from './$types';
 	import { resolve } from '$app/paths';
+	import type { PageData } from './$types';
+	import type { PortfolioItem } from '$lib/data/portfolio';
 
 	let { data } = $props<{ data: PageData }>();
 
-const images = $derived(
-	data.items
-		.filter((item) => item.image)
-		.map((item) => ({
-			src: item.image!,
-			alt: item.title
-		}))
-);
-
-const carouselItems = $derived(images.map((img) => ({ src: img.src, alt: img.alt })));
+	const items = $derived(data.items as PortfolioItem[]);
+	const images = $derived(items.filter((item): item is PortfolioItem & { image: string } => Boolean(item.image)));
 </script>
 
 <svelte:head>
@@ -40,18 +32,23 @@ const carouselItems = $derived(images.map((img) => ({ src: img.src, alt: img.alt
 		</div>
 
 		{#if images.length}
-			<div class="max-w-5xl mx-auto mb-12 space-y-4">
-				<Carousel items={carouselItems} indicators controls />
+			<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-12">
+				{#each images as img (img.id)}
+					<div class="overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900">
+						<img src={img.image} alt={img.title} class="w-full h-48 object-cover" loading="lazy" />
+						<div class="p-3 text-sm text-zinc-300">{img.title}</div>
+					</div>
+				{/each}
 			</div>
 		{:else}
 			<p class="text-center text-zinc-500 mb-12">No media available yet.</p>
 		{/if}
 
-		{#if data.items.length === 0}
+		{#if items.length === 0}
 			<p class="text-center text-zinc-500">No projects in this category yet.</p>
 		{:else}
 			<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-				{#each data.items as item (item.id)}
+				{#each items as item (item.id)}
 					<Card class="overflow-hidden border border-zinc-800 bg-zinc-900">
 						{#if item.image}
 							<div class="aspect-[4/3] overflow-hidden">

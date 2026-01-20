@@ -80,7 +80,7 @@
 </svelte:head>
 
 <!-- Hero Section -->
-<section class="bg-black text-white py-24">
+<section class="bg-black text-white py-16 md:py-24">
 	<Container>
 		<div class="text-center space-y-6">
 			<h1 class="text-4xl md:text-5xl font-bold">Our Services</h1>
@@ -92,7 +92,7 @@
 </section>
 
 <!-- Services Grid -->
-<section class="py-24 bg-black">
+<section class="py-16 md:py-24 bg-black">
 	<Container>
 		<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 			{#each services as service (service.title)}
@@ -146,7 +146,7 @@
 </section>
 
 <!-- Process Section -->
-<section class="py-24 bg-black">
+<section class="py-16 md:py-24 bg-black">
 	<Container>
 		<div class="text-center mb-16">
 			<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Our Process</h2>
@@ -189,7 +189,7 @@
 </section>
 
 <!-- CTA Section -->
-<section class="py-24 bg-black text-white">
+<section class="py-16 md:py-24 bg-black text-white">
 	<Container>
 		<div class="text-center space-y-8">
 			<h2 class="text-3xl md:text-4xl font-bold">Ready to Get Started?</h2>

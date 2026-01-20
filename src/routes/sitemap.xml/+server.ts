@@ -7,7 +7,9 @@ const PAGES = [
 	'/portfolio',
 	'/studio',
 	'/book',
-	'/contact'
+	'/contact',
+	'/privacy',
+	'/terms'
 ];
 
 export function GET() {

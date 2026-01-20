@@ -9,8 +9,7 @@
 	import Button from '../ui/Button.svelte';
 	import Card from '../ui/Card.svelte';
 	import Loading from '../ui/Loading.svelte';
-	import { resolve } from '$app/paths';
-	import { cn } from '$lib/utils';
+		import { cn } from '$lib/utils';
 
 	interface BookingData {
 		firstName: string;
@@ -416,9 +415,9 @@ const projectTypes = [
 		<div class="text-center text-sm text-zinc-500">
 			<p>
 				By booking this appointment, you agree to our
-				<a href={resolve('/terms')} class="text-[var(--color-primary)] hover:underline">Terms of Service</a>
+				<a href='/terms' class="text-[var(--color-primary)] hover:underline">Terms of Service</a>
 				and
-				<a href={resolve('/privacy')} class="text-[var(--color-primary)] hover:underline">Privacy Policy</a>.
+				<a href='/privacy' class="text-[var(--color-primary)] hover:underline">Privacy Policy</a>.
 			</p>
 		</div>
 	</form>

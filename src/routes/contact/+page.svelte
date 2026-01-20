@@ -110,7 +110,7 @@
 </svelte:head>
 
 <!-- Hero Section -->
-<section class="bg-black text-white py-24">
+<section class="bg-black text-white py-16 md:py-24">
 	<Container>
 		<div class="text-center space-y-6">
 			<h1 class="text-4xl md:text-5xl font-bold">Let's Create Together</h1>
@@ -122,7 +122,7 @@
 </section>
 
 <!-- Contact Section -->
-<section class="py-24 bg-black">
+<section class="py-16 md:py-24 bg-black">
 	<Container>
 		<div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
 			<!-- Contact Form -->

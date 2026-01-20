@@ -6,7 +6,7 @@
 	import { resolve } from '$app/paths';
 </script>
 
-<section class="py-24 bg-black text-white">
+<section class="py-16 md:py-24 bg-black text-white">
 	<Container>
 		<div class="text-center space-y-8">
 			<div class="space-y-4">
