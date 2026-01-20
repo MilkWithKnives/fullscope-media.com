@@ -21,27 +21,25 @@ import { resolve } from '$app/paths';
 </script>
 
 <header class="bg-black/90 backdrop-blur-md border-b border-zinc-800 sticky top-0 z-50">
-	<Container>
-		<div class="flex items-center justify-between h-16">
+	<Container class="header-shell">
+		<div class="flex items-center justify-between h-16 gap-4">
 			<!-- Logo -->
 			<div class="flex-shrink-0">
-				<a href={resolve('/' as any)} class="flex items-center gap-2">
-					<img src="/images/branding/logo.svg" alt="Full Scope Media logo" class="h-10 w-auto" loading="lazy" />
-					<span class="hidden sm:inline text-xl font-bold text-[var(--color-primary)]">Full Scope Media</span>
+				<a href={resolve('/' as any)} class="flex items-center gap-3">
+					<img src="/images/branding/logo.svg" alt="Full Scope Media logo" class="h-12 w-auto md:h-14" loading="lazy" />
+					<span class="hidden sm:inline text-xl font-bold text-[var(--color-primary)]"></span>
 				</a>
 			</div>
 
 			<!-- Desktop Navigation -->
-				<nav class="hidden sm:flex space-x-6 md:space-x-8">
-					{#each navigation as item (item.href)}
-						<a
-							href={resolve(item.href as any)}
-							class={cn(
-								'px-3 py-2 text-sm font-medium transition-colors rounded-md',
-								item.highlight
-									? 'bg-[var(--color-primary)] text-black hover:bg-[var(--color-primary)]/90'
-									: 'text-zinc-300 hover:text-[var(--color-primary)]',
-							$page.url.pathname === item.href && !item.highlight && 'text-[var(--color-primary)]'
+			<nav class="hidden sm:flex space-x-4 md:space-x-6">
+				{#each navigation as item (item.href)}
+					<a
+						href={resolve(item.href as any)}
+						class={cn(
+							'cta-button cta-nav',
+							item.highlight && 'cta-highlight',
+							$page.url.pathname === item.href && !item.highlight && 'cta-active'
 						)}
 					>
 						{item.name}
@@ -49,12 +47,10 @@ import { resolve } from '$app/paths';
 				{/each}
 			</nav>
 
-				<!-- CTA Button -->
-				<div class="hidden sm:block">
-					<Button variant="primary" size="sm">
-						<a href={resolve('/contact' as any)}>Get Started</a>
-					</Button>
-				</div>
+			<!-- CTA Button -->
+			<div class="hidden sm:block ml-4 md:ml-5">
+				<a href={resolve('/contact' as any)} class="cta-button">Get Started</a>
+			</div>
 
 			<!-- Mobile menu button -->
 			<div class="sm:hidden">
@@ -82,24 +78,94 @@ import { resolve } from '$app/paths';
 							<a
 								href={resolve(item.href as any)}
 								class={cn(
-									'px-3 py-2 text-base font-medium transition-colors rounded-md',
-									item.highlight
-										? 'bg-[var(--color-primary)] text-black hover:bg-[var(--color-primary)]/90'
-										: 'text-zinc-300 hover:text-[var(--color-primary)]',
-								$page.url.pathname === item.href && !item.highlight && 'text-[var(--color-primary)]'
-							)}
-							onclick={() => (mobileMenuOpen = false)}
+									'cta-button w-full text-center',
+									item.highlight && 'cta-highlight',
+									$page.url.pathname === item.href && !item.highlight && 'cta-active'
+								)}
+								onclick={() => (mobileMenuOpen = false)}
 						>
 							{item.name}
 						</a>
 						{/each}
 						<div class="pt-2">
-							<Button variant="primary" size="sm" class="w-full">
-								<a href={resolve('/contact' as any)}>Get Started</a>
-							</Button>
+							<a href={resolve('/contact' as any)} class="cta-button w-full text-center block">Get Started</a>
 						</div>
 					</nav>
 			</div>
 		{/if}
 	</Container>
 </header>
+
+<style>
+	.cta-button {
+		width: auto;
+		min-width: 8.5em;
+		position: relative;
+		height: 3.2em;
+		border: 3px ridge #149cea;
+		outline: none;
+		background-color: transparent;
+		color: white;
+		transition: 1s;
+		border-radius: 0.3em;
+		font-size: 14px;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		cursor: pointer;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		text-transform: uppercase;
+		padding: 0 1.4em;
+	}
+
+	.cta-nav {
+		font-size: 13px;
+	}
+
+	.cta-active {
+		color: #149cea;
+	}
+
+	.cta-button::after {
+		content: '';
+		position: absolute;
+		top: -10px;
+		left: 3%;
+		width: 95%;
+		height: 40%;
+		background-color: #212121;
+		transition: 0.5s;
+		transform-origin: center;
+	}
+
+	.cta-button::before {
+		content: '';
+		transform-origin: center;
+		position: absolute;
+		top: 80%;
+		left: 3%;
+		width: 95%;
+		height: 40%;
+		background-color: #212121;
+		transition: 0.5s;
+	}
+
+	.cta-button:hover::before,
+	.cta-button:hover::after {
+		transform: scale(0);
+	}
+
+	.cta-button:hover {
+		box-shadow: inset 0 0 25px #1479ea;
+	}
+
+	.header-shell {
+		width: 100%;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding-left: clamp(1.5rem, 4vw, 3rem);
+		padding-right: clamp(1.5rem, 4vw, 3rem);
+	}
+</style>

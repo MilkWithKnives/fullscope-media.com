@@ -17,8 +17,8 @@ import { resolve } from '$app/paths';
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
 				<!-- Company Info -->
 				<div class="space-y-3">
-					<a href='/' class="inline-flex items-center gap-3">
-						<img src="/images/branding/logo.svg" alt="Full Scope Media logo" class="h-10 w-auto" loading="lazy" />
+				<a href={resolve('/')} class="inline-flex items-center gap-3">
+					<img src="/images/branding/logo.svg" alt="Full Scope Media logo" class="h-12 w-auto md:h-14" loading="lazy" />
 						<span class="text-lg font-semibold text-[var(--color-primary)]">Full Scope Media</span>
 					</a>
 					<p class="text-sm text-zinc-400 leading-relaxed">
