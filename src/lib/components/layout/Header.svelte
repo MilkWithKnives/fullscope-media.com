@@ -108,7 +108,7 @@ import { resolve } from '$app/paths';
 		color: white;
 		transition: 1s;
 		border-radius: 0.3em;
-		font-size: 14px;
+		font-size: 13px;
 		font-weight: 700;
 		letter-spacing: 0.08em;
 		cursor: pointer;
