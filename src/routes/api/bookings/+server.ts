@@ -3,7 +3,7 @@ import type { RequestHandler } from './$types';
 import { supabase } from '$lib/supabase';
 import { createBookingEvent, generateICalInvite } from '$lib/utils/ical';
 import { sendEmail, generateBookingConfirmationEmail } from '$lib/utils/email';
-import { BUSINESS_EMAIL } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 export const POST: RequestHandler = async ({ request }) => {
 	try {
@@ -82,7 +82,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		`;
 
 		const ownerEmailSent = await sendEmail({
-			to: BUSINESS_EMAIL || 'contact@fullscopemedia.com',
+			to: env.BUSINESS_EMAIL || 'contact@fullscopemedia.com',
 			subject: `New Booking: ${booking.service_type} - ${booking.client_name}`,
 			html: ownerEmailHtml,
 			attachments: [
