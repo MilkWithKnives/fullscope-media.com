@@ -22,10 +22,12 @@
 body {
 	background-color: var(--color-bg);
 	color: var(--color-fg);
-	background-image: url('/textures/grain.png');
+	background-image:
+		linear-gradient(rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)),
+		url('/textures/grain.png');
 	background-repeat: repeat;
-	background-size: 600px 600px;
-	background-blend-mode: soft-light;
+	background-size: 250px 250px, 250px 250px;
+	background-blend-mode: normal, soft-light;
 }
 
 /* Custom animations and transitions */
