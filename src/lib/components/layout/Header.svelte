@@ -102,11 +102,11 @@ import { resolve } from '$app/paths';
 		min-width: 8.5em;
 		position: relative;
 		height: 3.2em;
-		border: 3px ridge #149cea;
+		border: 2px solid var(--color-primary);
 		outline: none;
-		background-color: transparent;
-		color: white;
-		transition: 1s;
+		background-color: rgba(0, 0, 0, 0.35);
+		color: #f5f6f8;
+		transition: 0.4s ease;
 		border-radius: 0.3em;
 		font-size: 13px;
 		font-weight: 700;
@@ -131,34 +131,37 @@ import { resolve } from '$app/paths';
 	.cta-button::after {
 		content: '';
 		position: absolute;
-		top: -10px;
-		left: 3%;
-		width: 95%;
-		height: 40%;
-		background-color: #212121;
-		transition: 0.5s;
-		transform-origin: center;
+		inset: 0;
+		background: linear-gradient(120deg, transparent 0%, rgba(255, 95, 59, 0.25) 50%, transparent 100%);
+		transform: translateX(-120%);
+		transition: transform 0.35s ease;
+		pointer-events: none;
+		z-index: 0;
 	}
 
 	.cta-button::before {
 		content: '';
-		transform-origin: center;
 		position: absolute;
-		top: 80%;
-		left: 3%;
-		width: 95%;
-		height: 40%;
-		background-color: #212121;
-		transition: 0.5s;
+		inset: 0;
+		background: linear-gradient(45deg, rgba(231, 233, 239, 0.12), transparent 60%);
+		opacity: 0;
+		transition: opacity 0.35s ease;
+		pointer-events: none;
+		z-index: 0;
 	}
 
 	.cta-button:hover::before,
 	.cta-button:hover::after {
-		transform: scale(0);
+		transform: translateX(0);
+		opacity: 1;
 	}
 
 	.cta-button:hover {
-		box-shadow: inset 0 0 25px #1479ea;
+		box-shadow:
+			0 0 18px rgba(231, 233, 239, 0.2),
+			0 0 26px rgba(255, 95, 59, 0.25),
+			inset 0 0 12px rgba(255, 95, 59, 0.25);
+		background-color: rgba(255, 95, 59, 0.08);
 	}
 
 	.header-shell {
