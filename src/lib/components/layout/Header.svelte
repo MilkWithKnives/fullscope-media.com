@@ -104,9 +104,9 @@ import { resolve } from '$app/paths';
 		height: 3.2em;
 		border: 2px solid var(--color-primary);
 		outline: none;
-		background-color: rgba(0, 0, 0, 0.35);
+		background-color: transparent;
 		color: #f5f6f8;
-		transition: 0.4s ease;
+		transition: 0.35s ease;
 		border-radius: 0.3em;
 		font-size: 13px;
 		font-weight: 700;
@@ -118,6 +118,7 @@ import { resolve } from '$app/paths';
 		justify-content: center;
 		text-transform: uppercase;
 		padding: 0 1.4em;
+		overflow: hidden;
 	}
 
 	.cta-nav {
@@ -131,10 +132,10 @@ import { resolve } from '$app/paths';
 	.cta-button::after {
 		content: '';
 		position: absolute;
-		inset: 0;
-		background: linear-gradient(120deg, transparent 0%, rgba(255, 95, 59, 0.25) 50%, transparent 100%);
-		transform: translateX(-120%);
-		transition: transform 0.35s ease;
+		inset: -2px;
+		background: linear-gradient(120deg, transparent 0%, rgba(255, 95, 59, 0.2) 50%, transparent 100%);
+		transform: translateX(-130%);
+		transition: transform 0.4s ease;
 		pointer-events: none;
 		z-index: 0;
 	}
@@ -142,8 +143,8 @@ import { resolve } from '$app/paths';
 	.cta-button::before {
 		content: '';
 		position: absolute;
-		inset: 0;
-		background: linear-gradient(45deg, rgba(231, 233, 239, 0.12), transparent 60%);
+		inset: -2px;
+		background: linear-gradient(45deg, rgba(231, 233, 239, 0.08), transparent 60%);
 		opacity: 0;
 		transition: opacity 0.35s ease;
 		pointer-events: none;
@@ -158,10 +159,9 @@ import { resolve } from '$app/paths';
 
 	.cta-button:hover {
 		box-shadow:
-			0 0 18px rgba(231, 233, 239, 0.2),
-			0 0 26px rgba(255, 95, 59, 0.25),
-			inset 0 0 12px rgba(255, 95, 59, 0.25);
-		background-color: rgba(255, 95, 59, 0.08);
+			0 0 16px rgba(231, 233, 239, 0.22),
+			0 0 22px rgba(255, 95, 59, 0.24),
+			inset 0 0 10px rgba(255, 95, 59, 0.2);
 	}
 
 	.header-shell {

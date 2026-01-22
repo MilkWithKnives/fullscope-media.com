@@ -19,15 +19,27 @@
 	--color-scroll-thumb-hover: #343743;
 }
 
+html,
 body {
+	height: 100%;
+}
+
+body {
+	position: relative;
 	background-color: var(--color-bg);
 	color: var(--color-fg);
-	background-image:
-		linear-gradient(rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)),
-		url('/textures/grain.png');
+}
+
+html::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	background-image: url('/textures/grain.png');
 	background-repeat: repeat;
-	background-size: 250px 250px, 250px 250px;
-	background-blend-mode: normal, soft-light;
+	background-size: 200px 200px;
+	opacity: 0.32;
+	pointer-events: none;
+	z-index: 0;
 }
 
 /* Custom animations and transitions */
